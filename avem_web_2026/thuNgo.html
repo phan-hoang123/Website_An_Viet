@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thư Ngỏ - AVEM Quản Trị Doanh Nghiệp</title>
+    <!-- Thêm Font Awesome để lấy icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Thêm Font Plus Jakarta Sans siêu đẹp -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css" />
+    
+    <style>
+        /* === PAGE BANNER === */
+        .page-banner {
+            height: 45vh;
+            background: linear-gradient(rgba(10, 10, 10, 0.6), rgba(163, 22, 22, 0.8)), url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80') center/cover;
+            display: flex; justify-content: center; align-items: center; flex-direction: column; color: var(--white); text-align: center;
+        }
+        .page-banner h1 { font-size: 3.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
+        .page-banner p { font-size: 1.2rem; font-weight: 400; opacity: 0.9; letter-spacing: 1px; }
+
+        /* === THƯ NGỎ - EDITORIAL STYLE === */
+        .letter-section { padding: 80px 5% 120px; background-color: var(--bg-light); }
+        .letter-paper {
+            max-width: 900px; margin: -100px auto 0; padding: 80px 100px;
+            background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow);
+            position: relative; z-index: 10;
+        }
+        
+        .letter-paper::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px;
+            background: linear-gradient(to right, var(--primary-color), var(--primary-light));
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .letter-header { text-align: center; margin-bottom: 50px; border-bottom: 1px solid var(--border-color); padding-bottom: 30px; }
+        .letter-header h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 3rem; color: var(--primary-color); font-weight: 600; margin-bottom: 15px; }
+        .letter-header span { font-size: 1rem; color: var(--text-gray); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+
+        .letter-content { font-size: 1.15rem; color: var(--text-main); text-align: justify; position: relative; }
+        
+        /* Drop Cap (Chữ cái đầu to) */
+        .letter-content > p:first-of-type::first-letter {
+            font-family: 'Plus Jakarta Sans', sans-serif; color: var(--primary-color);
+            float: left; font-size: 5.5rem; line-height: 0.8; padding-right: 15px; padding-top: 5px; font-weight: 600;
+        }
+
+        .letter-content p { margin-bottom: 25px; }
+
+        /* Highlight Quote chìm */
+        .highlight-quote {
+            margin: 40px 0; padding: 30px 40px; background: rgba(163, 22, 22, 0.03);
+            border-left: 4px solid var(--primary-color); font-family: 'Plus Jakarta Sans', serif;
+            font-size: 1.5rem; font-style: italic; color: var(--primary-color); line-height: 1.6;
+        }
+
+        .letter-signature { margin-top: 60px; text-align: right; border-top: 1px solid var(--border-color); padding-top: 30px; }
+        .letter-signature p:first-child { font-style: italic; color: var(--text-gray); margin-bottom: 10px; font-size: 1.1rem; }
+        .letter-signature h4 { font-size: 1.3rem; font-weight: 800; color: var(--primary-color); text-transform: uppercase; }
+
+        /* =======================================================
+         ĐẠI TU GIAO DIỆN MOBILE CHO TRANG THƯ NGỎ
+         ======================================================= */
+        @media (max-width: 768px) {
+            
+            /* 1. BANNER TRÊN CÙNG */
+            .page-banner { height: 300px; padding: 0 5%; }
+            .page-banner h1 { font-size: 2.2rem; margin-bottom: 10px; }
+            .page-banner p { font-size: 1rem; }
+
+            /* 2. TỜ GIẤY THƯ NGỎ (Bóp lề, giảm padding khổng lồ) */
+            .letter-section { padding: 40px 5% 60px; }
+            .letter-paper { 
+                padding: 40px 20px; /* Hạ từ 100px xuống 20px để chữ có chỗ thở */
+                margin-top: -60px; /* Giảm độ lún đè lên banner nền */
+            }
+
+            /* 3. TIÊU ĐỀ THƯ */
+            .letter-header { margin-bottom: 30px; padding-bottom: 20px; }
+            .letter-header h2 { font-size: 1.8rem; margin-bottom: 10px; line-height: 1.3; }
+            .letter-header span { font-size: 0.85rem; }
+
+            /* 4. NỘI DUNG CHỮ & CHỮ CÁI ĐẦU (DROP CAP) */
+            .letter-content { font-size: 1rem; line-height: 1.7; }
+            
+            /* Ép chữ cái đầu tiên bé lại 1 chút cho đỡ tràn */
+            .letter-content > p:first-of-type::first-letter {
+                font-size: 4.2rem; 
+                padding-right: 10px;
+                padding-top: 8px;
+            }
+            .letter-content p { margin-bottom: 15px; }
+
+            /* 5. CÂU QUOTE CHÌM ĐỎ ĐÔ */
+            .highlight-quote { 
+                margin: 30px 0; 
+                padding: 20px 15px; 
+                font-size: 1.2rem; 
+            }
+
+            /* 6. CHỮ KÝ CUỐI THƯ */
+            .letter-signature { margin-top: 40px; padding-top: 20px; }
+            .letter-signature h4 { font-size: 1.1rem; margin-top: 5px; }
+        }
+</style>
+</head>
+<body>
+
+   <div id="header-placeholder"></div>
+
+    <!-- ================= BANNER THƯ NGỎ ================= -->
+    <section class="page-banner">
+        <h1 class="reveal">Thư Ngỏ</h1>
+        <p class="reveal">Câu chuyện khởi nguồn và sứ mệnh đồng hành của AVEM</p>
+    </section>
+
+    <!-- ================= NỘI DUNG THƯ NGỎ ================= -->
+    <section class="letter-section">
+        <div class="letter-paper reveal">
+            <div class="letter-header">
+                <span>Thông điệp từ Ban Lãnh Đạo</span>
+                <h2>Gửi Quý Đối Tác & Khách Hàng</h2>
+            </div>
+            
+            <div class="letter-content">
+                <p>Trong bối cảnh Việt Nam ngày càng khẳng định vị thế là điểm đến hấp dẫn của dòng vốn đầu tư nước ngoài, đồng thời trở thành môi trường kinh doanh năng động với nhiều cơ hội phát triển và hội nhập, các nhà đầu tư, doanh nghiệp trong và ngoài nước đều không ngừng tìm kiếm cơ hội mở rộng thị trường, phát triển hoạt động sản xuất, thương mại và nâng cao năng lực quản trị.</p>
+                
+                <p>Tuy nhiên, sự khác biệt về môi trường pháp lý, văn hóa kinh doanh và hệ thống quản trị doanh nghiệp, cùng với những thay đổi của chính sách và thị trường, yêu cầu ngày càng cao về kiểm soát rủi ro, tuân thủ pháp luật và nâng cao hiệu quả hoạt động thường tạo ra không ít khó khăn trong quá trình đầu tư, triển khai và vận hành doanh nghiệp tại Việt Nam.</p>
+                
+                <div class="highlight-quote reveal">
+                    "KẾT NỐI GIÁ TRỊ & KIẾN TẠO THÀNH CÔNG."
+                </div>
+                
+                <p>Với mong muốn trở thành người đồng hành tin cậy của cộng đồng doanh nghiệp trong và ngoài nước, CÔNG TY TNHH QUẢN TRỊ DOANH NGHIỆP AN VIỆT (AVEM) được thành lập với sứ mệnh hỗ trợ các nhà đầu tư, doanh nghiệp và đối tác phát triển hoạt động kinh doanh một cách hiệu quả, an toàn và bền vững; góp phần xây dựng môi trường đầu tư, kinh doanh thân thiện, minh bạch và chuyên nghiệp, để mỗi nhà đầu tư khi đến Việt Nam đều cảm nhận được sự thuận lợi, an tâm như đang đầu tư trên chính quê hương của mình.</p>
+                
+                <p>Với đội ngũ chuyên gia giàu kinh nghiệm, am hiểu môi trường pháp lý, đầu tư và hoạt động kinh doanh tại Việt Nam, AVEM cam kết mang đến các giải pháp thực tiễn, tối ưu và phù hợp với từng nhu cầu của khách hàng. Chúng tôi không chỉ cung cấp dịch vụ mà còn đồng hành cùng doanh nghiệp trên hành trình đầu tư, vận hành và phát triển bền vững.</p>
+                
+                <p>AVEM trân trọng cảm ơn sự tin tưởng của Quý Khách hàng và Quý Đối tác. Chúng tôi mong muốn được đồng hành, kết nối và kiến tạo những giá trị lâu dài, góp phần vào sự thành công của cộng đồng doanh nghiệp trong thời kỳ hội nhập và phát triển.</p>
+            </div>
+            
+            <div class="letter-signature reveal">
+                <p>Trân trọng,</p>
+                <h4>CÔNG TY TNHH QUẢN TRỊ DOANH NGHIỆP AN VIỆT</h4>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="dictionary.js"></script>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dịch Vụ Kế Toán - AVEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css" />
+
+    <style>
+      :root {
+        --primary-dark: #630000;
+        --gold: #D4AF37;
+      }
+      body { overflow-x: hidden; }
+      .font-serif { font-family: 'Playfair Display', serif; }
+
+      /* === HERO SECTION (GIỮ NGUYÊN VÌ SẾP BẢO OKE) === */
+      .kt-hero { display: flex; padding: 120px 5% 80px; max-width: 1400px; margin: 0 auto; align-items: center; gap: 60px; }
+      .kt-hero-left { flex: 1; z-index: 1;}
+      .kt-eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 10px 20px; background: rgba(144, 0, 0, 0.08); border-radius: 50px; color: var(--primary-color); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 25px; }
+      .kt-hero-left h1 { font-size: 4rem; font-weight: 900; color: var(--text-main); margin-bottom: 25px; line-height: 1.1; max-width: 650px; }
+      .kt-hero-left p { font-size: 1.15rem; color: var(--text-gray); line-height: 1.7; max-width: 600px; margin-bottom: 40px; }
+      
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 50px; }
+      .btn-primary, .btn-secondary { display: inline-flex; align-items: center; justify-content: center; padding: 16px 35px; border-radius: 8px; font-weight: 700; font-size: 1rem; transition: all 0.3s ease; cursor: pointer; text-decoration: none;}
+      .btn-primary { background: var(--primary-color); color: var(--white); border: none; box-shadow: 0 10px 20px rgba(144, 0, 0, 0.15); }
+      .btn-primary:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 15px 25px rgba(144, 0, 0, 0.25); }
+      .btn-secondary { background: transparent; color: var(--text-main); border: 2px solid var(--border-color); }
+      .btn-secondary:hover { border-color: var(--primary-color); color: var(--primary-color); transform: translateY(-3px); background: rgba(144, 0, 0, 0.03); }
+      
+      .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; border-top: 1px solid var(--border-color); padding-top: 40px;}
+      .stat-card strong { display: block; font-size: 2.2rem; font-weight: 900; color: var(--primary-color); margin-bottom: 5px; }
+      .stat-card span { color: var(--text-gray); font-size: 0.95rem; line-height: 1.5; display: block; font-weight: 500;}
+      
+      .kt-hero-right { flex: 1.2; position: relative; }
+      .hero-image-wrapper { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+      .hero-image-wrapper img { width: 100%; height: auto; display: block; object-fit: cover; }
+      .hero-floating-card { position: absolute; bottom: -30px; left: -30px; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); display: flex; align-items: center; gap: 20px; border: 1px solid var(--border-color);}
+      .floating-icon { width: 50px; height: 50px; background: rgba(212, 175, 55, 0.15); color: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+      .floating-text strong { display: block; font-size: 1.1rem; color: var(--text-main); margin-bottom: 5px; }
+      .floating-text span { color: var(--text-gray); font-size: 0.9rem; }
+
+      /* === GIẢI PHÁP KẾ TOÁN (LÀM SẠCH BỐ CỤC) === */
+      .kt-solutions { padding: 80px 5%; background: var(--bg-light); border-top: 1px solid #eaeaea; border-bottom: 1px solid #eaeaea;}
+      .section-header { text-align: center; max-width: 800px; margin: 0 auto 60px; }
+      .section-header h2 { font-size: 2.8rem; color: var(--text-main); margin-bottom: 20px; }
+      .section-header p { font-size: 1.1rem; color: var(--text-gray); line-height: 1.7; }
+      
+      .solution-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1300px; margin: 0 auto; }
+      .solution-card { background: #fff; border: 1px solid var(--border-color); border-radius: 12px; padding: 40px 30px; transition: 0.3s; position: relative; overflow: hidden;}
+      .solution-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--gold); transform: scaleY(0); transition: 0.4s; transform-origin: bottom; }
+      .solution-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: transparent;}
+      .solution-card:hover::before { transform: scaleY(1); }
+      
+      .solution-icon { width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 12px; background: rgba(144, 0, 0, 0.05); color: var(--primary-color); font-size: 1.6rem; margin-bottom: 25px; transition: 0.3s;}
+      .solution-card:hover .solution-icon { background: var(--primary-color); color: #fff; }
+      .solution-card h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 15px; }
+      .solution-card p { color: var(--text-gray); line-height: 1.7; font-size: 0.95rem;}
+
+      /* === GIÁ TRỊ CAM KẾT (BỐ CỤC SPLIT HÌNH & CHỮ ĐỠ NGỢP) === */
+      .kt-benefits { padding: 100px 5%; max-width: 1400px; margin: 0 auto; display: flex; gap: 60px; align-items: center; }
+      .benefits-visual { flex: 1; position: relative; }
+      .benefits-img { border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+      .benefits-img img { width: 100%; height: auto; display: block; }
+      
+      /* Gộp 3 con số vào một bảng nổi đè lên ảnh */
+      .benefits-metrics-card { position: absolute; right: -30px; bottom: 40px; background: var(--primary-color); color: #fff; padding: 35px; border-radius: 16px; box-shadow: 0 20px 40px rgba(144,0,0,0.3); max-width: 280px; }
+      .metric-item { margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px;}
+      .metric-item:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0;}
+      .metric-item strong { display: block; font-size: 2.5rem; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 8px; }
+      .metric-item span { font-size: 0.9rem; line-height: 1.5; color: rgba(255,255,255,0.8); display: block;}
+
+      .benefits-content { flex: 1; padding-left: 20px;}
+      .benefits-content h2 { font-size: 2.8rem; color: var(--text-main); margin-bottom: 20px; line-height: 1.2; }
+      .benefits-content > p { font-size: 1.1rem; color: var(--text-gray); line-height: 1.7; margin-bottom: 40px; }
+      
+      .benefit-list { display: flex; flex-direction: column; gap: 30px; }
+      .benefit-item { display: flex; gap: 20px; align-items: flex-start; }
+      .benefit-item-icon { width: 45px; height: 45px; background: rgba(212, 175, 55, 0.15); color: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; margin-top: 5px;}
+      .benefit-item-text h3 { font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px; }
+      .benefit-item-text p { font-size: 0.95rem; color: var(--text-gray); line-height: 1.6; }
+
+      /* === QUY TRÌNH (HIỆU ỨNG SỐ CHÌM KHỔNG LỒ) === */
+      .kt-process { padding: 100px 5%; background: var(--bg-dark); color: #fff; }
+      .process-header { text-align: center; margin-bottom: 60px; }
+      .process-header h2 { font-size: 2.8rem; color: #fff; margin-bottom: 20px; }
+      .process-header p { font-size: 1.1rem; color: #aaa; max-width: 700px; margin: 0 auto; }
+      
+      .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; max-width: 1400px; margin: 0 auto; }
+      .process-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 40px 30px; position: relative; overflow: hidden; transition: 0.4s; cursor: default;}
+      .process-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(212, 175, 55, 0.5); transform: translateY(-5px);}
+      
+      /* Đây là điểm mấu chốt biến chữ thành hình ảnh đồ họa */
+      .process-watermark { position: absolute; right: -10px; bottom: -20px; font-size: 8rem; font-weight: 900; color: rgba(255,255,255,0.04); line-height: 1; pointer-events: none; font-family: 'Playfair Display', serif; transition: 0.4s;}
+      .process-card:hover .process-watermark { color: rgba(212, 175, 55, 0.1); transform: scale(1.1) rotate(-5deg); }
+      
+      .process-card h4 { font-size: 1.15rem; font-weight: 700; color: var(--gold); margin-bottom: 15px; position: relative; z-index: 2; line-height: 1.4;}
+      .process-card p { font-size: 0.95rem; color: #bbb; line-height: 1.6; position: relative; z-index: 2; }
+
+      /* =======================================================
+         MOBILE RESPONSIVE
+         ======================================================= */
+      @media (max-width: 1200px) {
+        .benefits-metrics-card { position: relative; right: 0; bottom: 0; max-width: 100%; border-radius: 0 0 20px 20px; display: flex; justify-content: space-between; gap: 20px; padding: 25px;}
+        .benefits-img { border-radius: 20px 20px 0 0; }
+        .metric-item { margin-bottom: 0; border-bottom: none; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 20px; flex: 1;}
+        .metric-item:last-child { border-right: none; padding-right: 0;}
+      }
+
+      @media (max-width: 992px) {
+        .kt-hero { flex-direction: column; text-align: center; gap: 50px; padding: 100px 5% 60px;}
+        .kt-hero-left h1 { margin: 0 auto 25px; }
+        .kt-hero-left p { margin: 0 auto 40px; }
+        .hero-actions { justify-content: center; }
+        .hero-floating-card { display: none; } /* Ẩn card lơ lửng trên mobile cho gọn */
+        
+        .solution-grid { grid-template-columns: repeat(2, 1fr); }
+        .kt-benefits { flex-direction: column; gap: 40px; }
+        .benefits-content { padding-left: 0; }
+        .benefits-content h2 { font-size: 2.2rem; }
+      }
+
+      @media (max-width: 768px) {
+        .kt-hero-left h1 { font-size: 2.5rem; }
+        .hero-stats { grid-template-columns: 1fr; gap: 30px; }
+        .hero-actions { flex-direction: column; width: 100%; }
+        .hero-actions a { width: 100%; }
+        
+        .kt-solutions, .kt-benefits, .kt-process { padding: 60px 5%; }
+        .section-header h2 { font-size: 2.2rem; }
+        .solution-grid { grid-template-columns: 1fr; }
+        
+        .benefits-metrics-card { flex-direction: column; gap: 20px; text-align: center;}
+        .metric-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-right: 0; padding-bottom: 20px;}
+        
+        .process-header h2 { font-size: 2.2rem; }
+        .process-grid { grid-template-columns: 1fr; }
+        .process-watermark { font-size: 6rem; right: 10px; bottom: -10px;}
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- ================= HERO BANNER ================= -->
+    <section class="kt-hero reveal">
+      <div class="kt-hero-left">
+        <div class="kt-eyebrow"><i class="fa-solid fa-shield-halved"></i> Quyền lợi kế toán</div>
+        <h1 class="font-serif">Tài chính an toàn, quyết định tự tin.</h1>
+        <p>AVEM kết hợp chuyên môn kế toán sâu rộng và công nghệ kiểm soát hiện đại để biến quản trị tài chính thành lợi thế cạnh tranh của doanh nghiệp.</p>
+        <div class="hero-actions">
+          <a href="contact.html" class="btn-primary">Đăng Ký Tư Vấn</a>
+          <a href="mailto:avemvietnam@gmail.com" class="btn-secondary">Gửi Email Hỗ Trợ</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <strong>10+</strong>
+            <span>Năm kinh nghiệm kế toán doanh nghiệp</span>
+          </div>
+          <div class="stat-card">
+            <strong>1.200+</strong>
+            <span>Doanh nghiệp đã đồng hành</span>
+          </div>
+          <div class="stat-card">
+            <strong>98%</strong>
+            <span>Khách hàng hài lòng với giải pháp</span>
+          </div>
+        </div>
+      </div>
+      <div class="kt-hero-right">
+        <div class="hero-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80" alt="Chuyên gia kế toán">
+        </div>
+        <div class="hero-floating-card">
+          <div class="floating-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+          <div class="floating-text">
+            <strong>Báo cáo định kỳ</strong>
+            <span>Chuẩn xác & Kịp thời</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GIẢI PHÁP KẾ TOÁN ================= -->
+    <section class="kt-solutions reveal">
+      <div class="section-header">
+        <h2 class="font-serif">Giải pháp kế toán toàn diện cho chiến lược doanh nghiệp</h2>
+        <p>AVEM giúp doanh nghiệp kiểm soát chi phí, tối ưu hóa thuế và vận hành tài chính minh bạch với hệ thống báo cáo chuyên sâu.</p>
+      </div>
+      <div class="solution-grid">
+        <article class="solution-card">
+          <div class="solution-icon"><i class="fa-solid fa-chart-column"></i></div>
+          <h3 class="font-serif">Quản trị tài chính doanh nghiệp</h3>
+          <p>Xây dựng báo cáo doanh thu, dòng tiền và lợi nhuận để ra quyết định nhanh, an toàn và chuẩn xác.</p>
+        </article>
+        <article class="solution-card">
+          <div class="solution-icon"><i class="fa-solid fa-file-contract"></i></div>
+          <h3 class="font-serif">Báo cáo thuế & tuân thủ</h3>
+          <p>Đảm bảo kê khai, nộp thuế và báo cáo tài chính theo chuẩn mực kế toán hiện hành, giảm thiểu rủi ro kiểm toán.</p>
+        </article>
+        <article class="solution-card">
+          <div class="solution-icon"><i class="fa-solid fa-people-roof"></i></div>
+          <h3 class="font-serif">Kế toán nhân sự & tiền lương</h3>
+          <p>Quản lý lương, bảo hiểm và hợp đồng lao động chặt chẽ, minh bạch cho bộ phận nhân sự và ban lãnh đạo.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= GIÁ TRỊ CAM KẾT (BỐ CỤC SPLIT MỚI) ================= -->
+    <section class="kt-benefits reveal">
+      <div class="benefits-visual">
+        <div class="benefits-img">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80" alt="Giá trị cam kết">
+        </div>
+        <!-- Gom 3 con số vào mảng đè lên ảnh -->
+        <div class="benefits-metrics-card">
+          <div class="metric-item">
+            <strong>30%</strong>
+            <span>Giảm thời gian xử lý hóa đơn và chứng từ.</span>
+          </div>
+          <div class="metric-item">
+            <strong>24/7</strong>
+            <span>Hỗ trợ chuyên viên khi cần thiết, mọi lúc mọi nơi.</span>
+          </div>
+          <div class="metric-item">
+            <strong>99%</strong>
+            <span>Tỷ lệ tuân thủ quy định và báo cáo chính xác.</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="benefits-content">
+        <h2 class="font-serif">Giá trị cam kết khi đồng hành cùng AVEM</h2>
+        <p>Chúng tôi mang đến quy trình chuyên nghiệp, kiểm soát rủi ro chặt chẽ và báo cáo rõ ràng để doanh nghiệp phát triển bền vững.</p>
+        
+        <div class="benefit-list">
+          <div class="benefit-item">
+            <div class="benefit-item-icon"><i class="fa-solid fa-stopwatch"></i></div>
+            <div class="benefit-item-text">
+              <h3>Tiết kiệm thời gian vận hành</h3>
+              <p>Giảm bớt công việc thủ công, tự động hóa quy trình tính toán và chuẩn bị báo cáo nhanh chóng.</p>
+            </div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-item-icon"><i class="fa-solid fa-shield-check"></i></div>
+            <div class="benefit-item-text">
+              <h3>Giảm thiểu rủi ro và sai sót</h3>
+              <p>Kiểm soát chi tiết, giảm sai sót kế toán và bảo đảm tính chính xác trước khi trình lên đối tác.</p>
+            </div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-item-icon"><i class="fa-solid fa-folder-open"></i></div>
+            <div class="benefit-item-text">
+              <h3>Chuẩn bị kiểm toán chuyên nghiệp</h3>
+              <p>Bộ hồ sơ rõ ràng, bài bản giúp doanh nghiệp thuận lợi khi kiểm toán nội bộ và đối tác bên ngoài.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= QUY TRÌNH (HIỆU ỨNG SỐ CHÌM WATERMARK) ================= -->
+    <section class="kt-process reveal">
+      <div class="process-header">
+        <h2 class="font-serif">5 bước lập kế toán an toàn và minh bạch</h2>
+        <p>Quy trình AVEM đảm bảo kiểm soát chi tiết, rà soát liên tục và báo cáo rõ ràng để doanh nghiệp luôn chủ động.</p>
+      </div>
+      
+      <div class="process-grid">
+        <div class="process-card">
+          <div class="process-watermark">01</div>
+          <h4>Tiếp nhận & hiểu nhu cầu</h4>
+          <p>Thu thập tài liệu, xác định mục tiêu tài chính và yêu cầu vận hành của doanh nghiệp.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-watermark">02</div>
+          <h4>Phân tích hiện trạng</h4>
+          <p>Đánh giá hệ thống kế toán, kiểm soát nội bộ và nhận diện điểm cải thiện.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-watermark">03</div>
+          <h4>Thiết kế giải pháp</h4>
+          <p>Xây dựng lộ trình kế toán, báo cáo và quy trình nhân sự phù hợp với chiến lược doanh nghiệp.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-watermark">04</div>
+          <h4>Triển khai & kiểm soát</h4>
+          <p>Thực hiện các nghiệp vụ và kiểm soát định kỳ để đảm bảo dữ liệu chính xác và kịp thời.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-watermark">05</div>
+          <h4>Báo cáo & hỗ trợ</h4>
+          <p>Cung cấp báo cáo dễ hiểu và tư vấn liên tục để lãnh đạo ra quyết định tự tin.</p>
+        </div>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="dictionary.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

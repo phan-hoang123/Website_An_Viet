@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liên Hệ - AVEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="pages.css" />
+
+    
+  </head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- HERO -->
+    <section class="contact-hero reveal">
+      <div class="ch-content">
+        <h1>Kết Nối Với Chuyên Gia</h1>
+        <p>Để lại thông tin và yêu cầu của doanh nghiệp, đội ngũ chuyên gia tư vấn cấp cao của AVEM sẽ liên hệ và hỗ trợ bạn trong vòng 24 giờ làm việc.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT BLOCK OVERLAP -->
+    <div class="contact-block reveal">
+      <!-- Cột Trái (Thông tin) -->
+      <div class="cb-info">
+        <div class="cb-info-content">
+          <h2>Thông Tin Liên Hệ</h2>
+          
+          <div class="info-item">
+            <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div class="info-text">
+              <h4>Trụ Sở Chính</h4>
+              <p>Thủ đô Hà Nội, Việt Nam<br>(Vui lòng đặt lịch hẹn trước khi đến)</p>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <div class="info-icon"><i class="fa-solid fa-phone-volume"></i></div>
+            <div class="info-text">
+              <h4>Hotline Hỗ Trợ 24/7</h4>
+              <p>VIP: 034 788 8331<br>Phone: 0225.xxxx.xxx</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+            <div class="info-text">
+              <h4>Email Trực Tuyến</h4>
+              <p>contact@avem.vn<br>support@avem.vn</p>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Website"><i class="fa-solid fa-globe"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cột Phải (Form) -->
+      <div class="cb-form">
+        <h2>Gửi Yêu Cầu Tư Vấn</h2>
+        <p>Vui lòng cung cấp chi tiết bài toán quản trị mà doanh nghiệp bạn đang gặp phải.</p>
+        
+        <form id="contactForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="cusName">Họ và Tên *</label>
+              <input type="text" id="cusName" placeholder="Nhập tên của bạn" required>
+            </div>
+            <div class="form-group">
+              <label for="cusCompany">Tên Doanh Nghiệp *</label>
+              <input type="text" id="cusCompany" placeholder="Công ty / Tổ chức" required>
+            </div>
+            <div class="form-group">
+              <label for="cusPhone">Số Điện Thoại *</label>
+              <input type="tel" id="cusPhone" placeholder="09xx xxx xxx" required>
+            </div>
+            <div class="form-group">
+              <label for="cusEmail">Email Trực Tiếp *</label>
+              <input type="email" id="cusEmail" placeholder="email@congty.com" required>
+            </div>
+            <div class="form-group full">
+              <label for="cusService">Dịch Vụ Quan Tâm *</label>
+              <select id="cusService" required>
+                <option value="" disabled selected>-- Chọn lĩnh vực cần tư vấn --</option>
+                <option value="Xúc tiến đầu tư">Xúc tiến đầu tư (FDI)</option>
+                <option value="Pháp lý doanh nghiệp">Pháp lý & Cấu trúc doanh nghiệp</option>
+                <option value="Kế toán & Thuế">Kế toán & Thuế</option>
+                <option value="Kiểm toán độc lập">Kiểm toán độc lập</option>
+                <option value="Cố vấn quản trị">Cố vấn quản trị & Vận hành</option>
+                <option value="Khác">Yêu cầu khác</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label for="cusMessage">Nội Dung Chi Tiết</label>
+              <textarea id="cusMessage" rows="4" placeholder="Mô tả cụ thể vấn đề hoặc mong muốn của doanh nghiệp..."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit" id="btnSubmitContact">Gửi Thông Tin Cho AVEM</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- HỆ THỐNG CHI NHÁNH -->
+    <section class="branches-section">
+      <div class="bs-header reveal">
+        <h2 class="font-serif">Mạng Lưới Chi Nhánh</h2>
+      </div>
+      <div class="branches-grid">
+        <div class="branch-card reveal">
+          <i class="fa-regular fa-building"></i>
+          <h4>Trụ Sở Hà Nội</h4>
+          <p>Khu vực trung tâm hành chính thủ đô, thuận tiện kết nối các cơ quan bộ ban ngành.</p>
+          <p><strong>Hotline:</strong> 034 788 8331</p>
+        </div>
+        <div class="branch-card reveal" style="transition-delay: 0.1s;">
+          <i class="fa-solid fa-map-location-dot"></i>
+          <h4>VP Đại Diện Miền Bắc</h4>
+          <p>Chi nhánh Hà Nội - Đầu mối xúc tiến cho các khu công nghiệp công nghệ cao.</p>
+          <p><strong>Hotline:</strong> 0247.xxxx.xxx</p>
+        </div>
+        <div class="branch-card reveal" style="transition-delay: 0.2s;">
+          <i class="fa-solid fa-city"></i>
+          <h4>VP Đại Diện Miền Nam</h4>
+          <p>Chi nhánh TP. Hồ Chí Minh - Trung tâm tài chính và thương mại năng động nhất.</p>
+          <p><strong>Hotline:</strong> 028.xxxx.xxx</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP (GRAYSCALE) -->
+    <section class="map-section reveal">
+      <!-- Thay đổi link src trong thẻ iframe bằng link Google Maps thực tế của cty nếu có -->
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29789.16088458861!2d105.72595199512455!3d21.046881435350464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313453582de9ff67%3A0x5f9a8de7ac01316c!2sAn%20Viet%20DECON%2C%20jsc!5e0!3m2!1svi!2s!4v1786198697877!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="dictionary.js"></script>
+
+    <script src="main.js"></script>
+  </body>
+</html>

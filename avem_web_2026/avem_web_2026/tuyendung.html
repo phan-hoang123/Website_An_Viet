@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tuyển Dụng - AVEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css" />
+
+    <style>
+      /* === HERO BANNER TUYỂN DỤNG === */
+      .cr-hero {
+        position: relative; padding: 140px 5% 120px;
+        background: linear-gradient(rgba(15, 17, 21, 0.8), rgba(15, 17, 21, 0.85)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80') center/cover;
+        text-align: center; color: var(--white);
+      }
+      .cr-hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+      .cr-hero-content h1 { font-family: 'Sans-Serif', serif; font-size: 4rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+      .cr-hero-content p { font-size: 1.2rem; color: rgba(255,255,255,0.85); line-height: 1.8; margin-bottom: 40px; }
+      .btn-gold { background: var(--gold); color: var(--bg-dark); padding: 15px 35px; border-radius: 50px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; transition: 0.3s; }
+      .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(207,168,110,0.3); background: var(--white); color: var(--primary-color); }
+
+      /* === VÌ SAO CHỌN AVEM (BENEFITS) === */
+      .cr-benefits { padding: 100px 5%; background: var(--white); }
+      .sec-header { text-align: center; margin-bottom: 60px; }
+      .sec-header h2 { font-family: 'Sans-Serif', serif; font-size: 2.8rem; color: var(--text-main); font-weight: 800; margin-bottom: 15px; }
+      .sec-header p { color: var(--text-gray); font-size: 1.1rem; }
+      
+      .ben-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+      .ben-card { padding: 40px 30px; text-align: center; background: var(--bg-light); border-radius: var(--radius-md); border: 1px solid var(--border-color); transition: 0.3s; }
+      .ben-card:hover { transform: translateY(-10px); border-color: var(--primary-color); box-shadow: var(--shadow); background: var(--white); }
+      .ben-card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
+      .ben-card h4 { font-size: 1.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 10px; }
+      .ben-card p { font-size: 0.95rem; color: var(--text-gray); line-height: 1.6; }
+
+      /* === DANH SÁCH VIỆC LÀM (JOB BOARD) === */
+      .cr-jobs { padding: 100px 5%; background: var(--bg-light); border-top: 1px solid var(--border-color); }
+      .job-container { max-width: 1000px; margin: 0 auto; }
+      
+      .job-card {
+        background: var(--white); border: 1px solid var(--border-color); border-radius: var(--radius-md);
+        padding: 35px 40px; display: flex; justify-content: space-between; align-items: center;
+        margin-bottom: 20px; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+      }
+      .job-card:hover { border-color: var(--primary-color); box-shadow: var(--shadow-hover); transform: translateX(10px); }
+      
+      .job-info h3 { font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin-bottom: 12px; transition: 0.3s; }
+      .job-card:hover .job-info h3 { color: var(--primary-color); }
+      
+      .job-tags { display: flex; gap: 15px; flex-wrap: wrap; }
+      .job-tags span { display: inline-flex; align-items: center; gap: 6px; padding: 6px 15px; background: var(--bg-light); color: var(--text-gray); border-radius: 50px; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--border-color); }
+      .job-tags span i { color: var(--primary-color); }
+      
+      .job-action { text-align: right; }
+      .btn-apply { display: inline-block; padding: 12px 30px; background: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 8px; font-weight: 700; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+      .job-card:hover .btn-apply { background: var(--primary-color); color: var(--white); }
+
+      /* === MODAL POPUP (FORM ỨNG TUYỂN) === */
+      .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(15, 17, 21, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        z-index: 99999; display: flex; justify-content: center; align-items: center;
+        opacity: 0; visibility: hidden; transition: all 0.3s ease;
+      }
+      .modal-overlay.show { opacity: 1; visibility: visible; }
+      
+      .modal-content {
+        background: var(--white); width: 90%; max-width: 650px;
+        border-radius: var(--radius-lg); padding: 50px 40px; position: relative;
+        transform: translateY(50px) scale(0.95); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.3); border-top: 5px solid var(--primary-color);
+      }
+      .modal-overlay.show .modal-content { transform: translateY(0) scale(1); }
+      
+      .close-modal {
+        position: absolute; top: 20px; right: 25px; font-size: 2rem;
+        color: var(--text-gray); cursor: pointer; line-height: 1; transition: 0.3s;
+      }
+      .close-modal:hover { color: var(--primary-color); transform: rotate(90deg); }
+
+      .modal-content h3 { font-size: 1.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 5px; }
+      .modal-content #modalJobTitle { color: var(--gold); font-weight: 700; margin-bottom: 25px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+      
+      .form-group { margin-bottom: 20px; text-align: left; }
+      .form-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.95rem; color: var(--text-main); }
+      .form-group input, .form-group textarea {
+        width: 100%; padding: 14px 20px; border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm); font-family: "Inter", sans-serif; font-size: 1rem;
+        background: var(--bg-light); transition: 0.3s; outline: none;
+      }
+      .form-group input:focus, .form-group textarea:focus { border-color: var(--primary-color); background: var(--white); box-shadow: 0 0 0 4px rgba(163, 22, 22, 0.1); }
+      .btn-submit {
+        background: var(--primary-color); color: var(--white); border: none; padding: 16px;
+        border-radius: var(--radius-sm); font-weight: 700; width: 100%; font-size: 1.05rem;
+        text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; margin-top: 10px;
+      }
+      .btn-submit:hover { background: var(--gold); color: var(--bg-dark); }
+
+      /* === QUY TRÌNH ỨNG TUYỂN === */
+      .cr-process { padding: 100px 5%; background: var(--white); }
+      .process-wrapper { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; position: relative; }
+      .process-wrapper::before { content: ''; position: absolute; top: 40px; left: 10%; right: 10%; height: 2px; border-top: 2px dashed var(--border-color); z-index: 1; }
+      .proc-step { text-align: center; position: relative; z-index: 2; flex: 1; padding: 0 20px; }
+      .proc-icon { width: 80px; height: 80px; background: var(--bg-light); border: 2px solid var(--border-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; color: var(--primary-color); margin: 0 auto 20px; transition: 0.3s; }
+      .proc-step:hover .proc-icon { background: var(--primary-color); color: var(--white); border-color: var(--primary-color); transform: scale(1.1); box-shadow: 0 10px 20px rgba(144,0,0,0.15); }
+      .proc-step h4 { font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 10px; }
+      .proc-step p { font-size: 0.95rem; color: var(--text-gray); }
+
+      /* ========================================================= */
+      /* === NÂNG CẤP ANIMATION CHO TRANG TUYỂN DỤNG (CAREERS) === */
+      /* ========================================================= */
+
+      /* 1. SỬA HIỆU ỨNG THẺ VIỆC LÀM (Sang trọng hơn, bỏ trượt ngang) */
+      .job-card {
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      }
+      .job-card:hover {
+        border-color: var(--primary-color) !important;
+        box-shadow: 0 20px 40px rgba(144, 0, 0, 0.08) !important; /* Đổ bóng màu đỏ đô nhạt */
+        transform: translateY(-8px) !important; /* Nâng thẻ lên thay vì trượt ngang */
+      }
+      .job-card:hover .btn-apply {
+        transform: scale(1.05); /* Nút ứng tuyển hơi phình to ra một chút mời gọi click */
+      }
+
+      /* 2. ĐƯỜNG KẺ QUY TRÌNH "TỰ VẼ" KHI CUỘN TỚI */
+      .process-wrapper::before {
+        width: 0; /* Giấu đường kẻ đi lúc ban đầu */
+        left: 10%;
+        right: auto !important; /* Bỏ right để width hoạt động */
+        transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        transition-delay: 0.4s; /* Đợi các khối icon nảy lên xong mới vẽ đường kẻ */
+      }
+      .process-wrapper.active::before {
+        width: 80%; /* Khi cuộn tới, đường kẻ sẽ chạy dài lấp đầy khoảng trống */
+      }
+
+      /* 3. HIỆU ỨNG SÓNG ÂM (PULSE) CHO ICON QUY TRÌNH */
+      .proc-icon {
+        position: relative;
+        z-index: 2;
+        background: var(--white) !important; /* Nền trắng để đè lên sóng */
+      }
+      .proc-icon::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 2px solid var(--primary-color);
+        top: -2px; 
+        left: -2px;
+        opacity: 0;
+        z-index: -1;
+        animation: radarPulse 2s infinite; /* Vòng lặp vô hạn */
+      }
+      /* Tạo độ trễ cho từng icon để sóng không đập cùng lúc */
+      .proc-step:nth-child(2) .proc-icon::after { animation-delay: 0.5s; }
+      .proc-step:nth-child(3) .proc-icon::after { animation-delay: 1s; }
+      .proc-step:nth-child(4) .proc-icon::after { animation-delay: 1.5s; }
+
+      @keyframes radarPulse {
+        0% { transform: scale(1); opacity: 0.8; }
+        100% { transform: scale(1.6); opacity: 0; }
+      }
+
+      /* 4. MODAL FORM: CÁC Ô NHẬP LIỆU LƯỚT LÊN SO LE CỰC MƯỢT */
+      .modal-overlay.show .form-group {
+        animation: modalFieldSlide 0.5s forwards;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      /* Cài đặt thời gian xuất hiện lần lượt cho từng dòng */
+      .modal-overlay.show .form-group:nth-child(2) { animation-delay: 0.1s; }
+      .modal-overlay.show .form-group:nth-child(3) { animation-delay: 0.2s; }
+      .modal-overlay.show .form-group:nth-child(4) { animation-delay: 0.3s; }
+      .modal-overlay.show .btn-submit {
+        animation: modalFieldSlide 0.5s forwards;
+        opacity: 0;
+        transform: translateY(20px);
+        animation-delay: 0.4s;
+      }
+
+      @keyframes modalFieldSlide {
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* =======================================================
+         ĐẠI TU TOÀN DIỆN GIAO DIỆN MOBILE TRANG TUYỂN DỤNG (CHỐT HẠ)
+         ======================================================= */
+      @media (max-width: 768px) {
+        
+        /* 1. HERO BANNER (Thu gọn chữ, giãn nút bấm toàn màn hình) */
+        .cr-hero { padding: 100px 5% 60px; }
+        .cr-hero-content h1 { font-size: 2.2rem; margin-bottom: 15px; line-height: 1.3; }
+        .cr-hero-content p { font-size: 1rem; margin-bottom: 25px; }
+        .cr-hero-content .btn-gold { display: block; width: 100%; text-align: center; }
+
+        /* 2. TIÊU ĐỀ CHUNG */
+        .sec-header { margin-bottom: 40px; }
+        .sec-header h2 { font-size: 1.8rem; margin-bottom: 10px; }
+        .sec-header p { font-size: 0.95rem; }
+
+        /* 3. VÌ SAO CHỌN AVEM (Bẻ 4 cột ngang thành 1 cột dọc) */
+        .cr-benefits { padding: 60px 5%; }
+        .ben-grid { grid-template-columns: 1fr; gap: 20px; }
+        .ben-card { padding: 25px 20px; }
+
+        /* 4. DANH SÁCH VIỆC LÀM (Đẩy nút ứng tuyển xuống dưới, giãn 100%) */
+        .cr-jobs { padding: 60px 5%; }
+        .job-card { 
+          flex-direction: column; 
+          align-items: flex-start; 
+          gap: 20px; 
+          padding: 25px 20px; 
+        }
+        .job-info h3 { font-size: 1.3rem; }
+        .job-tags { gap: 10px; }
+        .job-tags span { font-size: 0.8rem; padding: 5px 12px; }
+        .job-action { width: 100%; }
+        .btn-apply { display: block; width: 100%; text-align: center; }
+
+        /* 5. QUY TRÌNH ỨNG TUYỂN */
+        .cr-process { padding: 60px 5%; }
+        .process-wrapper { flex-direction: column; gap: 40px; }
+        /* Tắt đường kẻ ngang đứt đoạn trên điện thoại vì sẽ gây vỡ layout */
+        .process-wrapper::before { display: none !important; }
+        .proc-step { padding: 0; }
+        .proc-icon { width: 60px; height: 60px; font-size: 1.5rem; }
+
+        /* 6. MODAL FORM ỨNG TUYỂN (Bóp viền, bật thanh cuộn chống tràn) */
+        .modal-content { 
+          padding: 40px 20px 30px; 
+          width: 95%; 
+          max-height: 85vh; /* Khống chế chiều cao, cho phép cuộn mượt mà nếu form dài */
+          overflow-y: auto; 
+        }
+        .close-modal { top: 10px; right: 15px; font-size: 2rem; }
+        .modal-content h3 { font-size: 1.5rem; }
+        #modalJobTitle { font-size: 0.95rem; margin-bottom: 20px; }
+        
+        /* Bẻ ô Số điện thoại và Email nằm ngang thành dọc */
+        #applyForm > div[style*="display: flex"] { flex-direction: column; gap: 0 !important; }
+        .form-group { margin-bottom: 15px; }
+        .form-group input, .form-group textarea { padding: 12px 15px; font-size: 0.95rem; }
+        .btn-submit { padding: 14px; font-size: 0.95rem; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- HERO BANNER -->
+    <section class="cr-hero reveal">
+      <div class="cr-hero-content">
+        <h1 class="font-serif">Phát Triển Sự Nghiệp Cùng AVEM</h1>
+        <p>Gia nhập đội ngũ chuyên gia hàng đầu. Cùng chúng tôi kiến tạo những giải pháp quản trị xuất sắc và định hình tương lai của cộng đồng doanh nghiệp.</p>
+        <a href="#open-jobs" class="btn-gold">Xem Vị Trí Đang Tuyển</a>
+      </div>
+    </section>
+
+    <!-- VÌ SAO CHỌN AVEM -->
+    <section class="cr-benefits">
+      <div class="sec-header reveal">
+        <h2 class="font-serif">Vì Sao Chọn AVEM?</h2>
+        <p>Môi trường làm việc lý tưởng để bạn phát huy tối đa tiềm năng.</p>
+      </div>
+      <div class="ben-grid">
+        <div class="ben-card reveal">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <h4>Đào Tạo Chuyên Sâu</h4>
+          <p>Tham gia các khóa huấn luyện nội bộ và chứng chỉ quốc tế được tài trợ 100%.</p>
+        </div>
+        <div class="ben-card reveal" style="transition-delay: 0.1s;">
+          <i class="fa-solid fa-arrow-trend-up"></i>
+          <h4>Lộ Trình Thăng Tiến</h4>
+          <p>Đánh giá năng lực minh bạch định kỳ 6 tháng. Cơ hội thăng tiến lên Partner rõ ràng.</p>
+        </div>
+        <div class="ben-card reveal" style="transition-delay: 0.2s;">
+          <i class="fa-solid fa-sack-dollar"></i>
+          <h4>Chế Độ Đãi Ngộ</h4>
+          <p>Thu nhập cạnh tranh Top thị trường, thưởng dự án và gói bảo hiểm sức khỏe VIP.</p>
+        </div>
+        <div class="ben-card reveal" style="transition-delay: 0.3s;">
+          <i class="fa-solid fa-handshake-angle"></i>
+          <h4>Môi Trường Cởi Mở</h4>
+          <p>Văn hóa làm việc tôn trọng sự khác biệt, đề cao tính sáng tạo và tinh thần làm chủ.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DANH SÁCH CÔNG VIỆC -->
+    <section id="open-jobs" class="cr-jobs">
+      <div class="sec-header reveal">
+        <h2 class="font-serif">Vị Trí Đang Tuyển Dụng</h2>
+        <p>Tìm kiếm cơ hội phù hợp với năng lực của bạn tại các văn phòng của chúng tôi.</p>
+      </div>
+      
+      <div class="job-container">
+        <!-- Job 1 -->
+        <div class="job-card reveal">
+          <div class="job-info">
+            <h3>Chuyên Viên Tư Vấn Pháp Lý Doanh Nghiệp</h3>
+            <div class="job-tags">
+              <span><i class="fa-solid fa-briefcase"></i> Toàn thời gian</span>
+              <span><i class="fa-solid fa-location-dot"></i> Trụ sở Hà Nội</span>
+              <span><i class="fa-solid fa-calendar-days"></i> Hạn: 30/09/2026</span>
+            </div>
+          </div>
+          <div class="job-action">
+            <!-- Nút bấm mở Pop-up thay vì mailto -->
+            <a href="javascript:void(0)" class="btn-apply open-modal-btn" data-job="Chuyên Viên Tư Vấn Pháp Lý Doanh Nghiệp">Ứng Tuyển Ngay</a>
+          </div>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="job-card reveal" style="transition-delay: 0.1s;">
+          <div class="job-info">
+            <h3>Trợ Lý Kiểm Toán (Audit Assistant)</h3>
+            <div class="job-tags">
+              <span><i class="fa-solid fa-briefcase"></i> Toàn thời gian</span>
+              <span><i class="fa-solid fa-location-dot"></i> Chi nhánh TP.HCM</span>
+              <span><i class="fa-solid fa-calendar-days"></i> Hạn: 15/09/2026</span>
+            </div>
+          </div>
+          <div class="job-action">
+            <a href="javascript:void(0)" class="btn-apply open-modal-btn" data-job="Trợ Lý Kiểm Toán (Audit Assistant)">Ứng Tuyển Ngay</a>
+          </div>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="job-card reveal" style="transition-delay: 0.2s;">
+          <div class="job-info">
+            <h3>Chuyên Gia Xúc Tiến Đầu Tư FDI</h3>
+            <div class="job-tags">
+              <span><i class="fa-solid fa-briefcase"></i> Chuyên gia / Manager</span>
+              <span><i class="fa-solid fa-location-dot"></i> Trụ sở Hà Nội</span>
+              <span><i class="fa-solid fa-calendar-days"></i> Hạn: Không giới hạn</span>
+            </div>
+          </div>
+          <div class="job-action">
+            <a href="javascript:void(0)" class="btn-apply open-modal-btn" data-job="Chuyên Gia Xúc Tiến Đầu Tư FDI">Ứng Tuyển Ngay</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUY TRÌNH ỨNG TUYỂN -->
+    <section class="cr-process">
+      <div class="sec-header reveal">
+        <h2 class="font-serif">Quy Trình Ứng Tuyển</h2>
+      </div>
+      <div class="process-wrapper reveal">
+        <div class="proc-step">
+          <div class="proc-icon"><i class="fa-solid fa-file-pdf"></i></div>
+          <h4>1. Nộp Hồ Sơ</h4>
+          <p>Gửi CV qua email hoặc form ứng tuyển.</p>
+        </div>
+        <div class="proc-step">
+          <div class="proc-icon"><i class="fa-solid fa-phone-volume"></i></div>
+          <h4>2. Sơ Vấn Kỹ Năng</h4>
+          <p>Trao đổi ngắn qua điện thoại với nhân sự.</p>
+        </div>
+        <div class="proc-step">
+          <div class="proc-icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+          <h4>3. Phỏng Vấn Trực Tiếp</h4>
+          <p>Đánh giá chuyên môn cùng Ban Giám Đốc.</p>
+        </div>
+        <div class="proc-step">
+          <div class="proc-icon"><i class="fa-solid fa-handshake-angle"></i></div>
+          <h4>4. Nhận Việc & Đào Tạo</h4>
+          <p>Nhận Offer letter và tham gia Onboarding.</p>
+        </div>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- ================= MODAL POPUP (HTML CỦA FORM) ================= -->
+    <div id="applyModal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3 class="font-serif">Ứng Tuyển Vị Trí</h3>
+        <p id="modalJobTitle">Tên vị trí</p>
+        
+        <form id="applyForm">
+          <input type="hidden" id="jobPositionInput" name="jobPosition">
+          
+          <div class="form-group">
+            <label>Họ và Tên *</label>
+            <input type="text" placeholder="Nhập tên của bạn" required>
+          </div>
+          
+          <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <div class="form-group" style="flex: 1; min-width: 200px;">
+              <label>Số Điện Thoại *</label>
+              <input type="tel" placeholder="09xx xxx xxx" required>
+            </div>
+            <div class="form-group" style="flex: 1; min-width: 200px;">
+              <label>Email *</label>
+              <input type="email" placeholder="email@gmail.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Link CV / Portfolio (Google Drive, Dropbox...) *</label>
+            <input type="url" placeholder="https://..." required>
+          </div>
+          
+          <div class="form-group">
+            <label>Thư giới thiệu (Cover Letter)</label>
+            <textarea rows="3" placeholder="Vì sao bạn tin rằng mình phù hợp với vị trí này..."></textarea>
+          </div>
+          
+          <button type="submit" class="btn-submit">Gửi Hồ Sơ Ứng Tuyển</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- SCRIPT HIỆU ỨNG HIỂN THỊ VÀ MODAL POPUP -->
+    <script>
+      // 2. Logic Modal Pop-up Ứng Tuyển
+      const modal = document.getElementById('applyModal');
+      const openBtns = document.querySelectorAll('.open-modal-btn');
+      const closeBtn = document.querySelector('.close-modal');
+      const modalTitle = document.getElementById('modalJobTitle');
+      const jobInput = document.getElementById('jobPositionInput');
+      const applyForm = document.getElementById('applyForm');
+
+      // Mở Modal và điền tên công việc
+      openBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const jobName = btn.getAttribute('data-job');
+          modalTitle.textContent = jobName; // Hiển thị trên popup
+          jobInput.value = jobName; // Lưu vào input ẩn để gửi đi
+          modal.classList.add('show');
+        });
+      });
+
+      // Đóng Modal khi bấm X
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+      });
+
+      // Đóng Modal khi bấm ra ngoài vùng đen
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('show');
+        }
+      });
+
+      // Mô phỏng hiệu ứng Gửi form
+      applyForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Chặn hành động load trang mặc định
+        
+        const submitBtn = applyForm.querySelector('.btn-submit');
+        const originalText = submitBtn.textContent;
+        
+        // Hiệu ứng đang tải
+        submitBtn.textContent = 'Đang xử lý...';
+        submitBtn.style.opacity = '0.7';
+
+        // Set timeout 1.5 giây để mô phỏng giống gửi server thật
+        setTimeout(() => {
+          alert('Cảm ơn bạn! Hồ sơ ứng tuyển vị trí "' + jobInput.value + '" đã được gửi đến bộ phận Nhân sự AVEM.');
+          
+          // Reset form và đóng modal
+          applyForm.reset();
+          submitBtn.textContent = originalText;
+          submitBtn.style.opacity = '1';
+          modal.classList.remove('show');
+        }, 1500);
+      });
+    </script>
+
+    <script src="dictionary.js"></script>
+
+    <script src="main.js"></script>
+  </body>
+</html>

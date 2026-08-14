@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luật Doanh nghiệp 2026: Những thay đổi cốt lõi - AVEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Thêm font Lora cho bài viết tạp chí -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css" />
+
+    <style>
+      /* === BÀI VIẾT: HERO HEADER === */
+      .article-header { padding: 80px 5% 40px; background: var(--bg-light); text-align: center; }
+      .article-header-container { max-width: 900px; margin: 0 auto; }
+      .article-tag { display: inline-block; background: var(--primary-color); color: var(--white); padding: 6px 15px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; margin-bottom: 25px; }
+      .article-title { font-family: 'Lora', serif; font-size: 3.2rem; font-weight: 700; color: var(--text-main); line-height: 1.3; margin-bottom: 25px; }
+      .article-excerpt { font-size: 1.25rem; color: var(--text-gray); line-height: 1.6; margin-bottom: 30px; }
+      .article-meta { display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 0.95rem; color: var(--text-gray); }
+      .article-meta .author-avatar { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+      .article-meta-info { display: flex; flex-direction: column; align-items: flex-start; }
+      .article-meta-info strong { color: var(--text-main); font-weight: 700; }
+
+      /* === BÀI VIẾT: ẢNH BÌA === */
+      .article-cover { max-width: 1200px; margin: -40px auto 60px; /* Kéo đè lên header một chút */ padding: 0 5%; position: relative; z-index: 2; }
+      .article-cover img { width: 100%; height: 60vh; min-height: 400px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+      .article-cover-caption { text-align: center; font-size: 0.85rem; color: var(--text-gray); margin-top: 10px; font-style: italic; }
+
+      /* === BÀI VIẾT: NỘI DUNG CHÍNH === */
+      .article-body-layout { display: flex; max-width: 1200px; margin: 0 auto; padding: 0 5% 100px; gap: 60px; align-items: flex-start; }
+
+      /* Thanh chia sẻ bên trái (Sticky) */
+      .article-share { flex: 0 0 60px; position: sticky; top: 120px; display: flex; flex-direction: column; gap: 15px; }
+      .article-share span { font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--text-gray); text-align: center; margin-bottom: 5px; }
+      .share-btn { width: 45px; height: 45px; border-radius: 50%; background: var(--bg-light); color: var(--text-gray); display: flex; justify-content: center; align-items: center; font-size: 1.2rem; transition: 0.3s; border: 1px solid var(--border-color); cursor: pointer; }
+      .share-btn:hover { background: var(--primary-color); color: var(--white); border-color: var(--primary-color); transform: translateY(-3px); }
+      .share-btn.zalo:hover { background: #0068ff; border-color: #0068ff; }
+      .share-btn.fb:hover { background: #1877f2; border-color: #1877f2; }
+
+      /* Cột nội dung chữ */
+      .article-content { flex: 1; max-width: 800px; /* Khóa độ rộng để mắt đọc không bị mỏi */ font-family: 'Lora', serif; /* Font có chân đọc báo siêu sướng */ font-size: 1.2rem; line-height: 1.9; color: var(--text-body); }
+
+      /* Drop Cap (Chữ cái đầu to) */
+      .article-content > p:first-of-type::first-letter { font-family: 'Inter', sans-serif; color: var(--primary-color); float: left; font-size: 4.5rem; line-height: 0.8; padding-right: 12px; padding-top: 5px; font-weight: 800; }
+      .article-content p { margin-bottom: 25px; }
+      .article-content h2 { font-family: 'Inter', sans-serif; font-size: 2rem; font-weight: 800; color: var(--text-main); margin: 50px 0 20px; line-height: 1.3; }
+      .article-content h3 { font-family: 'Inter', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin: 30px 0 15px; }
+
+      /* Khối trích dẫn (Blockquote) */
+      .article-content blockquote { margin: 40px 0; padding: 30px 40px; background: rgba(144, 0, 0, 0.03); border-left: 5px solid var(--primary-color); font-size: 1.4rem; font-style: italic; color: var(--primary-color); font-weight: 600; }
+      .article-content ul { margin: 20px 0 30px 20px; }
+      .article-content ul li { margin-bottom: 12px; position: relative; padding-left: 25px; }
+      .article-content ul li::before { content: '\f0da';  font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; top: 0; color: var(--gold); font-size: 1rem; }
+      .article-content img { width: 100%; border-radius: var(--radius-md); margin: 30px 0 15px; }
+
+      /* === TAGS & AUTHOR BOX TẠI CUỐI BÀI === */
+      .article-footer { margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-color); }
+      .article-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+      .article-tags a { padding: 8px 18px; background: var(--bg-light); border-radius: 50px; font-size: 0.9rem; font-weight: 600; color: var(--text-gray); font-family: 'Inter', sans-serif; }
+      .article-tags a:hover { background: var(--primary-color); color: var(--white); }
+      .author-box { display: flex; gap: 25px; padding: 30px; background: var(--bg-light); border-radius: var(--radius-md); font-family: 'Inter', sans-serif; }
+      .author-box img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0;}
+      .author-box h4 { font-size: 1.2rem; margin-bottom: 5px; color: var(--text-main); }
+      .author-box p { font-size: 0.95rem; margin: 0; color: var(--text-gray); }
+
+      /* =======================================================
+         ĐẠI TU GIAO DIỆN MOBILE CHO TRANG CHI TIẾT TIN TỨC
+         ======================================================= */
+      @media (max-width: 768px) {
+        
+        /* 1. KHU VỰC HEADER BÀI VIẾT */
+        .article-header { padding: 40px 5% 20px; }
+        .article-title { font-size: 2rem; margin-bottom: 15px; } /* Thu nhỏ Tiêu đề */
+        .article-excerpt { font-size: 1.05rem; }
+        
+        /* 2. ẢNH BÌA BÀI VIẾT */
+        .article-cover { margin: -20px auto 30px; padding: 0; } /* Bỏ padding 2 bên để ảnh tràn viền điện thoại */
+        .article-cover img { 
+            height: 250px; /* Thu hẹp chiều cao ảnh cho đỡ lấn sân */
+            min-height: auto; 
+            border-radius: 0; /* Bo tròn trên điện thoại không đẹp bằng vuông vức tràn viền */
+        }
+        
+        /* 3. BỐ CỤC CHÍNH (Bẻ thanh Share xuống dưới ảnh, Nội dung lên trên) */
+        .article-body-layout { 
+            flex-direction: column; /* Bẻ từ 2 cột ngang thành 1 cột dọc */
+            gap: 30px; 
+            padding: 0 5% 60px;
+        }
+
+        /* 4. THANH MẠNG XÃ HỘI (Share) */
+        .article-share { 
+            flex-direction: row; /* Chuyển từ xếp dọc sang xếp ngang */
+            position: static; /* Gỡ bỏ thuộc tính dính (sticky) */
+            width: 100%; 
+            justify-content: center; /* Căn giữa màn hình */
+            align-items: center;
+            border-bottom: 1px solid var(--border-color); /* Kẻ thêm cái gạch dưới cho sang */
+            padding-bottom: 20px;
+        }
+        .article-share span { margin-bottom: 0; margin-right: 15px; } /* Sắp chữ "Chia sẻ" nằm ngang hàng */
+
+        /* 5. NỘI DUNG BÀI VIẾT (Tối ưu font đọc báo) */
+        .article-content { width: 100%; font-size: 1.05rem; line-height: 1.7; text-align: justify; }
+        .article-content h2 { font-size: 1.6rem; margin: 30px 0 15px; }
+        .article-content h3 { font-size: 1.3rem; margin: 25px 0 10px; }
+        .article-content blockquote { 
+            font-size: 1.2rem; 
+            padding: 20px; 
+            margin: 25px 0; 
+        }
+        
+        /* Thu nhỏ chữ cái đầu tiên (Drop cap) */
+        .article-content > p:first-of-type::first-letter { font-size: 3.5rem; }
+        
+        /* 6. KHỐI TÁC GIẢ BÊN DƯỚI */
+        .author-box { 
+            flex-direction: column; /* Đẩy Avatar lên trên, Tên xuống dưới */
+            align-items: center; 
+            text-align: center; 
+            padding: 20px; 
+        }
+        .article-tags { justify-content: center; } /* Căn giữa các Tag */
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- ================= ARTICLE HEADER ================= -->
+    <section class="article-header reveal">
+      <div class="article-header-container">
+        <span class="article-tag" id="api-category">Đang tải...</span>
+        <h1 class="article-title" id="api-title">Đang tải bài viết...</h1>
+        <p class="article-excerpt" id="api-excerpt"></p>
+        
+        <div class="article-meta">
+            <img src="anh_website/avatar-admin.jpg" alt="Admin" class="author-avatar">
+            <div class="article-meta-info">
+                <strong>Chuyên gia AVEM</strong>
+                <span id="api-date">Đang tải ngày...</span>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ẢNH BÌA BÀI VIẾT ================= -->
+    <div class="article-cover reveal">
+      <img id="api-cover" src="" alt="Ảnh bài viết">
+    </div>
+
+    <!-- ================= NỘI DUNG CHÍNH ================= -->
+    <section class="article-body-layout">
+      
+      <!-- Cột Mạng xã hội (Sticky) -->
+      <aside class="article-share reveal">
+        <span>Chia sẻ</span>
+        <a class="share-btn fb" title="Chia sẻ Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a class="share-btn" title="Chia sẻ LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a class="share-btn zalo" title="Chia sẻ Zalo"><strong>Z</strong></a>
+        <a class="share-btn" title="Copy Link" onclick="alert('Đã copy đường dẫn bài viết!')"><i class="fa-solid fa-link"></i></a>
+      </aside>
+
+      <!-- Cột Nội dung văn bản -->
+      <article class="article-content reveal" id="api-content">
+        <p>Hệ thống đang tải nội dung, vui lòng đợi...</p>
+    </article>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="dictionary.js"></script>
+    
+  <script src="main.js"></script>
+  </body>
+</html>

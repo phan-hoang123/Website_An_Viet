@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lịch Sử & Tầm Nhìn - AVEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css" />
+
+    <style>
+      /* === PAGE BANNER === */
+      .page-banner { height: 40vh; background: linear-gradient(rgba(15, 17, 21, 0.7), rgba(15, 17, 21, 0.9)), url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop") center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--white); text-align: center; }
+      .page-banner h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase;}
+      .page-banner p { font-size: 1.2rem; color: rgba(255, 255, 255, 0.8); }
+
+      /* === CHUNG === */
+      .section-padding { padding: 100px 5%; }
+      .section-header { text-align: center; margin-bottom: 80px; }
+      .section-header h2 { color: var(--primary-color); font-size: 2.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.3;}
+      .section-header p { color: var(--text-gray); font-size: 1.1rem; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+
+      /* === TIMELINE DẠNG ZICZAC (TỐI GIẢN CHẤM TRÒN) === */
+      .timeline-section { background-color: var(--bg-light); }
+      .timeline { position: relative; max-width: 1100px; margin: 0 auto; padding: 40px 0; }
+      
+      /* Làm mảnh trục thời gian lại, đổi màu nhạt bớt cho sang */
+      .timeline::after { content: ''; position: absolute; width: 2px; background: rgba(144, 0, 0, 0.15); top: 0; bottom: 0; left: 50%; transform: translateX(-50%); z-index: 1; }
+      
+      .timeline-item { padding: 0 50px 70px 50px; position: relative; width: 50%; }
+      .timeline-item.left { left: 0; }
+      .timeline-item.right { left: 50%; }
+      
+      /* CHẤM TRÒN NHỎ GỌN (THAY CHO VÒNG TRÒN TO CHỨA CHỮ) */
+      .timeline-marker { 
+          position: absolute; top: 30px; /* Căn ngang với chữ 2016 */
+          width: 22px; height: 22px; 
+          background: var(--white); 
+          border: 4px solid var(--primary-color); 
+          border-radius: 50%; z-index: 2; 
+          box-shadow: 0 0 0 6px rgba(144, 0, 0, 0.08); 
+          transform: scale(0); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+      }
+      /* Hiệu ứng khi cuộn tới: Sáng lên màu Vàng Gold */
+      .timeline-item.active .timeline-marker { 
+          transform: scale(1); 
+          background: var(--gold); 
+          border-color: var(--primary-color); 
+          box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.2); 
+      }
+      .timeline-item.left .timeline-marker { right: -11px; }
+      .timeline-item.right .timeline-marker { left: -11px; }
+      
+      .timeline-content { 
+          background: var(--white); padding: 40px; border-radius: var(--radius-md); 
+          box-shadow: var(--shadow); position: relative; border: 1px solid var(--border-color); 
+          transition: transform 0.3s; text-align: left; 
+      }
+      
+      /* MŨI TÊN TRỎ VÀO TRỤC TỪ THẺ TRẮNG */
+      .timeline-content::before { content: ''; position: absolute; top: 30px; width: 0; height: 0; border-style: solid; }
+      .timeline-item.left .timeline-content::before { right: -12px; border-width: 12px 0 12px 12px; border-color: transparent transparent transparent var(--border-color); }
+      .timeline-item.right .timeline-content::before { left: -12px; border-width: 12px 12px 12px 0; border-color: transparent var(--border-color) transparent transparent; }
+      
+      .timeline-content::after { content: ''; position: absolute; top: 31px; width: 0; height: 0; border-style: solid; }
+      .timeline-item.left .timeline-content::after { right: -10px; border-width: 11px 0 11px 11px; border-color: transparent transparent transparent var(--white); }
+      .timeline-item.right .timeline-content::after { left: -10px; border-width: 11px 11px 11px 0; border-color: transparent var(--white) transparent transparent; }
+
+      .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+      
+      /* ĐƯA NĂM VÀO TRONG THẺ LÀM TIÊU ĐỀ KHỔNG LỒ */
+      .timeline-year { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 900; color: var(--primary-color); line-height: 1; margin-bottom: 5px; }
+      .timeline-inner-date { font-size: 0.9rem; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 20px; }
+      
+      .timeline-content h4 { color: var(--text-main); font-size: 1.2rem; font-weight: 800; margin-bottom: 12px; line-height: 1.4; }
+      .timeline-content p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.7; margin: 0;}
+      
+      .timeline-progress { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 4px; background: var(--primary-color); height: 0%; z-index: 1; border-radius: 4px; box-shadow: 0 0 12px rgba(144, 0, 0, 0.4); }
+      
+      .timeline-item.left.reveal { transform: translateX(-40px) translateY(20px); }
+      .timeline-item.right.reveal { transform: translateX(40px) translateY(20px); }
+      .timeline-item.reveal.active { transform: translateX(0) translateY(0); }
+
+      /* CĂN CHỈNH LẠI TRÊN ĐIỆN THOẠI CHO GỌN GÀNG */
+      @media (max-width: 768px) {
+        .timeline::after { left: 20px; } 
+        .timeline-progress { left: 20px; }
+        .timeline-item { width: 100%; padding: 0 0 40px 45px !important; }
+        .timeline-item.left, .timeline-item.right { left: 0; }
+        
+        .timeline-item.left .timeline-marker, .timeline-item.right .timeline-marker { 
+            left: 9px; right: auto; top: 30px;
+        }
+        
+        /* Đảo lại mũi tên cho mobile (vì tất cả thẻ đều bị đẩy dồn sang bên phải trục) */
+        .timeline-item.left .timeline-content::before, .timeline-item.right .timeline-content::before { left: -12px; right: auto; border-width: 12px 12px 12px 0; border-color: transparent var(--border-color) transparent transparent; }
+        .timeline-item.left .timeline-content::after, .timeline-item.right .timeline-content::after { left: -10px; right: auto; border-width: 11px 11px 11px 0; border-color: transparent var(--white) transparent transparent; }
+        
+        .timeline-year { font-size: 2.5rem; }
+        .timeline-content { padding: 25px 20px; }
+      }
+
+      /* === LỢI THẾ CẠNH TRANH === */
+      .advantages-section { padding: 100px 5%; background-color: var(--white); }
+      .adv-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 50px 40px; max-width: 1100px; margin: 0 auto; }
+      .adv-card { display: flex; gap: 25px; align-items: flex-start; }
+      .adv-icon { flex-shrink: 0; width: 100px; height: 100px; background-color: rgba(163, 22, 22, 0.05); border-radius: 12px; display: flex; justify-content: center; align-items: center;font-size: 3rem; color: var(--primary-color); transition: all 0.3s ease; }
+      .adv-card:hover .adv-icon { background-color: var(--primary-color); color: var(--white); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(163, 22, 22, 0.2); }
+      .adv-content h4 { color: var(--primary-color); font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
+      .adv-content p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; }
+      .adv-card.reveal { transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+      .adv-card:nth-child(1).active { transition-delay: 0.1s; }
+      .adv-card:nth-child(2).active { transition-delay: 0.2s; }
+      .adv-card:nth-child(3).active { transition-delay: 0.3s; }
+      .adv-card:nth-child(4).active { transition-delay: 0.4s; }
+
+      /* === CTA TUYỂN DỤNG === */
+      .join-us-section { position: relative; padding: 120px 5%; background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80') center/cover no-repeat; display: flex; justify-content: flex-end; align-items: center; }
+      .join-us-content { background: var(--white); padding: 50px 40px; max-width: 500px; box-shadow: var(--shadow-hover); position: relative; z-index: 2; border-bottom: 4px solid var(--primary-color); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+      .join-us-content h3 { color: var(--primary-color); font-size: 2rem; font-weight: 800; margin-bottom: 15px; line-height: 1.3; }
+      .join-us-content p { color: var(--text-gray); margin-bottom: 25px; line-height: 1.7; }
+      .join-us-content.reveal { transform: translateX(80px); opacity: 0;}
+      .join-us-content.reveal.active { transform: translateX(0); opacity: 1;}
+      
+      /* MAKEUP CHO CÁI NÚT TUYỂN DỤNG ĐÂY SẾP NHÉ */
+      .btn-primary {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: var(--white);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      .btn-primary:hover {
+        background-color: var(--gold);
+        color: var(--text-main);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(144, 0, 0, 0.15);
+      }
+
+      /* =======================================================
+         ĐẠI TU GIAO DIỆN MOBILE CHO TRANG LỊCH SỬ & TẦM NHÌN
+         ======================================================= */
+      @media (max-width: 768px) {
+        /* 1. HERO BANNER & TIÊU ĐỀ CHUNG */
+        .page-banner { height: 300px; padding: 0 5%; }
+        .page-banner h1 { font-size: 2.2rem; margin-bottom: 10px; }
+        .page-banner p { font-size: 1rem; }
+        
+        .section-padding { padding: 60px 5%; }
+        .section-header { margin-bottom: 40px; }
+        .section-header h2 { font-size: 2rem; }
+        .section-header p { font-size: 1rem; text-align: justify; }
+
+        /* 2. TIMELINE ZICZAC (Fix lề bị lẹm) */
+        .timeline::after { left: 45px; } /* Đẩy trục vào sâu thêm để cứu chữ A */
+        .timeline-progress { left: 45px; }
+        
+        .timeline-item { width: 100%; padding-left: 85px; padding-right: 0; padding-bottom: 40px; }
+        .timeline-item.left, .timeline-item.right { left: 0; }
+        
+        /* Căn lại cục Marker chữ A */
+        .timeline-item.left .timeline-marker, .timeline-item.right .timeline-marker { 
+            left: 20px; /* Tâm khớp chính xác với trục 45px */
+            right: auto; 
+            width: 50px; 
+            height: 50px; 
+        }
+        .timeline-marker span { font-size: 1.5rem; }
+        
+        .timeline-item.left .timeline-date, .timeline-item.right .timeline-date { 
+            position: static; 
+            text-align: left; 
+            margin-bottom: 10px; 
+            font-size: 0.95rem; 
+        }
+        
+        .timeline-content { padding: 25px 20px; }
+        .timeline-content h4 { font-size: 1.1rem; }
+        .timeline-content h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .timeline-content p { font-size: 0.95rem; text-align: justify; }
+
+        .timeline-item.left.reveal, .timeline-item.right.reveal { transform: translateX(-40px) translateY(30px); }
+
+        /* 3. LỢI THẾ CẠNH TRANH */
+        .adv-grid { grid-template-columns: 1fr; gap: 30px; }
+        .adv-card { flex-direction: column; align-items: center; text-align: center; gap: 15px; }
+        .adv-icon { width: 70px; height: 70px; font-size: 2.2rem; }
+        .adv-content h4 { font-size: 1.3rem; }
+        .adv-content p { font-size: 0.95rem; text-align: justify; }
+
+        /* 4. CTA TUYỂN DỤNG CUỐI TRANG */
+        .join-us-section { justify-content: center; padding: 60px 5%; background-attachment: scroll; }
+        .join-us-content { width: 100%; text-align: center; padding: 30px 20px; }
+        .join-us-content h3 { font-size: 1.8rem; }
+        .join-us-content p { font-size: 0.95rem; margin-bottom: 20px; }
+        .join-us-content .btn-primary { display: block; width: 100%; padding: 14px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <!-- ================= PAGE BANNER ================= -->
+    <section class="page-banner">
+      <h1 class="font-serif reveal">Lịch Sử & Tầm Nhìn</h1>
+      <p class="reveal">Hành trình 10 năm khẳng định vị thế trong lĩnh vực Quản trị Doanh nghiệp</p>
+    </section>
+
+    <!-- ================= TIMELINE ZICZAC ================= -->
+    <section class="section-padding timeline-section">
+      <div class="section-header reveal">
+        <h2 class="font-serif">10 Năm Xây Dựng Và Phát Triển</h2>
+        <p>AVEM với đội ngũ chuyên gia giàu kinh nghiệm trong lĩnh vực quản trị đã và đang sẵn sàng hỗ trợ bạn tối ưu hóa hoạt động, nâng cao năng lực cạnh tranh và phát triển doanh nghiệp bền vững ngay từ những quyết định đầu tiên.</p>
+      </div>
+
+      <div class="timeline">
+
+        <div class="timeline-progress" id="timelineProgress"></div>
+        
+        <!-- Khối 1 -->
+        <div class="timeline-item left reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2016</div>
+            <span class="timeline-inner-date">26 Tháng 10</span>
+            <h4>Thành lập Công ty TNHH Quản Trị Doanh Nghiệp AVEM</h4>
+            <p>Ngay từ khi thành lập, AVEM mang trong mình sứ mệnh trở thành đối tác tin cậy của cộng đồng doanh nghiệp. Chúng tôi cung cấp các giải pháp pháp lý, kế toán và quản trị chuyên nghiệp, đặt nền móng vững chắc đầu tiên tại thị trường Việt Nam.</p>
+          </div>
+        </div>
+
+        <!-- Khối 2 -->
+        <div class="timeline-item right reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2017</div>
+            <span class="timeline-inner-date">Đối tác chiến lược</span>
+            <h4>Ký kết hợp tác với các tổ chức Quốc tế</h4>
+            <p>AVEM chính thức ký kết hợp tác với các phòng thương mại và hiệp hội doanh nghiệp nước ngoài. Bước tiến này giúp chúng tôi trở thành cầu nối vững chắc, hỗ trợ các nhà đầu tư quốc tế dễ dàng tiếp cận và rót vốn vào thị trường Việt Nam.</p>
+          </div>
+        </div>
+
+        <!-- Khối 3 -->
+        <div class="timeline-item left reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2018</div>
+            <span class="timeline-inner-date">Mở rộng quy mô</span>
+            <h4>Thành lập AVEM chi nhánh Hải Phòng</h4>
+            <p>Đáp ứng nhu cầu hỗ trợ pháp lý và xúc tiến đầu tư ngày càng tăng của khách hàng, AVEM mở rộng thị trường với chi nhánh tại Hải Phòng. Với chi nhánh mới, chúng tôi hỗ trợ các doanh nghiệp tại các khu công nghiệp phía Bắc kịp thời và sâu sát hơn.</p>
+          </div>
+        </div>
+
+        <!-- Khối 4 -->
+        <div class="timeline-item right reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2019</div>
+            <span class="timeline-inner-date">Phát triển nguồn lực</span>
+            <h4>Ra mắt Trung tâm Đào tạo Chuyên gia</h4>
+            <p>Xác định con người là giá trị cốt lõi, AVEM triển khai các chương trình đào tạo nội bộ chuyên sâu, liên kết với các chuyên gia tài chính hàng đầu để nâng cao chất lượng tư vấn, đảm bảo đội ngũ luôn bám sát sự thay đổi của luật doanh nghiệp.</p>
+          </div>
+        </div>
+
+        <!-- Khối 5 -->
+        <div class="timeline-item left reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2020</div>
+            <span class="timeline-inner-date">Tháng 09</span>
+            <h4>Cấp phép Dịch vụ Kiểm toán Độc lập</h4>
+            <p>Đánh dấu một bước ngoặt mới trong việc cung cấp giải pháp toàn diện. AVEM chính thức ra mắt dịch vụ Kiểm toán, giúp các doanh nghiệp FDI và công ty trong nước minh bạch hóa tài chính, tối ưu nguồn vốn hiệu quả trong giai đoạn kinh tế biến động.</p>
+          </div>
+        </div>
+
+        <!-- Khối 6 -->
+        <div class="timeline-item right reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2021</div>
+            <span class="timeline-inner-date">Chuyển đổi số</span>
+            <h4>Tiên phong áp dụng Công nghệ vào Quản trị</h4>
+            <p>Nắm bắt xu hướng toàn cầu, AVEM áp dụng hệ thống công nghệ thông minh vào quy trình tư vấn và quản lý hồ sơ khách hàng. Điều này giúp rút ngắn 30% thời gian xử lý thủ tục và nâng cao tính bảo mật dữ liệu tuyệt đối cho các đối tác.</p>
+          </div>
+        </div>
+
+        <!-- Khối 7 -->
+        <div class="timeline-item left reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2022</div>
+            <span class="timeline-inner-date">Cột mốc thành tựu</span>
+            <h4>Chính thức phục vụ 1,000 Khách hàng</h4>
+            <p>Sự nỗ lực không ngừng nghỉ của đội ngũ chuyên gia đã được đền đáp khi AVEM vinh dự phục vụ khách hàng doanh nghiệp thứ 1,000. Đây là minh chứng rõ nét nhất cho chất lượng dịch vụ và niềm tin mà thị trường dành cho thương hiệu.</p>
+          </div>
+        </div>
+
+        <!-- Khối 8 -->
+        <div class="timeline-item right reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2023</div>
+            <span class="timeline-inner-date">Nam tiến</span>
+            <h4>Khai trương Văn phòng đại diện Miền Nam</h4>
+            <p>Sự hiện diện tại TP. Hồ Chí Minh đánh dấu cam kết của AVEM trong việc phủ sóng dịch vụ trên toàn quốc. Đội ngũ chuyên gia cấp cao liên tục được bổ sung để phục vụ cho các tập đoàn đa quốc gia tại khu vực kinh tế trọng điểm phía Nam.</p>
+          </div>
+        </div>
+
+        <!-- Khối 9 -->
+        <div class="timeline-item left reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2024</div>
+            <span class="timeline-inner-date">Bước đột phá mới</span>
+            <h4>Thành lập Khối Tư vấn Cấu trúc Vốn & M&A</h4>
+            <p>AVEM ra mắt khối dịch vụ tư vấn mua bán sáp nhập (M&A) và tái cấu trúc tài chính, hỗ trợ các doanh nghiệp SME gọi vốn thành công và mở rộng quy mô, khẳng định năng lực ở những thương vụ mang tầm vóc quốc tế.</p>
+          </div>
+        </div>
+
+        <!-- Khối 10 -->
+        <div class="timeline-item right reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2025</div>
+            <span class="timeline-inner-date">Ghi nhận thị trường</span>
+            <h4>Lọt Top 50 Doanh nghiệp Tư vấn Quản trị</h4>
+            <p>AVEM tự hào được vinh danh trong danh sách các doanh nghiệp tư vấn quản trị uy tín hàng đầu, ghi nhận những đóng góp to lớn trong việc định hướng và hỗ trợ cộng đồng doanh nghiệp Việt Nam vững bước vượt qua thách thức kinh tế.</p>
+          </div>
+        </div>
+
+        <!-- Khối 11 -->
+        <div class="timeline-item left reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2026</div>
+            <span class="timeline-inner-date">Tháng 10</span>
+            <h4>Đánh dấu 1 Thập kỷ Vàng son (10 Năm)</h4>
+            <p>Lễ kỷ niệm 10 năm thành lập đánh dấu một chặng đường đầy tự hào. Từ một văn phòng tư vấn nhỏ, AVEM đã vươn mình trở thành tổ hợp quản trị doanh nghiệp toàn diện, đứng chung mâm với các tên tuổi lớn trong khu vực.</p>
+          </div>
+        </div>
+
+        <!-- Khối 12 -->
+        <div class="timeline-item right reveal">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">Tương lai</div>
+            <span class="timeline-inner-date">Định hướng chiến lược</span>
+            <h4>Dẫn dắt thị trường Tư vấn FDI</h4>
+            <p>Với định hướng phát triển bền vững, tầm nhìn của AVEM trong thập kỷ tiếp theo là tiếp tục nâng tầm chất lượng dịch vụ chuẩn quốc tế, dẫn dắt thị trường trong lĩnh vực xúc tiến FDI và kiến tạo nên những giá trị trường tồn cho đối tác.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= LỢI THẾ CẠNH TRANH ================= -->
+    <section class="advantages-section">
+      <div class="section-header reveal">
+        <h2 class="font-serif">Lợi Thế Cạnh Tranh Của AVEM</h2>
+        <p>Lý do để AVEM là đối tác quản trị hoàn hảo của bạn</p>
+      </div>
+
+      <div class="adv-grid">
+        <!-- Khối 1 -->
+        <div class="adv-card reveal">
+          <div class="adv-icon">
+            <i class="fa-solid fa-handshake"></i>
+          </div>
+          <div class="adv-content">
+            <h4>Sự kết nối</h4>
+            <p>AVEM kết nối đối tác chiến lược, khách hàng và nhà cung cấp, tạo nên một mạng lưới vững chắc hỗ trợ doanh nghiệp vượt qua mọi rào cản thị trường.</p>
+          </div>
+        </div>
+
+        <!-- Khối 2 -->
+        <div class="adv-card reveal">
+          <div class="adv-icon">
+            <i class="fa-solid fa-award"></i>
+          </div>
+          <div class="adv-content">
+            <h4>Tiêu chuẩn quốc tế</h4>
+            <p>Sở hữu đội ngũ quản trị xuất sắc, chúng tôi cung cấp các giải pháp vận hành chuẩn hóa, giúp khách hàng minh bạch tài chính và giảm thiểu rủi ro pháp lý.</p>
+          </div>
+        </div>
+
+        <!-- Khối 3 -->
+        <div class="adv-card reveal">
+          <div class="adv-icon">
+            <i class="fa-solid fa-user-tie"></i>
+          </div>
+          <div class="adv-content">
+            <h4>Đội ngũ giàu kinh nghiệm</h4>
+            <p>Các chuyên gia của chúng tôi am hiểu môi trường pháp lý, đầu tư và hoạt động kinh doanh tại Việt Nam, mang đến những tư vấn chính xác và thực tiễn nhất.</p>
+          </div>
+        </div>
+
+        <!-- Khối 4 -->
+        <div class="adv-card reveal">
+          <div class="adv-icon">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <div class="adv-content">
+            <h4>Tối ưu hiệu quả</h4>
+            <p>Chúng tôi luôn có những giải pháp thực tiễn, tối ưu và phù hợp với từng nhu cầu, đảm bảo an toàn và phát triển bền vững cho nguồn vốn của nhà đầu tư.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA TUYỂN DỤNG ================= -->
+    <section class="join-us-section reveal">
+      <div class="join-us-content reveal">
+        <h3 class="font-serif">Tham gia vào gia đình AVEM ngay !</h3>
+        <p>Trở thành nhân viên của AVEM với những phúc lợi hàng đầu và cơ hội học hỏi kinh nghiệm thực chiến với ngành Quản trị - Tài chính - Pháp lý.</p>
+        <a href="tuyendung.html" class="btn-primary" style="padding: 12px 30px; font-size: 0.95rem;">Tham gia cùng chúng tôi</a>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+      // LOGIC THANH TIẾN TRÌNH TIMELINE (ĐỎ DẦN KHI CUỘN CHUỘT)
+      window.addEventListener('scroll', function() {
+        var timeline = document.querySelector('.timeline');
+        var progressBar = document.getElementById('timelineProgress');
+        
+        if (timeline && progressBar) {
+          var timelineRect = timeline.getBoundingClientRect();
+          var windowHeight = window.innerHeight;
+          
+          // Điểm bắt đầu tính % (Khi đỉnh timeline xuất hiện giữa màn hình)
+          var startPoint = windowHeight / 1.5; 
+          
+          // Tính số pixel đã cuộn qua
+          var scrolled = startPoint - timelineRect.top;
+          var totalHeight = timelineRect.height;
+          
+          // Tính phần trăm
+          var progress = (scrolled / totalHeight) * 100;
+          
+          // Giới hạn giá trị từ 0% đến 100%
+          if (progress < 0) progress = 0;
+          if (progress > 100) progress = 100;
+          
+          // Gán vào CSS
+          progressBar.style.height = progress + '%';
+        }
+      });
+    </script>
+
+    <script src="dictionary.js"></script>
+
+    <script src="main.js"></script>
+  </body>
+</html>

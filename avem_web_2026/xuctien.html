@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xúc Tiến Đầu Tư - AVEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="global.css" />
+
+    <style>
+      :root {
+        --primary-color: #900000;
+        --primary-light: #b30000;
+        --gold: #D4AF37;
+        --bg-light: #f8f9fa;
+        --text-main: #111;
+        --text-gray: #666;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        --radius-lg: 12px;
+      }
+
+      body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+      .font-serif { font-family: 'Playfair Display', serif; }
+
+      /* === 1. BỐ CỤC SPLIT & OVERLAP === */
+      .xt-hero-split { display: flex; flex-wrap: wrap; position: relative; }
+      .xt-split-left {
+        flex: 1; min-width: 50%;
+        background-color: var(--primary-color);
+        background-image: radial-gradient(rgba(255,255,255,0.08) 2px, transparent 2px);
+        background-size: 30px 30px;
+        color: #fff; padding: 100px 5% 180px 10%;
+        display: flex; flex-direction: column; justify-content: center;
+      }
+      .xt-split-left h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;}
+      .xt-split-left p { font-size: 1.15rem; line-height: 1.7; opacity: 0.9; max-width: 550px; margin-bottom: 40px; }
+      
+      /* Nút Gold đồng bộ trang chủ */
+      .btn-gold { background: var(--gold); color: var(--text-main); padding: 15px 35px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border: none; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; width: fit-content; text-decoration: none; border-radius: 50px;}
+      .btn-gold:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1);}
+
+      .xt-split-right {
+        flex: 1; min-width: 50%;
+        background: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80') center/cover;
+        min-height: 400px; position: relative;
+      }
+      .xt-split-right::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(144,0,0,0.8), transparent); }
+
+      /* Khối Card trắng đè lên (Overlap) */
+      .xt-overlap-container { background: var(--bg-light); padding-bottom: 80px; }
+      .xt-overlap-card {
+        max-width: 1200px; margin: -100px auto 0;
+        background: #fff; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        position: relative; z-index: 10; padding: 60px;
+      }
+      .xt-overlap-header { margin-bottom: 50px; text-align: center;}
+      .xt-overlap-header h3 { font-size: 2rem; color: var(--text-main); font-weight: 800; }
+      .xt-overlap-header p { font-size: 1.1rem; color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px;}
+
+      .xt-overlap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+      .xt-overlap-item { display: flex; flex-direction: column; align-items: flex-start; gap: 15px; padding: 20px; transition: 0.3s; border-radius: 12px; border: 1px solid transparent;}
+      .xt-overlap-item:hover { background: var(--bg-light); transform: translateY(-5px); border-color: #eaeaea; }
+      .xt-overlap-item i { font-size: 2.2rem; color: var(--primary-color); background: rgba(144,0,0,0.05); width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 12px; transition: 0.3s;}
+      .xt-overlap-item:hover i { background: var(--primary-color); color: #fff; transform: scale(1.1) rotate(5deg); }
+      .xt-overlap-item h4 { font-size: 1.2rem; font-weight: 700; color: var(--text-main); line-height: 1.4;}
+      .xt-overlap-item p { font-size: 0.95rem; color: var(--text-gray); line-height: 1.6; }
+
+      .xt-note-box { margin-top: 50px; background: rgba(212, 175, 55, 0.1); border-left: 4px solid var(--gold); padding: 25px; border-radius: 0 8px 8px 0; display: flex; gap: 20px; align-items: center; }
+      .xt-note-box i { font-size: 2rem; color: var(--gold); }
+      .xt-note-box p { font-size: 1rem; color: var(--text-main); font-weight: 500; margin: 0; line-height: 1.6;}
+
+      /* === 2. BỐ CỤC ZIGZAG HÌNH ẢNH & CHỮ === */
+      .xt-zigzag-section { padding: 100px 5%; background: #fff; }
+      .xt-row { display: flex; flex-wrap: wrap; max-width: 1200px; margin: 0 auto 80px; align-items: center; gap: 60px;}
+      .xt-row:last-child { margin-bottom: 0; }
+      .xt-row.reverse { flex-direction: row-reverse; }
+      .xt-col-img { flex: 1; min-width: 45%; aspect-ratio: 4/3; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow); position: relative;}
+      .xt-col-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
+      .xt-row:hover .xt-col-img img { transform: scale(1.05); }
+      
+      .xt-col-text { flex: 1; min-width: 45%; display: flex; flex-direction: column; justify-content: center; }
+      .xt-col-text h3 { font-size: 2.2rem; color: var(--text-main); font-weight: 800; margin-bottom: 20px; line-height: 1.3; }
+      .xt-col-text p { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 30px; line-height: 1.7; }
+      .xt-col-text ul { list-style: none; padding: 0; }
+      .xt-col-text ul li { margin-bottom: 15px; color: var(--text-main); font-weight: 600; display: flex; align-items: center; gap: 15px; font-size: 1.05rem;}
+      .xt-col-text ul li i { color: var(--primary-color); font-size: 1.2rem; background: rgba(144,0,0,0.1); width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%;}
+
+      /* === 3. LIST 2 CỘT CÓ GẠCH CHÂN === */
+      .xt-list-section { padding: 100px 5%; background: var(--bg-dark); color: #fff; }
+      .xt-list-header { text-align: center; margin-bottom: 60px; }
+      .xt-list-header h2 { font-size: 2.8rem; font-weight: 800; color: #fff;}
+      .xt-list-header p { font-size: 1.1rem; color: #aaa; margin-top: 15px;}
+      .xt-list-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 80px; }
+      .xt-list-item { display: flex; align-items: center; gap: 20px; padding: 30px 10px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 1.2rem; font-weight: 600; transition: 0.4s; cursor: pointer; }
+      .xt-list-item:hover { color: var(--gold); border-bottom-color: var(--gold); padding-left: 20px; background: rgba(255,255,255,0.02);}
+      .xt-list-item i { color: var(--gold); font-size: 1.8rem; width: 40px; text-align: center; }
+
+      /* === 4. MODAL POP-UP (PHỄU ĐĂNG KÝ) === */
+      .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 9999; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+      .modal-overlay.active { display: flex; opacity: 1; }
+      .modal-content { background: #fff; width: 90%; max-width: 600px; border-radius: 16px; padding: 40px; position: relative; transform: translateY(30px); transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 30px 60px rgba(0,0,0,0.3);}
+      .modal-overlay.active .modal-content { transform: translateY(0); }
+      .btn-close-modal { position: absolute; top: 20px; right: 25px; font-size: 1.8rem; color: #aaa; cursor: pointer; transition: 0.3s; }
+      .btn-close-modal:hover { color: var(--primary-color); transform: rotate(90deg);}
+      .modal-content h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
+      .modal-form { margin-top: 30px; }
+      .modal-form .form-group { margin-bottom: 20px; }
+      .modal-form label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; color: var(--text-main); }
+      .modal-form input, .modal-form textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none; transition: 0.3s; background: var(--bg-light); }
+      .modal-form input:focus, .modal-form textarea:focus { border-color: var(--primary-color); background: #fff; box-shadow: 0 0 0 4px rgba(144,0,0,0.1); }
+
+      /* RESPONSIVE */
+      @media (max-width: 992px) {
+        .xt-overlap-grid { grid-template-columns: repeat(2, 1fr); }
+        .xt-split-left { padding: 80px 5% 140px; }
+        .xt-overlap-card { margin: -80px 5% 0; padding: 40px 30px; }
+        .xt-row { gap: 40px; }
+      }
+      @media (max-width: 768px) {
+        .xt-hero-split { flex-direction: column; }
+        .xt-split-left h1 { font-size: 2.5rem; }
+        .xt-split-left { padding: 60px 5% 100px; text-align: center; align-items: center;}
+        .xt-split-left p { text-align: center; }
+        .xt-overlap-card { margin: -60px 5% 0; width: 90%; }
+        .xt-overlap-grid { grid-template-columns: 1fr; gap: 20px;}
+        .xt-overlap-item { flex-direction: row; align-items: flex-start;}
+        .xt-note-box { flex-direction: column; text-align: center; padding: 20px; }
+        .xt-row, .xt-row.reverse { flex-direction: column; gap: 30px;}
+        .xt-list-container { grid-template-columns: 1fr; gap: 0; }
+        .modal-content { padding: 30px 20px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- BỐ CỤC ĐỘT PHÁ: SPLIT & OVERLAP -->
+    <section class="xt-hero-split">
+      <div class="xt-split-left reveal">
+        <span style="color: var(--gold); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">Dịch vụ cốt lõi</span>
+        <h1 class="font-serif">Xúc Tiến Đầu Tư</h1>
+        <p>AVEM đồng hành cùng nhà đầu tư trong việc tìm kiếm cơ hội, tối ưu chiến lược và triển khai dự án đầu tư hiệu quả, bền vững tại Việt Nam.</p>
+        <!-- NÚT GỌI MODAL POP-UP CHUYÊN NGHIỆP -->
+        <button class="btn-gold" id="btnOpenModal">Đăng ký tư vấn <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+      <div class="xt-split-right reveal"></div>
+    </section>
+
+    <!-- THẺ TRẮNG ĐÈ LÊN (OVERLAP) -->
+    <section class="xt-overlap-container">
+      <div class="xt-overlap-card reveal">
+        <div class="xt-overlap-header">
+          <p>AVEM Thực Hiện</p>
+          <h3 class="font-serif">Giải pháp xúc tiến toàn diện</h3>
+        </div>
+        
+        <div class="xt-overlap-grid">
+          <div class="xt-overlap-item">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <div>
+              <h4>Khảo sát & Đánh giá</h4>
+              <p>Nghiên cứu thị trường và đánh giá tính khả thi dự án chuyên sâu.</p>
+            </div>
+          </div>
+          <div class="xt-overlap-item">
+            <i class="fa-solid fa-chess-knight"></i>
+            <div>
+              <h4>Tư vấn chiến lược</h4>
+              <p>Đề xuất phương án và mô hình triển khai dự án tối ưu nhất.</p>
+            </div>
+          </div>
+          <div class="xt-overlap-item">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <div>
+              <h4>Lựa chọn địa điểm</h4>
+              <p>Khảo sát thực địa và đánh giá chi tiết hạ tầng kỹ thuật các KCN.</p>
+            </div>
+          </div>
+          <div class="xt-overlap-item">
+            <i class="fa-solid fa-file-signature"></i>
+            <div>
+              <h4>Hỗ trợ pháp lý</h4>
+              <p>Hoàn thiện hồ sơ xin cấp phép IRC, ERC nhanh chóng, chuẩn xác.</p>
+            </div>
+          </div>
+          <div class="xt-overlap-item">
+            <i class="fa-solid fa-handshake"></i>
+            <div>
+              <h4>Kết nối đối tác</h4>
+              <p>Hỗ trợ xúc tiến thương mại và mở rộng mạng lưới phân phối.</p>
+            </div>
+          </div>
+          <div class="xt-overlap-item">
+            <i class="fa-solid fa-gears"></i>
+            <div>
+              <h4>Đồng hành vận hành</h4>
+              <p>Tư vấn quản trị doanh nghiệp và kiểm soát rủi ro sau đầu tư.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="xt-note-box">
+          <i class="fa-solid fa-shield-halved"></i>
+          <p>Áp dụng đối với mọi loại hình doanh nghiệp. AVEM cam kết bảo mật tuyệt đối thông tin kinh doanh và tư vấn lộ trình phù hợp nhằm hạn chế tối đa rủi ro cho nhà đầu tư FDI.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BỐ CỤC ZIGZAG HÌNH & CHỮ -->
+    <section class="xt-zigzag-section">
+      <!-- Hàng 1 (Chữ trái - Hình phải) -->
+      <div class="xt-row reveal">
+        <div class="xt-col-text">
+          <h3 class="font-serif">Kết nối đối tác và phát triển kinh doanh bền vững</h3>
+          <p>Thiết lập mạng lưới liên kết vững chắc, mở rộng cơ hội phát triển cho nhà đầu tư thông qua hệ sinh thái đối tác đa dạng của AVEM trên toàn cầu.</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Kết nối quỹ đầu tư và đối tác chiến lược</li>
+            <li><i class="fa-solid fa-check"></i> Thiết lập chuỗi cung ứng: Khách hàng - Nhà cung cấp</li>
+            <li><i class="fa-solid fa-check"></i> Hỗ trợ đấu thầu, kết nối nhà thầu xây dựng uy tín</li>
+            <li><i class="fa-solid fa-check"></i> Tư vấn thâm nhập và mở rộng thị trường nội địa</li>
+          </ul>
+        </div>
+        <div class="xt-col-img">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80" alt="Kết nối đối tác">
+        </div>
+      </div>
+
+      <!-- Hàng 2 (Hình trái - Chữ phải / Lớp reverse) -->
+      <div class="xt-row reverse reveal">
+        <div class="xt-col-text">
+          <h3 class="font-serif">Đồng hành vận hành sau khi nhận giấy phép</h3>
+          <p>Trách nhiệm của AVEM không chỉ dừng lại ở giai đoạn cấp phép. Chúng tôi tiếp tục song hành cùng ban lãnh đạo trong suốt quá trình nhà máy, công ty đi vào hoạt động thực tế.</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Cố vấn thiết lập sơ đồ tổ chức & quản trị nhân sự</li>
+            <li><i class="fa-solid fa-check"></i> Cung cấp dịch vụ Kế toán - Khai báo thuế định kỳ</li>
+            <li><i class="fa-solid fa-check"></i> Rà soát tuân thủ pháp luật lao động, BHXH</li>
+            <li><i class="fa-solid fa-check"></i> Đánh giá và kiểm soát rủi ro vận hành (ERM)</li>
+          </ul>
+        </div>
+        <div class="xt-col-img">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80" alt="Đồng hành vận hành">
+        </div>
+      </div>
+    </section>
+
+    <!-- DANH SÁCH 2 CỘT NỀN TỐI -->
+    <section class="xt-list-section reveal">
+      <div class="xt-list-header">
+        <h2 class="font-serif">Các Ngành Nghề Cốt Lõi</h2>
+        <p>Kinh nghiệm sâu rộng trong việc thiết lập pháp lý cho đa dạng lĩnh vực kinh doanh</p>
+      </div>
+      <div class="xt-list-container">
+        <div class="xt-list-item"><i class="fa-solid fa-industry"></i> Sản xuất công nghiệp & Chế xuất</div>
+        <div class="xt-list-item"><i class="fa-solid fa-cart-shopping"></i> Thương mại & Phân phối bán lẻ</div>
+        <div class="xt-list-item"><i class="fa-solid fa-building"></i> Đầu tư Bất động sản KCN</div>
+        <div class="xt-list-item"><i class="fa-solid fa-plane-departure"></i> Du lịch, Khách sạn & Dịch vụ</div>
+        <div class="xt-list-item"><i class="fa-solid fa-ship"></i> Xuất nhập khẩu & Logistics</div>
+        <div class="xt-list-item"><i class="fa-solid fa-microchip"></i> Công nghệ thông tin & Phần mềm</div>
+        <div class="xt-list-item"><i class="fa-solid fa-bolt"></i> Năng lượng tái tạo (Điện gió, Mặt trời)</div>
+        <div class="xt-list-item"><i class="fa-solid fa-leaf"></i> Xử lý môi trường & Nông nghiệp sạch</div>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- HỆ THỐNG POP-UP MODAL ĐĂNG KÝ TƯ VẤN -->
+    <div class="modal-overlay" id="contactModal">
+      <div class="modal-content">
+        <i class="fa-solid fa-xmark btn-close-modal" id="btnCloseModal"></i>
+        <span style="color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Phản hồi trong 2h</span>
+        <h3 class="font-serif">Yêu cầu tư vấn xúc tiến</h3>
+        <p style="color: var(--text-gray); margin-bottom: 20px;">Vui lòng để lại thông tin, chuyên gia AVEM sẽ liên hệ trực tiếp với bạn.</p>
+        
+        <form class="modal-form" action="mailto:avemvietnam@gmail.com" method="POST" enctype="text/plain">
+          <div class="form-group">
+            <label>Tên cá nhân / Doanh nghiệp *</label>
+            <input type="text" placeholder="Nhập tên..." required>
+          </div>
+          <div style="display: flex; gap: 20px;">
+            <div class="form-group" style="flex: 1;">
+              <label>Số điện thoại *</label>
+              <input type="tel" placeholder="VD: 0912..." required>
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label>Email liên hệ</label>
+              <input type="email" placeholder="VD: email@domain.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Nội dung cần tư vấn</label>
+            <textarea rows="3" placeholder="Quốc gia nhà đầu tư, Lĩnh vực quan tâm, Quy mô vốn dự kiến..."></textarea>
+          </div>
+          <button type="submit" class="btn-gold" style="width: 100%; justify-content: center; border-radius: 8px;">Gửi Yêu Cầu <i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+
+    <script src="dictionary.js"></script>
+    <script src="main.js"></script>
+
+    <!-- Script xử lý Bật/Tắt Pop-up Modal -->
+    <script>
+      const modal = document.getElementById('contactModal');
+      const btnOpen = document.getElementById('btnOpenModal');
+      const btnClose = document.getElementById('btnCloseModal');
+
+      // Mở Modal
+      btnOpen.addEventListener('click', () => {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Khóa cuộn trang nền
+      });
+
+      // Đóng Modal khi bấm nút X
+      btnClose.addEventListener('click', () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Mở lại cuộn trang
+      });
+
+      // Đóng Modal khi click ra ngoài khung đen
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      });
+    </script>
+  </body>
+</html>

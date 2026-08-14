@@ -1,0 +1,84 @@
+<!-- NỘI DUNG HEADER TRONG SUỐT -->
+<header class="transparent-header">
+  <div class="header-container">
+    
+    <!-- ================= TRÁI: LOGO AVEM ================= -->
+    <div class="header-left">
+      <a class="logo" href="index.html">
+        <div class="logo-text">
+          <h1 class="brand-name">AVEM</h1>
+          <p class="brand-slogan">EXCELLENCE IN MANAGEMENT</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- ================= GIỮA: MENU ĐIỀU HƯỚNG ================= -->
+    <nav class="header-center main-nav">
+      <ul>
+        <li><a href="index.html" class="nav-link" data-i18n="menu_home">Trang Chủ</a></li>
+        <li>
+          <a href="lichsu.html" class="nav-link"><span data-i18n="menu_about">Về Chúng Tôi</span> <i class="fa-solid fa-angle-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="thuNgo.html" data-i18n="menu_letter">Thư ngỏ</a></li>
+            <li><a href="lichsu.html" data-i18n="menu_history">Lịch sử & Tầm nhìn</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="dichvu.html" class="nav-link"><span data-i18n="menu_solutions">Giải Pháp</span> <i class="fa-solid fa-angle-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="xuctien.html" data-i18n="menu_fdi">Xúc tiến đầu tư</a></li>
+            <li><a href="phaply.html" data-i18n="menu_legal">Pháp lý doanh nghiệp</a></li>
+            <li><a href="ketoan.html" data-i18n="menu_accounting">Kế toán</a></li>
+            <li><a href="kiemtoan.html" data-i18n="menu_audit">Kiểm toán</a></li>
+            <li><a href="covanquantri.html" data-i18n="menu_consulting">Cố vấn quản trị</a></li>
+          </ul>
+        </li>
+        <li><a href="duan.html" class="nav-link" data-i18n="menu_projects">Dự Án</a></li>
+        <li><a href="tintuc.html" class="nav-link" data-i18n="menu_news">Tin Tức</a></li>
+        <li><a href="contact.html" class="nav-link" data-i18n="menu_contact">Liên Hệ</a></li>
+      </ul>
+    </nav>
+
+    <!-- ================= PHẢI: HOTLINE, NGÔN NGỮ, TÌM KIẾM ================= -->
+    <div class="header-right">
+      
+      <!-- Hotline -->
+      <div class="header-hotline">
+        <i class="fa-solid fa-phone-volume"></i> 034 788 8331
+      </div>
+      
+      <!-- Chọn Ngôn Ngữ -->
+      <div class="header-lang">
+        <div id="btn-lang" class="lang-toggle">
+          <span id="current-lang-text">VN</span> <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <ul id="lang-dropdown" class="lang-dropdown-menu">
+          <li><a href="#" class="lang-opt" data-lang="vi">Tiếng Việt</a></li>
+          <li><a href="#" class="lang-opt" data-lang="zh-CN">中文 </a></li>
+        </ul>
+      </div>
+
+      <!-- Thanh Tìm Kiếm (Đã được cách ly an toàn khỏi Menu bằng Flexbox Gap) -->
+      <div class="header-search">
+        <form action="search.html" method="GET">
+          <input type="text" name="q" data-i18n="search_placeholder" placeholder="Tìm kiếm..." required>
+          <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+      </div>
+
+      <!-- Icon Tìm kiếm Mobile & Hamburger (Chỉ hiện trên màn hình nhỏ) -->
+      <i id="mobile-search-toggle" class="fa-solid fa-magnifying-glass mobile-only"></i>
+      <div id="mobile-menu-btn" class="mobile-only">
+          <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- THANH TÌM KIẾM MOBILE (Mặc định ẩn, xổ xuống khi bấm icon lúp mobile) -->
+  <div id="mobile-search-bar" class="mobile-search-bar">
+    <form action="search.html" method="GET">
+      <input type="text" name="q" placeholder="Nhập từ khóa tìm kiếm..." required>
+      <button type="submit">TÌM</button>
+    </form>
+  </div>
+</header>

@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AVEM - Quản Trị Doanh Nghiệp An Việt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="global.css" />
+
+    <style>
+      :root {
+        --primary-color: #900000;
+        --gold: #D4AF37;
+        --bg-light: #f8f9fa;
+        --bg-dark: #0a0a0a;
+        --text-main: #111;
+        --text-gray: #666;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        --shadow-hover: 0 20px 40px rgba(163, 22, 22, 0.1);
+        --radius-md: 12px;
+        --radius-lg: 20px;
+      }
+
+      body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
+      .font-serif { font-family: 'Playfair Display', serif; }
+      .section-padding { padding: 120px 5%; }
+      .section-header { text-align: center; margin-bottom: 70px; }
+      .section-header h2 { color: var(--text-main); font-size: 2.8rem; font-weight: 800; margin-bottom: 15px; }
+      .section-header p { color: var(--text-gray); font-size: 1.15rem; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+      .btn-gold { background: var(--gold); color: var(--text-main); padding: 16px 40px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border: none; border-radius: 50px; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;}
+      .btn-gold:hover { background: var(--text-main); color: var(--white); transform: translateY(-3px); }
+
+      /* === 1. HERO BANNER CŨ (NHƯNG SANG HƠN) === */
+      .hero-nexus {
+        position: relative; height: 95vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 5%;
+        background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070') center/cover;
+        color: var(--white); overflow: hidden;
+      }
+      .hero-nexus::before {
+        content: ""; position: absolute; inset: 0;
+        background: linear-gradient(rgba(10,10,10,0.7), rgba(10,10,10,0.9)); z-index: 1;
+      }
+      .hollow-text {
+        position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+        font-size: 25vw; font-weight: 900; line-height: 1;
+        color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,0.05);
+        z-index: 1; pointer-events: none;
+      }
+      .hero-content { position: relative; z-index: 2; max-width: 900px; display: flex; flex-direction: column; align-items: center;}
+      .hero-badge-premium { display: inline-flex; align-items: center; gap: 15px; padding: 12px 30px; background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border-left: 4px solid var(--gold); border-radius: 8px; margin-bottom: 30px; }
+      .badge-number { font-size: 3rem; font-weight: 900; color: var(--gold); }
+      .badge-text { display: flex; flex-direction: column; text-align: left; }
+      .badge-text span { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,0.8); }
+      .badge-text strong { font-size: 1.15rem; text-transform: uppercase; letter-spacing: 4px; color: #fff; }
+      .hero-content h1 { font-size: 4.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;}
+      .hero-content p { font-size: 1.4rem; color: rgba(255,255,255,0.85); margin-bottom: 40px; line-height: 1.6; }
+
+      /* === 2. GIỚI THIỆU CHỒNG ẢNH === */
+      .home-intro { background-color: var(--white); }
+      .overlap-section { display: flex; gap: 60px; align-items: center; max-width: 1300px; margin: 0 auto; }
+      .overlap-images { flex: 1; position: relative; height: 500px; }
+      .img-back { width: 80%; height: 80%; object-fit: cover; position: absolute; top: 0; right: 0; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-radius: 12px;}
+      .img-front { width: 60%; height: 60%; object-fit: cover; position: absolute; bottom: 0; left: 0; border: 15px solid #fff; box-shadow: 0 30px 50px rgba(0,0,0,0.15); border-radius: 12px;}
+      .overlap-text { flex: 1; padding-left: 20px; }
+      .overlap-text span { color: var(--primary-color); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block;}
+      .overlap-text h2 { font-size: 2.8rem; color: var(--text-main); margin-bottom: 20px; line-height: 1.2; font-weight: 800;}
+      .overlap-text p { font-size: 1.15rem; color: var(--text-gray); margin-bottom: 40px; line-height: 1.8; text-align: justify;}
+
+      /* === 3. HỆ SINH THÁI DỊCH VỤ (BỐ CỤC CHIA ĐÔI CHUẨN CŨ) === */
+      .services-section { background: var(--bg-light); }
+      .services-layout-new { display: flex; gap: 60px; max-width: 1300px; margin: 0 auto; align-items: flex-start; }
+      
+      /* Khối chữ đứng im bên trái */
+      .services-intro-new { flex: 1; position: sticky; top: 120px; }
+      .services-intro-new span { color: var(--primary-color); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; display: block; margin-bottom: 15px; }
+      .services-intro-new h2 { font-size: 2.8rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; letter-spacing: -0.5px; color: var(--text-main); }
+      .services-intro-new p { color: var(--text-gray); font-size: 1.1rem; line-height: 1.7; margin-bottom: 40px; }
+      
+      /* Lưới dịch vụ bên phải */
+      .services-grid-new { flex: 1.8; display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+      .service-item-new { background: var(--white); border-radius: 12px; padding: 35px 30px; border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02); transition: all 0.4s ease; display: flex; flex-direction: column; position: relative; overflow: hidden; cursor: pointer; }
+      
+      /* Hiệu ứng gạch chân chạy ngang khi hover */
+      .service-item-new::before { content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 4px; background: var(--primary-color); transition: width 0.4s ease; border-radius: 0 0 12px 12px;}
+      .service-item-new:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(144, 0, 0, 0.08); border-color: transparent; }
+      .service-item-new:hover::before { width: 100%; }
+      .service-item-new:nth-child(5) { grid-column: span 2; } /* Ô số 5 dàn trải 2 cột */
+      
+      .sin-icon { width: 55px; height: 55px; border-radius: 10px; background: rgba(144, 0, 0, 0.05); color: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; transition: 0.3s; }
+      .service-item-new:hover .sin-icon { background: var(--primary-color); color: var(--white); }
+      .sin-content h4 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; transition: 0.3s; color: var(--text-main); }
+      .service-item-new:hover .sin-content h4 { color: var(--primary-color); }
+      .sin-content p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; }
+
+      @media (max-width: 992px) {
+        .services-layout-new { flex-direction: column; }
+        .services-intro-new { position: relative; top: 0; }
+        .services-grid-new { grid-template-columns: 1fr; }
+        .service-item-new:nth-child(5) { grid-column: span 1; }
+      }
+
+      /* === CAM KẾT (TỪ FILE GỐC) === */
+      .commitments { background: var(--white); }
+      .commitments-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+      .commit-card { text-align: center; padding: 50px 30px; background: var(--bg-light); border-radius: var(--radius-md); border-top: 4px solid var(--primary-color); transition: all 0.4s ease; border-bottom: 1px solid var(--border-color); }
+      .commit-card:hover { transform: translateY(-10px); box-shadow: var(--shadow); background: var(--white); }
+      .commit-card i { font-size: 3.5rem; color: var(--gold); margin-bottom: 25px; }
+      .commit-card h4 { font-size: 1.25rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+
+      /* === 4. QUY TRÌNH NỀN TỐI (BẢN V2 SÁNG TẠO & TƯƠNG TÁC) === */
+      .dark-process-v2 { background: var(--bg-dark); padding: 100px 5%; position: relative; overflow: hidden; }
+      
+      /* Quả cầu ánh sáng đỏ Booc-đô mờ ảo chìm dưới nền */
+      .dark-process-v2::before { content: ''; position: absolute; top: -150px; left: -100px; width: 500px; height: 500px; background: rgba(144, 0, 0, 0.15); filter: blur(120px); border-radius: 50%; z-index: 0; pointer-events: none;}
+      
+      .dp2-container { display: flex; gap: 80px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; align-items: flex-start; }
+      
+      /* Cột chữ bên trái đứng im (Sticky) */
+      .dp2-left { flex: 1; position: sticky; top: 120px; }
+      .dp2-tag { display: inline-block; padding: 6px 20px; border: 1px solid rgba(212, 175, 55, 0.5); color: var(--gold); border-radius: 50px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; background: rgba(212, 175, 55, 0.05);}
+      .dp2-left h2 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; color: #fff; font-weight: 800; }
+      .dp2-left p { font-size: 1.1rem; color: rgba(255,255,255,0.7); line-height: 1.7; }
+
+      /* Cột thẻ cuộn bên phải */
+      .dp2-right { flex: 1.5; position: relative; padding-left: 50px; }
+      
+      /* Trục dọc mờ ảo nối các bước */
+      .dp2-track { position: absolute; top: 20px; bottom: 20px; left: 19px; width: 2px; background: linear-gradient(to bottom, rgba(212,175,55,0.6), rgba(212,175,55,0.05)); }
+      
+      .dp2-step { position: relative; margin-bottom: 30px; }
+      .dp2-step:last-child { margin-bottom: 0; }
+      
+      /* Dấu chấm trên trục */
+      .dp2-dot { position: absolute; left: -37px; top: 35px; width: 14px; height: 14px; background: var(--bg-dark); border: 2px solid var(--gold); border-radius: 50%; z-index: 2; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 0 0 4px rgba(212,175,55,0); }
+      
+      /* Thẻ nội dung bằng kính mờ */
+      .dp2-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); padding: 35px 40px; border-radius: 16px; backdrop-filter: blur(10px); position: relative; overflow: hidden; transition: all 0.4s ease; cursor: pointer; }
+      
+      /* Tia chớp viền trái khi hover */
+      .dp2-card::after { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 0; background: var(--gold); transition: 0.4s; }
+      
+      /* Số khổng lồ in chìm (Watermark) */
+      .dp2-watermark { position: absolute; right: 20px; bottom: -15px; font-size: 6rem; font-weight: 900; color: rgba(255,255,255,0.03); font-family: 'Playfair Display', serif; line-height: 1; transition: 0.5s ease; pointer-events: none; }
+      
+      .dp2-card h3 { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 12px; transition: 0.3s; position: relative; z-index: 2;}
+      .dp2-card p { font-size: 1.05rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin: 0; position: relative; z-index: 2;}
+
+      /* !!! MA THUẬT XUẤT HIỆN KHI RÊ CHUỘT !!! */
+      .dp2-step:hover .dp2-dot { background: var(--gold); box-shadow: 0 0 0 6px rgba(212,175,55,0.25); transform: scale(1.3); }
+      .dp2-step:hover .dp2-card { transform: translateX(15px); background: rgba(255,255,255,0.06); border-color: rgba(212,175,55,0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+      .dp2-step:hover .dp2-card::after { height: 100%; }
+      .dp2-step:hover .dp2-watermark { color: rgba(212,175,55,0.12); transform: scale(1.1) rotate(-5deg); }
+      .dp2-step:hover h3 { color: var(--gold); }
+
+      /* Đáp ứng mọi thiết bị */
+      @media (max-width: 992px) {
+        .dp2-container { flex-direction: column; gap: 40px; }
+        .dp2-left { position: relative; top: 0; }
+      }
+      @media (max-width: 768px) {
+        .dark-process-v2 { padding: 60px 5%; }
+        .dp2-left h2 { font-size: 2.5rem; }
+        .dp2-right { padding-left: 35px; }
+        .dp2-track { left: 9px; }
+        .dp2-dot { left: -32px; width: 14px; height: 14px; top: 30px;}
+        .dp2-card { padding: 25px 20px; }
+        .dp2-step:hover .dp2-card { transform: translateX(8px); }
+        .dp2-watermark { font-size: 4rem; right: 10px; bottom: 0; }
+      }
+
+      /* === THÀNH TỰU VÀ TIẾN TRÌNH (BẢN PRO) === */
+      .achievements-section { 
+        /* Thêm hiệu ứng fixed để ảnh nền đứng im khi cuộn chuột (Parallax) */
+        background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.92)), url("https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80") center/cover fixed; 
+        padding: 120px 5%;
+        color: var(--white); 
+      }
+      .achievements-container {
+        display: flex; gap: 80px; align-items: center; justify-content: space-between; flex-wrap: wrap; max-width: 1200px; margin: 0 auto;
+      }
+      .achiev-text { flex: 1; min-width: 300px; }
+      .achiev-text h5 { color: var(--gold); font-size: 0.9rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; }
+      .achiev-text h2 { font-size: 3.2rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; color: #fff; }
+      .achiev-text p { font-size: 1.15rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 40px; line-height: 1.7;}
+      
+      /* Nút bấm rỗng ruột (Outline Button) y hệt ảnh mẫu */
+      .btn-outline-gold {
+        display: inline-block; padding: 14px 35px; border: 1px solid var(--gold); color: var(--gold); 
+        font-weight: 700; text-transform: uppercase; letter-spacing: 1px; border-radius: 50px; 
+        transition: 0.3s; background: transparent; cursor: pointer; text-decoration: none;
+      }
+      .btn-outline-gold:hover { background: var(--gold); color: var(--bg-dark); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); }
+
+      .achiev-boxes { flex: 1; width: 100%; display: flex; flex-direction: column; gap: 40px;}
+      .progress-item { width: 100%; }
+      .progress-label { display: flex; justify-content: space-between; align-items: flex-end; font-weight: 700; margin-bottom: 12px; font-size: 1rem; color: #fff; text-transform: uppercase; letter-spacing: 1px;}
+      .progress-label span:last-child { font-size: 1.5rem; font-weight: 900; line-height: 1;}
+      
+      /* Thanh tiến trình nét sắc, không bo tròn, có hiệu ứng phát sáng (Glow) */
+      .progress-bar { width: 100%; height: 3px; background: rgba(255,255,255,0.15); position: relative; }
+      .progress-fill { position: absolute; top: 0; left: 0; height: 100%; background: var(--gold); box-shadow: 0 0 10px rgba(212, 175, 55, 0.6); }
+      
+      /* Responsive */
+      @media (max-width: 992px) {
+         .achievements-container { gap: 50px; flex-direction: column; }
+      }
+      @media (max-width: 768px) {
+         .achievements-section { padding: 80px 5%; }
+         .achiev-text h2 { font-size: 2.2rem; }
+         .progress-label { flex-direction: column; align-items: flex-start; gap: 8px; }
+      }
+
+      /* === DỰ ÁN TỪ GỐC === */
+      /* Tăng khoảng cách cho phần Dự án */
+      .projects { background: var(--bg-light); padding: 120px 5%; } /* Tăng padding lên 120px để tạo không gian thở */
+      .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; max-width: 1300px; margin: 0 auto; }
+      .project-card { border-radius: var(--radius-lg); overflow: hidden; position: relative; cursor: pointer; box-shadow: var(--shadow); aspect-ratio: 4/3; }
+      .project-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+      .project-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 60%); display: flex; align-items: flex-end; padding: 30px; transition: 0.4s; }
+      .project-card:hover img { transform: scale(1.08); }
+      .project-card h4 { color: var(--white); font-size: 1.4rem; font-weight: 700; transform: translateY(10px); transition: 0.4s; line-height: 1.4;}
+      .project-card:hover h4 { transform: translateY(0); color: var(--gold);}
+
+      /* === 5. TẠP CHÍ TIN TỨC === */
+      .mag-news { background: var(--white); max-width: 1300px; margin: 0 auto; }
+      .mag-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; }
+      .mag-header h2 { font-size: 2.8rem; font-weight: 800; color: var(--text-main); }
+      .mag-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; }
+      .mag-main { position: relative; cursor: pointer; }
+      .mag-main img { width: 100%; height: 450px; object-fit: cover; border-radius: 12px;}
+      .mag-main-content { margin-top: 25px; }
+      .mag-tag { color: var(--primary-color); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 10px; display: block; }
+      .mag-main h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 15px; line-height: 1.4; transition: 0.3s; }
+      .mag-main:hover h3 { color: var(--primary-color); }
+      .mag-main p { font-size: 1.05rem; color: var(--text-gray); line-height: 1.6; }
+      .mag-side { display: flex; flex-direction: column; gap: 30px; }
+      /* === FIX LỖI ÉP CHỮ DỌC PHẦN TIN TỨC === */
+      .mag-side-item { display: flex; gap: 20px; align-items: flex-start; padding-bottom: 30px; border-bottom: 1px dashed #eaeaea; cursor: pointer; }
+      .mag-side-item img { width: 140px; height: 120px; object-fit: cover; border-radius: 8px; flex-shrink: 0; } /* Thêm flex-shrink: 0 để ảnh không bị móp */
+      .mag-side-item div { flex: 1; min-width: 0; } /* Bắt buộc thẻ chứa chữ phải giãn đều và không bị bóp nghẹt */
+      .mag-side-item h4 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; line-height: 1.4; transition: 0.3s; color: var(--text-main); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; } /* Cắt chữ gọn gàng nếu tiêu đề quá dài */
+
+      /* === FAQ & CONTACT TỪ GỐC === */
+      .faq { background: var(--bg-light); }
+      .faq-container { max-width: 800px; margin: 0 auto; }
+      .accordion { background-color: var(--white); color: var(--text-main); cursor: pointer; padding: 25px 30px; width: 100%; border: 1px solid var(--border-color); text-align: left; outline: none; font-size: 1.15rem; font-weight: 600; transition: 0.4s; margin-bottom: 15px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; }
+      .accordion i { color: var(--primary-color); transition: 0.4s; background: rgba(163, 22, 22, 0.1); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+      .accordion.active { border-color: var(--primary-color); box-shadow: 0 10px 20px rgba(163, 22, 22, 0.05); }
+      .accordion.active i { background: var(--primary-color); color: var(--white); transform: rotate(180deg); }
+      .panel { padding: 0 30px; background-color: transparent; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+      .panel p { margin: 10px 0 25px 0; color: var(--text-gray); line-height: 1.6;}
+
+      /* =========================================================
+         SIÊU KHỐI PARALLAX NEXUS (GỘP LOGO + CTA + FORM)
+         ========================================================= */
+      
+      /* 1. KHUNG MASTER: Ôm trọn tất cả, chứa ảnh nền đứng im duy nhất */
+      .nexus-master-parallax {
+        position: relative;
+        background: url('anh_website/trangchu/trangchu_1.webp') center/cover fixed;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      /* Lớp phủ đen mờ toàn khung để dễ đọc chữ */
+      .nexus-master-parallax::before {
+        content: ''; position: absolute; inset: 0;
+        background: rgba(15, 20, 25, 0.6); /* Đen mờ 60% */
+        z-index: 1; pointer-events: none;
+      }
+
+      /* Khối chứa nội dung, nổi lên trên lớp kính */
+      .nexus-master-content { position: relative; z-index: 2; display: flex; flex-direction: column; }
+
+      /* --------------------------------------
+         PHẦN 1: DẢI LOGO TRONG SUỐT NỔI TRÊN NỀN ĐEN
+         -------------------------------------- */
+      .partner-section-nexus { padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; align-items: center; }
+      .marquee-wrapper-nexus { width: 100%; max-width: 1200px; overflow: hidden; position: relative; }
+      .marquee-wrapper-nexus::before, .marquee-wrapper-nexus::after { content: ''; position: absolute; top: 0; width: 100px; height: 100%; z-index: 2; }
+      .marquee-wrapper-nexus::before { left: 0; background: linear-gradient(to right, rgba(15,20,25,0.8), transparent); }
+      .marquee-wrapper-nexus::after { right: 0; background: linear-gradient(to left, rgba(15,20,25,0.8), transparent); }
+      .marquee-track-nexus { display: flex; width: fit-content; animation: scrollMarquee 30s linear infinite; }
+      .marquee-track-nexus:hover { animation-play-state: paused; }
+      
+      /* Sửa màu logo thành Trắng để nổi trên nền tối */
+      .partner-logo-nexus {
+        width: 200px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+        font-weight: 800; font-size: 1.5rem; color: #fff; opacity: 0.7; 
+        text-transform: uppercase; transition: 0.4s; cursor: pointer; font-family: 'Playfair Display', serif;
+      }
+      .partner-logo-nexus:hover { opacity: 1; color: var(--gold); transform: scale(1.1); }
+      @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+      /* --------------------------------------
+         PHẦN 2: CHỮ CTA GIỮA MÀN HÌNH (TRONG SUỐT)
+         -------------------------------------- */
+      .cta-nexus-part { padding: 100px 5%; text-align: center; }
+      .cta-nexus-part p { color: #ccc; font-size: 0.95rem; font-weight: 600; margin-bottom: 15px; }
+      .cta-nexus-part h2 { font-family: 'Inter', sans-serif; font-size: 3.2rem; font-weight: 800; color: #fff; max-width: 700px; margin: 0 auto 35px; line-height: 1.3; }
+      .btn-nexus-yellow { background: var(--gold); color: var(--text-main); font-weight: 700; font-size: 0.95rem; padding: 16px 35px; border-radius: 4px; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; }
+      .btn-nexus-yellow:hover { background: #fff; transform: translateY(-3px); }
+
+      /* --------------------------------------
+         PHẦN 3: FORM LIÊN HỆ (ĐỔ GRADIENT ĐEN CHE DẦN ẢNH)
+         -------------------------------------- */
+      .form-nexus-part {
+        /* Bí quyết nằm ở đây: Đổ gradient từ mờ sang đen đặc */
+        background: linear-gradient(to bottom, rgba(15, 10, 10, 0.6) 0%, rgba(10, 10, 10, 0.98) 40%, rgba(10, 10, 10, 1) 100%);
+        padding: 80px 5% 100px; color: var(--white);
+      }
+      .contact-layout { display: flex; gap: 80px; max-width: 1200px; margin: 0 auto; align-items: flex-start; }
+      .contact-info-panel { flex: 1; }
+      .contact-info-panel p { margin-bottom: 25px; font-size: 1.1rem; color: rgba(255,255,255,0.85); line-height: 1.7;}
+      .contact-form-section { flex: 1.2; width: 100%; }
+      .form-group { margin-bottom: 20px; }
+      .form-group input, .form-group select { width: 100%; padding: 18px 25px; border: none; border-radius: 50px; font-size: 1rem; background: var(--white); color: var(--text-main); outline: none; transition: 0.3s; }
+      .form-group textarea { width: 100%; padding: 18px 25px; border: none; border-radius: 25px; font-size: 1rem; background: var(--white); color: var(--text-main); outline: none; resize: vertical; transition: 0.3s; }
+      .form-group input:focus, .form-group textarea:focus, .form-group select:focus { box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.4); }
+      .btn-submit-nexus { background: var(--gold); color: var(--text-main); font-weight: 700; padding: 18px 40px; border: none; border-radius: 50px; width: 100%; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+      .btn-submit-nexus:hover { background: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2); }
+
+      @media (max-width: 992px) {
+        .contact-layout { flex-direction: column; gap: 50px; }
+        .cta-nexus-part h2 { font-size: 2.5rem; }
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 992px) {
+        .overlap-section, .dark-process, .mag-grid, .contact-layout, .achievements { flex-direction: column; }
+        .hero-content h1 { font-size: 3rem; }
+        .hollow-text { display: none; } 
+        .img-back, .img-front { position: relative; width: 100%; height: 300px; border: none; }
+        .overlap-images { height: auto; display: flex; flex-direction: column; gap: 20px; }
+        .ms-grid { grid-template-columns: 1fr 1fr; }
+        .dp-left { position: relative; top: 0; margin-bottom: 30px; }
+        .mag-header { flex-direction: column; align-items: flex-start; gap: 20px;}
+      }
+      @media (max-width: 768px) {
+        .section-padding { padding: 60px 5%; }
+        .section-header h2 { font-size: 2rem; }
+        .hero-nexus { height: auto; padding: 120px 5% 80px;}
+        .hero-content h1 { font-size: 2.5rem; }
+        .hero-content p { font-size: 1.1rem; }
+        .ms-grid { grid-template-columns: 1fr; }
+        .dp-left h2 { font-size: 2.5rem; }
+        .dp-number { font-size: 3rem; }
+        .mag-side-item { flex-direction: column; align-items: flex-start;}
+        .mag-side-item img { width: 100%; height: 200px;}
+        .contact-info-panel, .contact-form-section { padding: 40px 20px; }
+      }
+
+      /* === DẢI ĐỐI TÁC CHẠY NGANG (INFINITE MARQUEE) === */
+    .partner-section {
+      padding: 40px 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .partner-header { margin-bottom: 30px; text-align: center; }
+    .partner-header p {
+      font-size: 0.95rem; font-weight: 700; color: var(--text-gray);
+      text-transform: uppercase; letter-spacing: 2px; margin: 0;
+    }
+    .marquee-wrapper {
+      width: 100%; max-width: 1500px;
+      overflow: hidden; position: relative;
+    }
+    /* Tạo lớp sương mù mờ 2 bên viền để logo chìm vào ảo diệu hơn */
+    .marquee-wrapper::before, .marquee-wrapper::after {
+      content: ''; position: absolute; top: 0; width: 150px; height: 100%; z-index: 2;
+    }
+    .marquee-wrapper::before { left: 0; background: linear-gradient(to right, white, transparent); }
+    .marquee-wrapper::after { right: 0; background: linear-gradient(to left, white, transparent); }
+    
+    .marquee-track {
+      display: flex;
+      width: fit-content;
+      /* Thời gian 30s, chạy đều (linear), lặp vô tận (infinite) */
+      animation: scrollMarquee 30s linear infinite; 
+    }
+    .marquee-track:hover {
+      animation-play-state: paused; /* Chạm chuột vào là dừng lại */
+    }
+    /* Tút lại dải Logo: Mặc định xám bạc, Hover mới lên màu */
+    .partner-logo {
+      width: 250px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.3rem; 
+      color: #b0b0b0; /* Đổi từ màu đỏ sang màu xám bạc thanh lịch */
+      text-transform: uppercase; transition: 0.4s ease; cursor: pointer;
+      font-family: 'Playfair Display', serif; letter-spacing: 2px;
+    }
+    .partner-logo:hover { 
+      color: var(--primary-color); /* Rê chuột vào mới hiện đỏ đô */
+      transform: scale(1.1); 
+    }
+    
+    /* Công thức chạy: Dịch chuyển đúng một nửa tổng chiều dài */
+    @keyframes scrollMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); } 
+    }
+
+    @media (max-width: 768px) {
+      .partner-logo { width: 180px; font-size: 1.1rem; }
+      .marquee-wrapper::before, .marquee-wrapper::after { width: 50px; }
+    }
+    </style>
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <main id="view-home" class="page-view active">
+      
+      <!-- 1. HERO BANNER CHUẨN ĐIỆN ẢNH -->
+      <section class="hero-nexus reveal">
+        <div class="hollow-text">AVEM</div>
+        <div class="hero-content">
+          <div class="hero-badge-premium">
+            <div class="badge-number">10</div>
+            <div class="badge-text">
+              <span>Years of</span>
+              <strong>Excellence</strong>
+            </div>
+          </div>
+          <h1 class="font-serif">Quản Trị Xuất Sắc</h1>
+          <p>Kiến tạo nền tảng vững chắc cho sự tăng trưởng bền vững của doanh nghiệp bạn.</p>
+          <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+            <a href="contact.html" class="btn-gold">Nhận Tư Vấn Ngay</a>
+            <a href="dichvu.html" class="btn-gold" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.3); color: #fff;">Xem Dịch Vụ</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- DẢI ĐỐI TÁC CHẠY NGANG -->
+      <section class="partner-section reveal">
+        <div class="partner-header">
+          <p>Hơn 200+ Doanh nghiệp FDI đã tin tưởng đồng hành cùng AVEM</p>
+        </div>
+        <div class="marquee-wrapper">
+          <div class="marquee-track">
+            <!-- Set 1: Danh sách đối tác -->
+            <div class="partner-logo">An Việt</div>
+            <div class="partner-logo">Hồng Đạt</div>
+            <div class="partner-logo">Shuojinbao</div>
+            <div class="partner-logo">Kangtian</div>
+            <div class="partner-logo">Kim Đạt</div>
+            <div class="partner-logo">Xinzhou</div>
+            <div class="partner-logo">Hà Nội Vàng</div>
+            <div class="partner-logo">Kechuang</div>
+            <div class="partner-logo">Tuấn Kiệt</div>
+            <div class="partner-logo">Chemdo</div>
+            
+            <!-- Set 2: BẮT BUỘC PHẢI COPY Y HỆT SET 1 ĐỂ TẠO VÒNG LẶP VÔ TẬN -->
+            <div class="partner-logo">An Việt</div>
+            <div class="partner-logo">Hồng Đạt</div>
+            <div class="partner-logo">Shuojinbao</div>
+            <div class="partner-logo">Kangtian</div>
+            <div class="partner-logo">Kim Đạt</div>
+            <div class="partner-logo">Xinzhou</div>
+            <div class="partner-logo">Hà Nội Vàng</div>
+            <div class="partner-logo">Kechuang</div>
+            <div class="partner-logo">Tuấn Kiệt</div>
+            <div class="partner-logo">Chemdo</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. GIỚI THIỆU CHỒNG ẢNH -->
+      <section class="section-padding home-intro reveal">
+        <div class="overlap-section">
+          <div class="overlap-images">
+            <img class="img-back" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80" alt="Building">
+            <img class="img-front" src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80" alt="Team">
+          </div>
+          <div class="overlap-text">
+            <span>Về AVEM</span>
+            <h2 class="font-serif">Người đồng hành tin cậy của cộng đồng doanh nghiệp trong và ngoài nước</h2>
+            <p>Với đội ngũ chuyên gia giàu kinh nghiệm, am hiểu môi trường pháp lý, đầu tư và hoạt động kinh doanh tại Việt Nam, AVEM cam kết mang đến các giải pháp thực tiễn, tối ưu và phù hợp với từng nhu cầu của khách hàng. Chúng tôi không chỉ cung cấp dịch vụ mà còn đồng hành cùng doanh nghiệp trên hành trình đầu tư, vận hành và phát triển bền vững.</p>
+            <a href="thuNgo.html" class="btn-gold" style="background: var(--primary-color); color: #fff;">Xem thêm về chúng tôi</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- THÀNH TỰU PROGRESS BAR -->
+      <section class="achievements-section reveal">
+        <div class="achievements-container">
+          
+          <div class="achiev-text">
+            <h5>Thành Tựu Đạt Được</h5>
+            <h2 class="font-serif">Dấu ấn khẳng định thương hiệu AVEM</h2>
+            <p>Sự thành công và phát triển bền vững của cộng đồng đối tác chính là minh chứng rõ ràng nhất cho chất lượng dịch vụ quản trị xuất sắc của chúng tôi.</p>
+            <a href="duan.html" class="btn-outline-gold">Xem Hồ Sơ Năng Lực</a>
+          </div>
+          
+          <div class="achiev-boxes">
+              <div class="progress-item">
+                <div class="progress-label"><span>Doanh Nghiệp Hỗ Trợ</span><span>1,500+</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+              </div>
+              
+              <div class="progress-item">
+                <div class="progress-label"><span>Chuyên Gia Ngành</span><span>50+</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width: 100%"></div></div>
+              </div>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- 3. HỆ SINH THÁI DỊCH VỤ (KHÔI PHỤC BỐ CỤC CHIA ĐÔI CŨ) -->
+      <section class="section-padding services-section reveal">
+        <div class="services-layout-new">
+          
+          <!-- Cột trái đứng im -->
+          <div class="services-intro-new">
+            <span>Giải Pháp Toàn Diện</span>
+            <h2 class="font-serif">Hệ Sinh Thái Dịch Vụ</h2>
+            <p>Cung cấp bộ giải pháp chuyên sâu giúp doanh nghiệp kiểm soát rủi ro pháp lý, minh bạch tài chính và tối ưu hóa hiệu suất vận hành trong thời kỳ hội nhập.</p>
+            <a href="dichvu.html" class="btn-gold" style="margin-top: 10px; background: var(--primary-color); color: #fff;">Xem Chi Tiết <i class="fa-solid fa-arrow-right" style="margin-left: 5px;"></i></a>
+          </div>
+          
+          <!-- Cột phải cuộn -->
+          <div class="services-grid-new">
+            <div class="service-item-new" onclick="window.location.href = 'xuctien.html'">
+              <div class="sin-icon"><i class="fa-solid fa-chart-line"></i></div>
+              <div class="sin-content">
+                <h4 class="font-serif">Xúc tiến đầu tư</h4>
+                <p>Đồng hành tìm kiếm cơ hội, tư vấn chiến lược và hỗ trợ thủ tục triển khai dự án đầu tư hiệu quả.</p>
+              </div>
+            </div>
+            <div class="service-item-new" onclick="window.location.href = 'phaply.html'">
+              <div class="sin-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+              <div class="sin-content">
+                <h4 class="font-serif">Pháp lý doanh nghiệp</h4>
+                <p>Thực hiện và giám sát toàn bộ thủ tục pháp lý, bảo vệ doanh nghiệp trước các rủi ro tuân thủ.</p>
+              </div>
+            </div>
+            <div class="service-item-new" onclick="window.location.href = 'ketoan.html'">
+              <div class="sin-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+              <div class="sin-content">
+                <h4 class="font-serif">Kế toán</h4>
+                <p>Thiết lập hệ thống báo cáo chuẩn mực, đảm bảo minh bạch tài chính và hỗ trợ ra quyết định.</p>
+              </div>
+            </div>
+            <div class="service-item-new" onclick="window.location.href = 'kiemtoan.html'">
+              <div class="sin-icon"><i class="fa-solid fa-file-invoice"></i></div>
+              <div class="sin-content">
+                <h4 class="font-serif">Kiểm toán</h4>
+                <p>Kiểm toán độc lập chuyên sâu, nâng cao độ tin cậy của thông tin tài chính đối với nhà đầu tư.</p>
+              </div>
+            </div>
+            <div class="service-item-new" onclick="window.location.href = 'covanquantri.html'">
+              <div class="sin-icon"><i class="fa-solid fa-sitemap"></i></div>
+              <div class="sin-content">
+                <h4 class="font-serif">Quản trị doanh nghiệp</h4>
+                <p>Tái cấu trúc tổ chức, xây dựng quy trình vận hành linh hoạt để nâng cao năng lực cạnh tranh cốt lõi.</p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- 4. QUY TRÌNH NỀN TỐI (BẢN V2 SÁNG TẠO & TƯƠNG TÁC) -->
+      <section class="dark-process-v2 reveal">
+        <div class="dp2-container">
+          
+          <!-- Cột trái: Tiêu đề đứng im -->
+          <div class="dp2-left">
+            <span class="dp2-tag">Quy trình 5 bước</span>
+            <h2 class="font-serif">Quy Trình<br>Triển Khai</h2>
+            <p>Chuẩn hóa 5 bước chuyên nghiệp, tiết kiệm thời gian cho đối tác.</p>
+          </div>
+          
+          <!-- Cột phải: Dàn thẻ kính mờ -->
+          <div class="dp2-right">
+            <div class="dp2-track"></div>
+            
+            <div class="dp2-step">
+              <div class="dp2-dot"></div>
+              <div class="dp2-card">
+                <div class="dp2-watermark">01</div>
+                <h3>Tiếp nhận</h3>
+                <p>Lắng nghe & Phân tích hiện trạng, yêu cầu của doanh nghiệp.</p>
+              </div>
+            </div>
+
+            <div class="dp2-step">
+              <div class="dp2-dot"></div>
+              <div class="dp2-card">
+                <div class="dp2-watermark">02</div>
+                <h3>Đánh giá</h3>
+                <p>Khảo sát hiện trạng thực tế để đưa ra phương án tối ưu nhất.</p>
+              </div>
+            </div>
+
+            <div class="dp2-step">
+              <div class="dp2-dot"></div>
+              <div class="dp2-card">
+                <div class="dp2-watermark">03</div>
+                <h3>Thực hiện</h3>
+                <p>Triển khai chuyên môn bởi đội ngũ chuyên gia giàu kinh nghiệm.</p>
+              </div>
+            </div>
+
+            <div class="dp2-step">
+              <div class="dp2-dot"></div>
+              <div class="dp2-card">
+                <div class="dp2-watermark">04</div>
+                <h3>Kiểm soát</h3>
+                <p>Đánh giá & Điều chỉnh liên tục trong suốt quá trình thực hiện.</p>
+              </div>
+            </div>
+
+            <div class="dp2-step">
+              <div class="dp2-dot"></div>
+              <div class="dp2-card">
+                <div class="dp2-watermark">05</div>
+                <h3>Báo cáo</h3>
+                <p>Bàn giao kết quả minh bạch và đồng hành cùng doanh nghiệp.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- CAM KẾT (GIỮ GỐC) -->
+      <section class="section-padding commitments reveal">
+        <div class="section-header">
+          <h2 class="font-serif">AVEM Cam Kết</h2>
+          <p>Chúng tôi không ngừng nỗ lực để mang lại những giá trị thiết thực và vững chắc nhất cho sự phát triển của Quý doanh nghiệp.</p>
+        </div>
+        <div class="commitments-grid">
+          <div class="commit-card"><i class="fa-solid fa-handshake-angle"></i><h4>Đồng Hành Cùng<br>Nhà Đầu Tư</h4></div>
+          <div class="commit-card"><i class="fa-solid fa-chart-pie"></i><h4>Tối Ưu Hiệu Quả<br>Quản Trị</h4></div>
+          <div class="commit-card"><i class="fa-solid fa-shield-halved"></i><h4>Kiểm Soát Rủi Ro<br>Pháp Lý</h4></div>
+          <div class="commit-card"><i class="fa-solid fa-seedling"></i><h4>Phát Triển<br>Bền Vững</h4></div>
+        </div>
+      </section>
+
+      <!-- DỰ ÁN TIÊU BIỂU (GIỮ GỐC) -->
+      <section class="section-padding projects reveal">
+        <div class="section-header">
+          <h2 class="font-serif">Dự Án Tiêu Biểu</h2>
+          <p>Những công trình tái cấu trúc và quản trị vận hành thành công</p>
+        </div>
+        <div class="projects-grid">
+          <div class="project-card" onclick="window.location.href = 'duan.html'">
+            <img src="anh_website/trangchu/trangchu_1.webp" alt="Dự án" />
+            <div class="project-overlay"><h4 class="font-serif">Tư vấn tái cấu trúc Tập đoàn Đa quốc gia</h4></div>
+          </div>
+          <div class="project-card" onclick="window.location.href = 'duan.html'">
+            <img src="anh_website/trangchu/trangchu_2.webp" alt="Dự án" />
+            <div class="project-overlay"><h4 class="font-serif">Xúc tiến đầu tư Khu công nghiệp Trọng điểm</h4></div>
+          </div>
+          <div class="project-card" onclick="window.location.href = 'duan.html'">
+            <img src="anh_website/trangchu/trangchu_3.webp" alt="Dự án" />
+            <div class="project-overlay"><h4 class="font-serif">Kiểm toán độc lập Chuỗi Cung ứng FDI</h4></div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 60px">
+          <a href="duan.html" class="btn-gold" style="background: var(--primary-color); color: #fff;">Xem Tất Cả Dự Án</a>
+        </div>
+      </section>
+
+      <!-- 5. TẠP CHÍ TIN TỨC (MAGAZINE) VỚI NỘI DUNG GỐC -->
+      <section class="section-padding mag-news reveal">
+        <div class="mag-header">
+          <div>
+              <h2 class="font-serif">Góc Nhìn Chuyên Gia</h2>
+              <p style="color: var(--text-gray); font-size: 1.15rem; margin-top: 10px;">Cập nhật thông tin thị trường, luật doanh nghiệp và kiến thức quản trị</p>
+          </div>
+          <a href="tintuc.html" class="btn-gold" style="padding: 12px 30px; font-size: 0.9rem;">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        
+        <div class="mag-grid">
+          <!-- Bài viết nổi bật -->
+          <div class="mag-main" onclick="window.location.href='tintuc.html'">
+            <img src="anh_website/trangchu/trangchu_4.webp" alt="Tin tức nổi bật">
+            <div class="mag-main-content">
+              <span class="mag-tag">Pháp lý</span>
+              <h3 class="font-serif">Luật Doanh nghiệp 2025: Những điểm thay đổi cốt lõi</h3>
+              <p>Cập nhật những quy định mới nhất về quản trị và thành lập doanh nghiệp FDI tại thị trường Việt Nam...</p>
+            </div>
+          </div>
+          
+          <!-- Bài viết phụ -->
+          <div class="mag-side">
+            <div class="mag-side-item" onclick="window.location.href='tintuc.html'">
+              <img src="anh_website/trangchu/trangchu_5.webp" alt="Tin tức 2">
+              <div>
+                <span class="mag-tag">Thị trường</span>
+                <h4 class="font-serif">Làn sóng FDI đổ bộ mạnh mẽ vào các KCN miền Bắc</h4>
+                <p style="font-size: 0.9rem; color: var(--text-gray);">Nhờ vào chính sách ưu đãi linh hoạt, nguồn vốn đầu tư trực tiếp nước ngoài đang gia tăng mạnh mẽ...</p>
+              </div>
+            </div>
+            <div class="mag-side-item" onclick="window.location.href='tintuc.html'">
+              <img src="anh_website/trangchu/trangchu_6.webp" alt="Tin tức 3">
+              <div>
+                <span class="mag-tag">Quản trị</span>
+                <h4 class="font-serif">Giải bài toán minh bạch tài chính cho Doanh nghiệp vừa và nhỏ</h4>
+                <p style="font-size: 0.9rem; color: var(--text-gray);">Hệ thống kiểm soát nội bộ đóng vai trò then chốt trong việc giúp các SME tiếp cận nguồn vốn...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ (GIỮ GỐC) -->
+      <section class="section-padding faq reveal">
+        <div class="section-header">
+          <h2 class="font-serif">Câu Hỏi Thường Gặp</h2>
+          <p>Giải đáp nhanh những thắc mắc từ đối tác của AVEM</p>
+        </div>
+        <div class="faq-container">
+          <button class="accordion">Công ty TNHH AVEM cung cấp những dịch vụ trọng tâm nào?<i class="fa-solid fa-plus"></i></button>
+          <div class="panel"><p>Hệ sinh thái của AVEM tập trung vào 5 mảng: Xúc tiến đầu tư, Pháp lý doanh nghiệp, Dịch vụ Kế toán, Kiểm toán độc lập và Cố vấn quản trị. Chúng tôi định hướng cung cấp giải pháp trọn gói (All-in-one) cho nhà đầu tư.</p></div>
+
+          <button class="accordion">Giá trị cốt lõi khi sử dụng dịch vụ Kiểm toán tại AVEM?<i class="fa-solid fa-plus"></i></button>
+          <div class="panel"><p>Sự độc lập, trung thực và bảo mật tuyệt đối. Hơn thế, các báo cáo kiểm toán của chuyên gia AVEM còn cung cấp cái nhìn sâu sắc, giúp ban lãnh đạo phát hiện lỗ hổng quản trị và ra quyết định tài chính chính xác.</p></div>
+
+          <button class="accordion">AVEM có hỗ trợ nhà đầu tư nước ngoài (FDI) thiết lập công ty không?<i class="fa-solid fa-plus"></i></button>
+          <div class="panel"><p>Hoàn toàn có. AVEM chuyên tư vấn mô hình đầu tư, khảo sát địa điểm, xin cấp phép Giấy chứng nhận đầu tư (IRC) và Giấy đăng ký doanh nghiệp (ERC) nhanh chóng, chuẩn xác nhất theo luật Việt Nam.</p></div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SIÊU KHỐI PARALLAX NEXUS (GỘP LOGO + CTA + FORM)
+           ========================================================= -->
+      <section class="nexus-master-parallax ">
+        <div class="nexus-master-content">
+
+          <!-- 1. DẢI ĐỐI TÁC TRONG SUỐT -->
+          <div class="partner-section-nexus">
+            <div class="marquee-wrapper-nexus">
+              <div class="marquee-track-nexus">
+                <div class="partner-logo-nexus">An Việt</div>
+                <div class="partner-logo-nexus">Hồng Đạt</div>
+                <div class="partner-logo-nexus">Shuojinbao</div>
+                <div class="partner-logo-nexus">Kangtian</div>
+                <div class="partner-logo-nexus">Kim Đạt</div>
+                <div class="partner-logo-nexus">Xinzhou</div>
+                <div class="partner-logo-nexus">Hà Nội Vàng</div>
+                <div class="partner-logo-nexus">An Việt</div>
+                <div class="partner-logo-nexus">Hồng Đạt</div>
+                <div class="partner-logo-nexus">Shuojinbao</div>
+                <div class="partner-logo-nexus">Kangtian</div>
+                <div class="partner-logo-nexus">Kim Đạt</div>
+                <div class="partner-logo-nexus">Xinzhou</div>
+                <div class="partner-logo-nexus">Hà Nội Vàng</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. CTA BANNER Ở GIỮA -->
+          <div class="cta-nexus-part">
+             <p>Để biết thêm thông tin</p>
+             <h2>Hợp tác và phát triển cùng nhau bước vào kỷ nguyên mới.</h2>
+             <a href="contact.html" class="btn-nexus-yellow">Liên hệ ngay <i class="fa-solid fa-play" style="font-size: 0.7rem;"></i></a>
+          </div>
+
+          <!-- 3. FORM LIÊN HỆ ĐEN KỊT Ở DƯỚI -->
+          <div class="form-nexus-part">
+            <div class="contact-layout">
+              
+              <!-- Cột thông tin -->
+              <div class="contact-info-panel">
+                <p style="font-size: 1.4rem; font-weight: 600; color: #fff; line-height: 1.5; margin-bottom: 30px;">
+                  Hà Nội, Việt Nam<br>
+                  (Trụ sở chính)
+                </p>
+                <p>
+                  <span style="color: var(--gold); font-weight: 600;">Email:</span> avemvietnam@gmail.com<br>
+                  <span style="color: var(--gold); font-weight: 600;">Hotline:</span> + (84) 034 788 8331
+                </p>
+                <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-top: 30px;">
+                  Để lại lời nhắn cho chúng tôi, chúng tôi sẽ liên hệ lại trong vòng 24h hoặc gọi ngay qua hotline
+                </p>
+              </div>
+
+              <!-- Cột Form điền -->
+              <div class="contact-form-section">
+                <form action="mailto:avemvietnam@gmail.com" method="POST" enctype="text/plain">
+                  <div class="form-group"><input type="text" required placeholder="Tên của bạn *" /></div>
+                  <div class="form-group"><input type="email" placeholder="Email của bạn" /></div>
+                  <div class="form-group"><input type="tel" required placeholder="Số điện thoại của bạn *" /></div>
+                  <div class="form-group"><textarea rows="4" placeholder="Nội dung..."></textarea></div>
+                  <button type="submit" class="btn-submit-nexus">Gửi thông tin</button>
+                </form>
+              </div>
+              
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="dictionary.js"></script>
+    <script src="main.js"></script>
+
+    <!-- Kịch bản riêng của trang (Accordion FAQ) -->
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      for (var i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          let icon = this.querySelector("i");
+          if (this.classList.contains("active")) {
+            icon.classList.remove("fa-plus");
+            icon.classList.add("fa-minus");
+          } else {
+            icon.classList.remove("fa-minus");
+            icon.classList.add("fa-plus");
+          }
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

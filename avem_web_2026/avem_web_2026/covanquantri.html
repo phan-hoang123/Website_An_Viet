@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cố Vấn Quản Trị - AVEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css" />
+
+    <style>
+      /* === HERO BANNER (MAGAZINE STYLE) === */
+      .cv-hero { position: relative; padding: 120px 5% 100px; background: var(--bg-light); display: flex; align-items: center; gap: 60px; overflow: hidden; }
+      .cv-hero::before { content: ''; position: absolute; top: 0; right: 0; width: 45%; height: 100%; background: var(--primary-color); z-index: 0; border-radius: 200px 0 0 200px; }
+      .cv-hero-text { flex: 1; position: relative; z-index: 2; padding-left: 5%; }
+      .cv-hero-text span { display: inline-block; color: var(--primary-color); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 20px; }
+      .cv-hero-text h1 { font-family: 'Sans-Serif', serif; font-size: 4.5rem; font-weight: 900; line-height: 1.1; color: var(--text-main); margin-bottom: 30px; }
+      .cv-hero-text p { font-size: 1.2rem; color: var(--text-gray); line-height: 1.8; max-width: 550px; }
+      .cv-hero-img { flex: 1; position: relative; z-index: 2; height: 600px; border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+      .cv-hero-img img { width: 100%; height: 100%; object-fit: cover; }
+
+      /* === REFINED SERVICES === */
+      .cv-services { padding: 120px 5%; background: var(--white); }
+      .sec-title { text-align: center; margin: 0 auto 40px; max-width: 980px; }
+      .sec-title h2 { font-family: 'Sans-Serif', serif; font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; }
+      .sec-title p { font-size: 1.1rem; color: var(--text-gray); line-height: 1.6; }
+      .cv-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: start; }
+      .cv-feature { position: relative; border-radius: 14px; overflow: hidden; min-height: 420px; box-shadow: 0 30px 70px rgba(14,20,30,0.06); }
+      .cv-feature img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.95) contrast(0.96); transform-origin: center; transition: transform 0.6s ease; }
+      .cv-feature:hover img { transform: scale(1.06) rotate(-0.5deg); }
+      .cv-feature .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.35)); display:flex; flex-direction:column; justify-content:flex-end; padding: 28px; color: #fff; }
+      .cv-feature .kicker { font-weight:700; color: var(--gold); font-size:0.9rem; margin-bottom:8px; }
+      .cv-feature h3 { margin:0; font-size:1.6rem; font-weight:700; line-height:1.1; }
+      .cv-feature p { margin-top:10px; font-size:1rem; color: rgba(255,255,255,0.92); max-width: 85%; }
+      .cv-feature .btn-ghost { margin-top:14px; padding:10px 14px; background: rgba(255,255,255,0.12); color:#fff; border-radius:8px; font-weight:600; display:inline-block; }
+      .cv-list { display:flex; flex-direction:column; gap:18px; }
+      .cv-list .cv-card { display:flex; gap:14px; align-items:flex-start; padding:18px; border-radius:12px; background:#fff; border:1px solid rgba(20,24,30,0.04); box-shadow: 0 12px 30px rgba(14,20,30,0.04); }
+      .cv-list .cv-icon { width:56px; height:56px; border-radius:10px; display:flex; align-items:center; justify-content:center; background: rgba(144,0,0,0.06); color: var(--primary-color); font-size:1.25rem; }
+      .cv-list h3 { margin:0; font-size:1.05rem; font-weight:700; }
+      .cv-list p { margin:6px 0 0 0; color: var(--text-gray); font-size:0.98rem; }
+      @keyframes liftUp { from { transform: translateY(18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      .reveal.active .cv-feature, .reveal.active .cv-card { animation: liftUp 0.6s cubic-bezier(.16,1,.3,1) both; }
+
+      /* === LỢI ÍCH (STICKY SCROLL BÊN TRÁI) === */
+      .cv-benefits { padding: 120px 5%; background: var(--bg-dark); color: var(--white); border-top: 1px solid var(--border-color); }
+      .ben-container { max-width: 1300px; margin: 0 auto; display: flex; gap: 80px; align-items: flex-start; }
+      .ben-left { flex: 1; position: sticky; top: 150px; }
+      .ben-left h2 { font-family: 'Sans-Serif', serif; font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; color: var(--white); }
+      .ben-left h2 span { color: var(--gold); }
+      .ben-left p { font-size: 1.15rem; color: #a0aab5; line-height: 1.7; }
+      .ben-right { flex: 1.2; display: flex; flex-direction: column; gap: 40px; }
+      .ben-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: var(--radius-md); padding: 50px 40px; display: flex; gap: 30px; align-items: flex-start; transition: 0.4s; }
+      .ben-card:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--gold); transform: translateX(-10px); }
+      .ben-icon { width: 70px; height: 70px; flex-shrink: 0; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: var(--bg-dark); border-radius: 16px; display: flex; justify-content: center; align-items: center; font-size: 2rem; }
+      .ben-content h4 { font-size: 1.4rem; font-weight: 800; color: var(--white); margin-bottom: 15px; }
+      .ben-content p { font-size: 1.05rem; color: #a0aab5; line-height: 1.7; }
+
+      /* =========================================================
+         === THIẾT KẾ MỚI CHO QUY TRÌNH (VERTICAL TIMELINE VIP) ===
+         ========================================================= */
+      .cv-process { padding: 120px 5%; background: var(--bg-light); position: relative; overflow: hidden; }
+      .cv-process::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 100% 50%, rgba(144, 0, 0, 0.03) 0%, transparent 50%), radial-gradient(circle at 0% 50%, rgba(207, 168, 110, 0.05) 0%, transparent 50%); pointer-events: none; }
+      .timeline-wrap { max-width: 1100px; margin: 0 auto; position: relative; padding: 40px 0; }
+      
+      /* Đường Line chạy dọc mượt mà */
+      .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, transparent, var(--primary-color) 15%, var(--gold) 85%, transparent); transform: translateX(-50%); border-radius: 4px; }
+      .timeline-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; position: relative; width: 100%; z-index: 2; }
+      .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+
+      /* Điểm nối Dot */
+      .timeline-dot { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 24px; height: 24px; background: var(--white); border: 4px solid var(--primary-color); border-radius: 50%; box-shadow: 0 0 0 6px rgba(144, 0, 0, 0.1); transition: 0.4s ease; z-index: 3; }
+      .timeline-item:hover .timeline-dot { background: var(--primary-color); border-color: var(--gold); transform: translate(-50%, -50%) scale(1.4); box-shadow: 0 0 20px rgba(207, 168, 110, 0.4); }
+
+      /* Thẻ nội dung */
+      .timeline-content { width: 45%; background: var(--white); padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow); border: 1px solid var(--border-color); position: relative; transition: 0.4s ease; overflow: hidden; }
+      
+      /* CON SỐ IN CHÌM KHỔNG LỒ NẰM BÊN DƯỚI */
+      .timeline-content::after { content: attr(data-step); position: absolute; right: 15px; bottom: -20px; font-size: 8rem; font-weight: 900; color: rgba(144, 0, 0, 0.03); line-height: 1; font-family: 'Sans-Serif', serif; z-index: 0; transition: 0.4s ease; }
+      .timeline-item:nth-child(even) .timeline-content::after { left: 15px; right: auto; }
+
+      /* Hiệu ứng hover nổi thẻ */
+      .timeline-item:hover .timeline-content { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: var(--primary-color); }
+      .timeline-item:hover .timeline-content::after { color: rgba(144, 0, 0, 0.08); transform: scale(1.1); }
+
+      /* Đẩy nội dung chữ lên trên số in chìm */
+      .timeline-content > * { position: relative; z-index: 1; }
+      .timeline-icon { width: 55px; height: 55px; background: rgba(144, 0, 0, 0.05); color: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border-radius: 14px; margin-bottom: 20px; transition: 0.4s; }
+      .timeline-item:hover .timeline-icon { background: var(--primary-color); color: var(--white); }
+      .timeline-content h4 { font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px; }
+      .timeline-content p { font-size: 1rem; color: var(--text-gray); line-height: 1.6; margin: 0; }
+
+      /* RESPONSIVE CHO QUY TRÌNH (TỰ ĐỘNG CĂN TRÁI VÀ ĐẨY LINE SANG LỀ) */
+      @media (max-width: 900px) {
+        .timeline-line { left: 25px; }
+        .timeline-item, .timeline-item:nth-child(even) { flex-direction: column; align-items: flex-end; margin-bottom: 40px; }
+        .timeline-dot { left: 25px; top: 40px; transform: translate(-50%, -50%); }
+        .timeline-item:hover .timeline-dot { transform: translate(-50%, -50%) scale(1.4); }
+        .timeline-content { width: calc(100% - 70px); }
+        .timeline-content::after, .timeline-item:nth-child(even) .timeline-content::after { right: 15px; left: auto; }
+      }
+
+      /* === CAM KẾT (SOLID CTA) === */
+      .cv-cta { padding: 100px 5%; background: var(--primary-color); text-align: center; color: var(--white); }
+      .cta-content { max-width: 900px; margin: 0 auto; }
+      .cta-content i { font-size: 3rem; color: var(--gold); margin-bottom: 30px; }
+      .cta-content h2 { font-family: 'Sans-Serif', serif; font-size: 2.5rem; font-weight: 700; line-height: 1.4; margin-bottom: 40px; }
+      .btn-gold { background: var(--gold); color: var(--text-main); padding: 16px 40px; border-radius: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: inline-block; transition: 0.3s; border: none; cursor: pointer; box-shadow: 0 10px 20px rgba(207, 168, 110, 0.3); }
+      .btn-gold:hover { transform: translateY(-5px); background: var(--white); color: var(--primary-color); }
+
+      /* =======================================================
+         ĐẠI TU GIAO DIỆN MOBILE CHO TRANG CỐ VẤN QUẢN TRỊ
+         ======================================================= */
+      @media (max-width: 768px) {
+        
+        /* 1. HERO BANNER (Bẻ từ ngang sang dọc) */
+        .cv-hero { 
+            flex-direction: column; 
+            padding: 100px 5% 60px; 
+            gap: 40px; 
+            text-align: center;
+        }
+        /* Sửa lại mảng màu nền phía sau cho cân đối trên đt */
+        .cv-hero::before { 
+            width: 100%; 
+            height: 60%; 
+            border-radius: 0 0 40px 40px; 
+        }
+        .cv-hero-text { padding-left: 0; }
+        .cv-hero-text span { color: var(--gold) !important; } /* Đổi chữ nhỏ trên cùng thành màu vàng */
+        .cv-hero-text h1 { font-size: 2.3rem; margin-bottom: 20px; color: #ffffff !important; }
+        .cv-hero-text p { font-size: 1rem; margin: 0 auto; color: rgba(255, 255, 255, 0.9) !important; }
+        
+        /* Cắt bớt chiều cao ảnh bìa */
+        .cv-hero-img { height: 350px; width: 100%; }
+
+
+        /* 2. HỆ SINH THÁI GIẢI PHÁP (Đại tu cho sang xịn mịn) */
+        .cv-services { padding: 60px 5%; }
+        .sec-title h2 { font-size: 2rem; }
+        .sec-title p { font-size: 1rem; }
+        
+        .cv-grid { grid-template-columns: 1fr; gap: 30px; }
+        
+        /* Trị dứt điểm bệnh "hụt chân" lòi nền xám của ảnh */
+        .cv-feature { 
+            min-height: 420px; 
+            position: relative; /* Giữ khung */
+            border-radius: 16px;
+        }
+        
+        .cv-feature img {
+            position: absolute; /* Ép ảnh bung tỏa 100% lấp đầy khung */
+            top: 0; left: 0;
+            width: 100%; 
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cv-feature .overlay { 
+            position: absolute;
+            /* Phủ gradient đen đậm từ dưới lên để chữ bật tông */
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+            padding: 30px 20px; 
+        }
+        
+        .cv-feature h3 { 
+            font-size: 1.6rem; 
+            margin-bottom: 10px; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Đổ bóng nhẹ cho chữ dễ đọc */
+        }
+        
+        .cv-feature p { 
+            max-width: 100%; 
+            font-size: 0.95rem; 
+            color: rgba(255,255,255,0.9); 
+        }
+        
+        /* Nâng cấp nút bấm thành nút nổi bật (Primary Button) */
+        .cv-feature .btn-ghost { 
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            width: 100%; /* Kéo giãn 100% cho ngón tay dễ bấm */
+            text-align: center;
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 25px;
+            font-size: 1rem;
+            box-shadow: 0 10px 20px rgba(144,0,0,0.3);
+        }
+
+        /* Tút lại các thẻ danh sách bên dưới cho sạch sẽ */
+        .cv-list .cv-card { 
+            padding: 20px; 
+            align-items: center; /* Căn giữa icon và text ngang hàng */
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03); /* Đổ bóng siêu vi cho thẻ nổi nhẹ */
+        }
+        
+        .cv-list .cv-icon { 
+            width: 55px; height: 55px; 
+            font-size: 1.3rem; 
+            flex-shrink: 0;
+            background: rgba(144, 0, 0, 0.08); /* Đỏ đô nhạt sang trọng */
+        }
+        
+        .cv-list h3 { font-size: 1.1rem; margin-bottom: 4px; }
+        .cv-list p { font-size: 0.9rem; line-height: 1.5; margin: 0; }
+
+
+        /* 3. LỢI ÍCH VƯỢT TRỘI */
+        .cv-benefits { padding: 60px 5%; }
+        .ben-container { flex-direction: column; gap: 40px; }
+        
+        /* Gỡ bỏ thuộc tính dính (sticky) để khách vuốt màn hình không bị kẹt */
+        .ben-left { position: static; text-align: center; }
+        .ben-left h2 { font-size: 2.2rem; }
+        .ben-left p { font-size: 1rem; }
+        
+        /* Cấu trúc lại thẻ lợi ích */
+        .ben-card { padding: 25px 20px; gap: 20px; align-items: center; text-align: center; flex-direction: column; }
+        .ben-icon { width: 60px; height: 60px; font-size: 1.6rem; }
+        .ben-content h4 { font-size: 1.25rem; margin-bottom: 10px; }
+        .ben-content p { font-size: 0.95rem; }
+
+
+        /* 4. QUY TRÌNH TRIỂN KHAI (TIMELINE) */
+        .cv-process { padding: 60px 5%; }
+        
+        /* Khối timeline đã có media max-width: 900px, nên ở đây chỉ cần tối ưu lại text và padding */
+        .timeline-content { padding: 25px 20px; width: calc(100% - 60px); }
+        .timeline-content h4 { font-size: 1.15rem; margin-bottom: 8px; }
+        .timeline-content p { font-size: 0.95rem; text-align: justify; }
+        
+        /* Thu nhỏ con số mờ in chìm phía sau */
+        .timeline-content::after { font-size: 5rem; bottom: -10px; right: 10px; }
+        .timeline-item:nth-child(even) .timeline-content::after { left: 10px; right: auto; }
+
+
+        /* 5. KHỐI KÊU GỌI HÀNH ĐỘNG (CTA) */
+        .cv-cta { padding: 60px 5%; }
+        .cta-content i { font-size: 2rem; margin-bottom: 20px; }
+        .cta-content h2 { font-size: 1.5rem; line-height: 1.5; margin-bottom: 30px; }
+        
+        /* Kéo giãn nút bấm để dễ chạm bằng ngón tay */
+        .btn-gold { width: 100%; text-align: center; padding: 14px 20px; font-size: 0.95rem; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- HERO BANNER -->
+    <section class="cv-hero reveal">
+      <div class="cv-hero-text">
+        <span>Tái cấu trúc & Vận hành</span>
+        <h1 class="font-serif">Cố Vấn Quản Trị</h1>
+        <p>AVEM đồng hành cùng doanh nghiệp thiết lập hệ thống quản trị hiệu quả, minh bạch và phát triển bền vững, nâng cao năng lực cạnh tranh và gia tăng giá trị doanh nghiệp.</p>
+      </div>
+      <div class="cv-hero-img">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80" alt="Cố vấn quản trị AVEM">
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="cv-services">
+      <div class="sec-title reveal">
+        <h2 class="font-serif">Hệ Sinh Thái Giải Pháp</h2>
+        <p>Kiến tạo bộ khung vận hành vững chắc, linh hoạt đáp ứng mọi biến động của thị trường.</p>
+      </div>
+
+      <div class="cv-grid reveal">
+        <div class="cv-feature">
+          <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1400&q=80" alt="Quản trị doanh nghiệp">
+          <div class="overlay">
+            <div class="kicker">Giải pháp tiêu biểu</div>
+            <h3>Chiến lược – Tổ chức – Vận hành</h3>
+            <p>Thiết kế mô hình quản trị, cấu trúc tổ chức và lộ trình triển khai thực tế, đảm bảo kết quả bền vững.</p>
+            <a class="btn-ghost" href="dichvu.html">Xem chi tiết</a>
+          </div>
+        </div>
+
+        <div class="cv-list">
+          <div class="cv-card reveal" style="transition-delay:0.05s">
+            <div class="cv-icon"><i class="fa-solid fa-chess-board"></i></div>
+            <div>
+              <h3>Cố vấn quản trị theo lĩnh vực</h3>
+              <p>Đánh giá từng mảng chức năng: chiến lược, tài chính, nhân sự, vận hành và CNTT.</p>
+            </div>
+          </div>
+          <div class="cv-card reveal" style="transition-delay:0.10s">
+            <div class="cv-icon"><i class="fa-solid fa-sitemap"></i></div>
+            <div>
+              <h3>Xây dựng quy trình & hệ thống</h3>
+              <p>Chuẩn hoá quy trình, chính sách và KPI để vận hành hiệu quả và kiểm soát rủi ro.</p>
+            </div>
+          </div>
+          <div class="cv-card reveal" style="transition-delay:0.15s">
+            <div class="cv-icon"><i class="fa-solid fa-people-roof"></i></div>
+            <div>
+              <h3>Phát triển năng lực lãnh đạo</h3>
+              <p>Đào tạo, huấn luyện quản trị và chuyển giao năng lực cho ban lãnh đạo.</p>
+            </div>
+          </div>
+          <div class="cv-card reveal" style="transition-delay:0.20s">
+            <div class="cv-icon"><i class="fa-solid fa-handshake-angle"></i></div>
+            <div>
+              <h3>Giám sát triển khai & reporting</h3>
+              <p>Hỗ trợ giám sát, báo cáo tiến độ và điều chỉnh để đảm bảo kết quả cam kết.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="cv-benefits">
+      <div class="ben-container">
+        <div class="ben-left reveal">
+          <h2 class="font-serif">Lợi Ích<br><span>Vượt Trội</span></h2>
+          <p>Giá trị cốt lõi khi thiết lập được một hệ thống quản trị bài bản dưới sự cố vấn của chuyên gia AVEM.</p>
+        </div>
+        <div class="ben-right">
+          <div class="ben-card reveal">
+            <div class="ben-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="ben-content">
+              <h4>Nâng cao năng lực quản trị</h4>
+              <p>Hệ thống quản trị bài bản giúp doanh nghiệp vận hành chuyên nghiệp, hiệu quả và linh hoạt.</p>
+            </div>
+          </div>
+          <div class="ben-card reveal">
+            <div class="ben-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+            <div class="ben-content">
+              <h4>Minh bạch & Tuân thủ</h4>
+              <p>Đảm bảo tuân thủ pháp luật, chuẩn mực quản trị và thông lệ tốt, giảm thiểu rủi ro.</p>
+            </div>
+          </div>
+          <div class="ben-card reveal">
+            <div class="ben-icon"><i class="fa-solid fa-gears"></i></div>
+            <div class="ben-content">
+              <h4>Tối ưu hiệu quả hoạt động</h4>
+              <p>Chuẩn hóa quy trình, phân bổ nguồn lực hợp lý, nâng cao năng suất và hiệu quả kinh doanh.</p>
+            </div>
+          </div>
+          <div class="ben-card reveal">
+            <div class="ben-icon"><i class="fa-solid fa-arrow-up-right-dots"></i></div>
+            <div class="ben-content">
+              <h4>Tăng giá trị doanh nghiệp</h4>
+              <p>Quản trị tốt giúp nâng cao uy tín, thu hút nhà đầu tư và gia tăng giá trị bền vững.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROCESS — THIẾT KẾ TIMELINE DỌC HOÀN TOÀN MỚI ================= -->
+    <section class="cv-process">
+      <div class="sec-title reveal" style="text-align: center; margin: 0 auto 80px; max-width: 800px;">
+        <h2 class="font-serif">Quy Trình Triển Khai</h2>
+        <p>Lộ trình thực thi 6 bước rõ ràng, minh bạch — từ khảo sát đến bàn giao và cải tiến liên tục.</p>
+      </div>
+
+      <div class="timeline-wrap">
+        <div class="timeline-line"></div>
+
+        <!-- Bước 1 -->
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content" data-step="01">
+            <div class="timeline-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <h4>Khảo sát & Tiếp nhận</h4>
+            <p>Thu thập thông tin, đánh giá hiện trạng và xác định mục tiêu cốt lõi của dự án.</p>
+          </div>
+        </div>
+
+        <!-- Bước 2 -->
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content" data-step="02">
+            <div class="timeline-icon"><i class="fa-solid fa-chart-pie"></i></div>
+            <h4>Phân tích & Đánh giá</h4>
+            <p>Phân tích dữ liệu đa chiều, xác định rủi ro tiềm ẩn và các điểm nghẽn trong vận hành.</p>
+          </div>
+        </div>
+
+        <!-- Bước 3 -->
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content" data-step="03">
+            <div class="timeline-icon"><i class="fa-solid fa-lightbulb"></i></div>
+            <h4>Đề xuất giải pháp</h4>
+            <p>Thiết kế giải pháp phù hợp, đặt ra chỉ tiêu KPI và lộ trình triển khai thực tế.</p>
+          </div>
+        </div>
+
+        <!-- Bước 4 -->
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content" data-step="04">
+            <div class="timeline-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+            <h4>Triển khai & Thực hiện</h4>
+            <p>Triển khai hệ thống mới, đào tạo nhân sự và chuyển giao công cụ quản trị.</p>
+          </div>
+        </div>
+
+        <!-- Bước 5 -->
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content" data-step="05">
+            <div class="timeline-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+            <h4>Giám sát & Đánh giá</h4>
+            <p>Theo dõi tiến độ sát sao, đo lường hiệu quả và rà soát kết quả theo KPI đã đề ra.</p>
+          </div>
+        </div>
+
+        <!-- Bước 6 -->
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content" data-step="06">
+            <div class="timeline-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+            <h4>Tối ưu & Cải tiến</h4>
+            <p>Hoàn thiện, tối ưu hóa quy trình liên tục dựa trên dữ liệu và kết quả thực tế.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cv-cta">
+      <div class="cta-content reveal">
+        <i class="fa-solid fa-quote-left"></i>
+        <h2 class="font-serif">"Chúng tôi cam kết đồng hành cùng doanh nghiệp bằng sự tận tâm, chuyên nghiệp và trách nhiệm, mang đến giải pháp quản trị tối ưu – hiệu quả - bền vững."</h2>
+        <a href="contact.html" class="btn-gold">Đặt Lịch Ngay</a>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="dictionary.js"></script>
+
+    <script src="main.js"></script>
+  </body>
+</html>

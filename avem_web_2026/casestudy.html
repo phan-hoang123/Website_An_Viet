@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case Study: Tái Cấu Trúc Tập Đoàn BĐS - AVEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css" />
+
+    <style>
+      /* === CASE STUDY HERO (OVERLAP TITLE) === */
+      .cs-hero { height: 70vh; min-height: 550px; background: linear-gradient(to top, rgba(15, 17, 21, 0.8) 0%, rgba(15, 17, 21, 0.2) 100%), url('anh_website/casestudy/casestudy_1.webp') center/cover; display: flex; align-items: flex-end; position: relative; }
+      .cs-hero-container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; transform: translateY(80px); z-index: 10; }
+      .cs-title-box { background: var(--white); padding: 60px; border-radius: var(--radius-md); box-shadow: 0 30px 60px rgba(0,0,0,0.1); border-top: 6px solid var(--primary-color); max-width: 900px; }
+      .cs-breadcrumb { display: flex; gap: 10px; align-items: center; font-size: 0.9rem; font-weight: 600; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; }
+      .cs-breadcrumb a { color: var(--primary-color); }
+      .cs-breadcrumb a:hover { color: var(--gold); }
+      .cs-title-box h1 { font-family: 'Sans-Serif', serif; font-size: 3.2rem; font-weight: 800; color: var(--text-main); line-height: 1.2; margin-bottom: 20px; }
+      .cs-title-box p { font-size: 1.2rem; color: var(--text-gray); line-height: 1.6; }
+
+      /* === CASE STUDY LAYOUT === */
+      .cs-content-section { padding: 160px 5% 100px;  background: var(--bg-light); }
+      .cs-layout { max-width: 1200px; margin: 0 auto; display: flex; gap: 60px; align-items: flex-start; }
+
+      /* Cột trái: Thông tin Metadata (Sticky) */
+      .cs-sidebar { flex: 1; position: sticky; top: 120px; background: var(--white); padding: 40px 30px; border-radius: var(--radius-md); box-shadow: var(--shadow); border: 1px solid var(--border-color); }
+      .meta-item { margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid var(--border-color); }
+      .meta-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+      .meta-item h4 { font-size: 0.85rem; text-transform: uppercase; color: var(--text-gray); letter-spacing: 1.5px; margin-bottom: 8px; }
+      .meta-item p { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+      
+      .btn-download { display: flex; justify-content: center; align-items: center; gap: 10px; width: 100%; margin-top: 30px; padding: 15px; background: var(--primary-color); color: var(--white); font-weight: 700; border-radius: 6px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; cursor: pointer; border: none; }
+      .btn-download:hover { background: var(--gold); color: var(--bg-dark); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(207, 168, 110, 0.3); }
+
+      /* Cột phải: Nội dung chi tiết bài toán */
+      .cs-main { flex: 2.5; background: var(--white); padding: 60px; border-radius: var(--radius-md); box-shadow: var(--shadow); }
+      .cs-text-block { margin-bottom: 60px; }
+      .cs-text-block:last-child { margin-bottom: 0; }
+      .cs-text-block h2 { font-family: 'Sans-Serif', serif; font-size: 2.2rem; font-weight: 800; color: var(--primary-color); margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+      .cs-text-block h2::before { content: ''; display: inline-block; width: 40px; height: 3px; background: var(--gold); }
+      .cs-text-block p { font-size: 1.15rem; color: var(--text-main); line-height: 1.8; margin-bottom: 20px; }
+
+      /* Khối trích dẫn (Blockquote) */
+      .cs-quote { margin: 40px 0; padding: 40px; background: linear-gradient(to right, rgba(144, 0, 0, 0.03), transparent); border-left: 5px solid var(--primary-color); font-family: 'Sans-Serif', serif; font-size: 1.6rem; font-style: italic; color: var(--text-main); line-height: 1.5; }
+
+      /* Khối kết quả (Metrics) */
+      .cs-metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 40px 0; }
+      .metric-box { background: var(--bg-dark); color: var(--white); padding: 30px 20px; text-align: center; border-radius: var(--radius-md); border-bottom: 4px solid var(--gold); transition: 0.3s; }
+      .metric-box:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+      .metric-box h3 { font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 10px; }
+      .metric-box p { font-size: 0.95rem; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; color: rgba(255,255,255,0.8); margin: 0;}
+
+      /* Danh sách check (Unordered List) */
+      .cs-list { list-style: none; margin: 30px 0; }
+      .cs-list li { position: relative; padding-left: 35px; margin-bottom: 15px; font-size: 1.1rem; color: var(--text-main); line-height: 1.6; }
+      .cs-list li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; top: 2px; color: var(--primary-color); font-size: 1.2rem; }
+
+      /* === HÌNH ẢNH MINH HỌA GIỮA BÀI === */
+      .cs-inline-img { width: 100%; border-radius: var(--radius-md); margin: 40px 0; box-shadow: var(--shadow); }
+
+      /* === CALL TO ACTION === */
+      .cs-cta { padding: 80px 5%; background: var(--primary-color); text-align: center; color: var(--white); }
+      .cs-cta h2 { font-family: 'Sans-Serif', serif; font-size: 2.8rem; margin-bottom: 20px; }
+      .btn-outline-white { display: inline-block; padding: 15px 40px; border: 2px solid var(--white); color: var(--white); font-weight: 700; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; margin-top: 20px; }
+      .btn-outline-white:hover { background: var(--white); color: var(--primary-color); }
+
+      /* Hiệu ứng nổi khối nhẹ cho Sidebar và Metric Box */
+.cs-sidebar, .metric-box {
+    transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.cs-sidebar:hover {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    transform: translateY(-4px); /* Nổi nhẹ lên 4px */
+}
+
+/* Áp dụng cho cả mấy tấm ảnh minh họa */
+.cs-inline-img {
+    transition: box-shadow 0.5s ease, transform 0.5s ease;
+}
+.cs-inline-img:hover {
+    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+    transform: scale(1.01); /* Phóng to ra 1% cực kỳ tinh tế */
+}
+
+/* =======================================================
+         ĐẠI TU GIAO DIỆN MOBILE CHO TRANG CHI TIẾT DỰ ÁN
+         ======================================================= */
+      @media (max-width: 768px) {
+        
+        /* 1. KHU VỰC BANNER (HERO) */
+        .cs-hero { 
+            min-height: 400px; 
+            height: auto; 
+            padding-top: 100px; 
+            padding-bottom: 40px; 
+            align-items: center; 
+        }
+        .cs-hero-container { transform: translateY(0); } /* Bỏ hiệu ứng đẩy trồi lên */
+        .cs-title-box { padding: 30px 20px; }
+        .cs-breadcrumb { font-size: 0.8rem; margin-bottom: 15px; flex-wrap: wrap; }
+        
+        /* Ép tiêu đề dự án bé lại cho khỏi tràn viền */
+        .cs-title-box h1 { 
+            font-size: 1.8rem; 
+            margin-bottom: 15px; 
+            line-height: 1.3; 
+        }
+        .cs-title-box p { font-size: 1rem; }
+
+        /* 2. CẤU TRÚC LAYOUT (BẺ 2 CỘT THÀNH 1 CỘT DỌC) */
+        .cs-content-section { padding: 60px 5% 80px; }
+        .cs-layout { flex-direction: column; gap: 30px; }
+        
+        /* Cột Sidebar (Khách hàng, Lĩnh vực...) */
+        .cs-sidebar { 
+            width: 100%; 
+            position: static; /* Tắt dính (sticky) trên đt để đỡ vướng khi lướt bài */
+            padding: 25px 20px; 
+        }
+        .meta-item { margin-bottom: 15px; padding-bottom: 15px; }
+        .meta-item p { font-size: 1rem; }
+        
+        /* Cột Nội dung chính */
+        .cs-main { width: 100%; padding: 30px 20px; }
+        .cs-text-block { margin-bottom: 40px; }
+        .cs-text-block h2 { font-size: 1.6rem; margin-bottom: 15px; }
+        .cs-text-block h2::before { width: 25px; } /* Thu nhỏ cái gạch ngang vàng */
+        
+        /* Dàn chữ thẳng thớm 2 bên */
+        .cs-text-block p { 
+            font-size: 1rem; 
+            line-height: 1.7; 
+            text-align: justify; 
+        }
+
+        /* 3. TRÍCH DẪN & DANH SÁCH */
+        .cs-quote { font-size: 1.15rem; padding: 25px 20px; margin: 30px 0; }
+        .cs-list li { font-size: 1rem; padding-left: 30px; }
+
+        /* 4. KHỐI KẾT QUẢ (IMPACT) */
+        /* Ép 3 ô kết quả rớt xuống thành 1 hàng dọc, số liệu thu nhỏ lại */
+        .cs-metrics-grid { grid-template-columns: 1fr; gap: 15px; margin: 30px 0; }
+        .metric-box { padding: 25px 20px; }
+        .metric-box h3 { font-size: 2.2rem; }
+        .metric-box p { font-size: 0.85rem; }
+
+        /* 5. KHỐI KÊU GỌI HÀNH ĐỘNG (CTA) DƯỚI CÙNG */
+        .cs-cta { padding: 60px 5%; }
+        .cs-cta h2 { font-size: 1.8rem; line-height: 1.4; }
+        .cs-cta p { font-size: 1rem !important; margin-bottom: 25px; }
+        
+        /* Kéo dài nút bấm ra 100% màn hình để ngón tay dễ ấn */
+        .btn-outline-white { 
+            padding: 12px 30px; 
+            font-size: 0.95rem; 
+            width: 100%; 
+            margin-top: 10px;
+        } 
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <!-- ================= CASE STUDY HERO ================= -->
+    <section class="cs-hero reveal">
+      <div class="cs-hero-container">
+        <div class="cs-title-box">
+          <div class="cs-breadcrumb">
+            <a href="duan.html"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="cs_back_project">Quay lại Dự Án</span></a>
+            <span>/</span>
+            <span id="api-category" data-i18n="cs_loading" class="skeleton">Đang tải...</span>
+          </div>
+          <h1 id="api-title" data-i18n="search_placeholder" class="skeleton">Hệ thống đang tải dữ liệu...</h1>
+          <p id="api-excerpt" data-i18n="cs_wait" class="skeleton">Vui lòng đợi trong giây lát.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= NỘI DUNG CASE STUDY ================= -->
+    <section class="cs-content-section">
+      <div class="cs-layout">
+        
+        <!-- Cột Trái (Sidebar Sticky) -->
+        <aside class="cs-sidebar reveal">
+          <div class="meta-item">
+            <h4 data-i18n="cs_client">Khách hàng</h4>
+            <p id="api-client" data-i18n="cs_loading" class="skeleton">Đang tải...</p>
+          </div>
+          <div class="meta-item">
+            <h4 data-i18n="cs_industry">Lĩnh vực</h4>
+            <p id="api-industry" data-i18n="cs_loading" class="skeleton">Đang tải...</p>
+          </div>
+          <div class="meta-item">
+            <h4 data-i18n="cs_service_provided">Dịch vụ cung cấp</h4>
+            <p id="api-services" data-i18n="cs_loading" class="skeleton">Đang tải...</p>
+          </div>
+          <div class="meta-item">
+            <h4 data-i18n="cs_duration">Thời gian triển khai</h4>
+            <p id="api-duration" data-i18n="cs_loading"class="skeleton">Đang tải...</p>
+          </div>
+          
+          <button class="btn-download" onclick="alert('Tính năng tải báo cáo PDF đang được cập nhật.')">
+            <i class="fa-solid fa-file-pdf"></i> <span data-i18n="cs_download_pdf">Tải Báo Cáo PDF</span>
+          </button>
+        </aside>
+
+        <!-- Cột Phải (Nội dung chính) -->
+        <article class="cs-main reveal">
+          
+          <!-- PHẦN 1: NỘI DUNG BÀI VIẾT (Bối cảnh, Giải pháp... từ CKEditor sẽ được bơm thẳng vào đây bằng innerHTML) -->
+          <div id="api-content" data-i18n="cs_loading_content" class="skeleton">
+              <p>Đang tải nội dung chi tiết...</p>
+          </div>
+
+          <!-- PHẦN 2: ẢNH MINH HỌA CHÍNH CỦA DỰ ÁN -->
+          <img loading="lazy" id="api-cover" src="" alt="Ảnh dự án" class="cs-inline-img reveal" style="display: none;">
+
+          <!-- PHẦN 3: BA CON SỐ THÀNH TÍCH (Giữ nguyên khung, gắn ID) -->
+          <div class="cs-text-block reveal" style="margin-top: 40px;">
+            <h2 data-i18n="cs_results_impact">Kết Quả Đạt Được</h2>
+            <div class="cs-metrics-grid">
+              
+              <div class="metric-box">
+                <h3 id="api-metric-1-val">...</h3>
+                <p id="api-metric-1-label" data-i18n="cs_loading" class="skeleton">Đang tải</p>
+              </div>
+              
+              <div class="metric-box">
+                <h3 id="api-metric-2-val">...</h3>
+                <p id="api-metric-2-label" data-i18n="cs_loading" class="skeleton">Đang tải</p>
+              </div>
+              
+              <div class="metric-box">
+                <h3 id="api-metric-3-val">...</h3>
+                <p id="api-metric-3-label" data-i18n="cs_loading" class="skeleton">Đang tải</p>
+              </div>
+
+            </div>
+            
+            <!-- Chỗ này dành cho câu chốt hạ cuối cùng của dự án -->
+            <p id="api-conclusion"></p>
+          </div>
+
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section class="cs-cta reveal">
+      <h2 data-i18n="cs_cta_title">Bạn Đang Đối Mặt Với Thách Thức Tương Tự?</h2>
+      <p style="font-size: 1.2rem; margin-bottom: 10px; color: rgba(255,255,255,0.8);" data-i18n="cs_cta_desc">
+        Hãy để các chuyên gia của AVEM giúp bạn thiết kế một lộ trình quản trị riêng biệt.
+      </p>
+      <a href="contact.html" class="btn-outline-white" data-i18n="cs_cta_button">Đặt Lịch Tư Vấn</a>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="dictionary.js"></script>
+
+    <script src="main.js"></script>
+
+    <!-- JAVASCRIPT HÚT DỮ LIỆU TỪ C# & XỬ LÝ ĐA NGÔN NGỮ -->
+    <script>
+      document.addEventListener("DOMContentLoaded", async function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug');
+
+        // TẠO HÀM CHUYÊN ĐI GỠ BỎ KHUNG XƯƠNG (SKELETON)
+        const removeSkeletons = () => {
+            const fieldsToClear = [
+                'api-title', 'api-category', 'api-excerpt', 'api-client', 
+                'api-industry', 'api-services', 'api-duration', 
+                'api-metric-1-val', 'api-metric-1-label', 
+                'api-metric-2-val', 'api-metric-2-label', 
+                'api-metric-3-val', 'api-metric-3-label',
+                'api-content'
+            ];
+            fieldsToClear.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.removeAttribute('data-i18n'); // Gỡ thẻ dịch chữ "Đang tải"
+                    el.classList.remove('skeleton'); // Gỡ class khung xương
+                }
+            });
+        };
+
+        // NẾU KHÔNG CÓ SLUG TRÊN URL (Mở trực tiếp file)
+        if (!slug) {
+            document.getElementById('api-title').innerText = "Lỗi: Không tìm thấy đường dẫn dự án!";
+            document.getElementById('api-excerpt').innerText = "Vui lòng truy cập từ trang Danh sách Dự án.";
+            removeSkeletons(); // Phải gỡ khung xương ra thì sếp mới đọc được dòng báo lỗi ở trên
+            return;
+        }
+
+        try {
+            // GỌI API (Nhớ check lại cổng localhost của C#)
+            const response = await fetch(`https://localhost:7287/api/casestudies/${slug}`);
+            if (!response.ok) throw new Error("Bài viết không tồn tại hoặc lỗi Server");
+            
+            const data = await response.json();
+
+            // KIỂM TRA NGÔN NGỮ ĐANG CHỌN ĐỂ HIỂN THỊ
+            const currentLang = localStorage.getItem('avem_lang') || 'vi';
+            const isCN = currentLang === 'zh-CN';
+
+            // --- BƠM DỮ LIỆU (Ưu tiên tiếng Trung nếu có) ---
+            document.getElementById('api-category').innerText = isCN && data.categoryName_CN ? data.categoryName_CN : (data.categoryName || "Dự án");
+            document.getElementById('api-title').innerText = isCN && data.title_CN ? data.title_CN : data.title;
+            document.getElementById('api-excerpt').innerText = isCN && data.excerpt_CN ? data.excerpt_CN : data.excerpt;
+            document.getElementById('api-content').innerHTML = isCN && data.content_CN ? data.content_CN : data.content;
+
+            if(data.conclusion) {
+                document.getElementById('api-conclusion').innerHTML = isCN && data.conclusion_CN ? data.conclusion_CN : data.conclusion;
+            }
+
+            // DỮ LIỆU TIẾNG VIỆT MẶC ĐỊNH (Cho các trường chưa có cột tiếng Trung)
+            document.getElementById('api-client').innerText = data.clientName || 'Đang cập nhật';
+            document.getElementById('api-industry').innerText = data.industry || 'Đang cập nhật';
+            document.getElementById('api-services').innerText = data.servicesProvided || 'Đang cập nhật';
+            document.getElementById('api-duration').innerText = data.duration || 'Đang cập nhật';
+            
+            document.getElementById('api-metric-1-val').innerText = data.metric1Value || '-';
+            document.getElementById('api-metric-1-label').innerText = data.metric1Label || '';
+            document.getElementById('api-metric-2-val').innerText = data.metric2Value || '-';
+            document.getElementById('api-metric-2-label').innerText = data.metric2Label || '';
+            document.getElementById('api-metric-3-val').innerText = data.metric3Value || '-';
+            document.getElementById('api-metric-3-label').innerText = data.metric3Label || '';
+
+            // BẬT ẢNH BÌA
+            if(data.coverImageUrl) {
+                const coverEl = document.getElementById('api-cover');
+                coverEl.src = data.coverImageUrl;
+                coverEl.style.display = "block"; 
+            }
+
+        } catch (error) {
+            console.error("Lỗi tải dự án:", error);
+            document.getElementById('api-title').innerText = "Lỗi kết nối tới Server C#!";
+            document.getElementById('api-excerpt').innerText = "Đảm bảo bạn đã chạy Backend và kiểm tra lại đường dẫn URL.";
+        } finally {
+            // ĐÂY LÀ CHÌA KHÓA: Dù API thành công hay thất bại, cuối cùng cũng phải xóa sạch khung xương!
+            removeSkeletons();
+        }
+      });
+    </script>
+  </body>
+</html>

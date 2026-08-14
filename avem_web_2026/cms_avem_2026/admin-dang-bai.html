@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Đăng Bài Viết Mới (Song Ngữ)</title>
+    <!-- Nhúng thư viện CKEditor 5 siêu xịn -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.21/mammoth.browser.min.js"></script>
+    
+    <style>
+        /* === HEADER CỦA TRANG ADMIN (TABS) === */
+      .admin-tabs { display: flex; gap: 10px; margin-bottom: 25px; }
+      .tab-btn {
+        padding: 10px 20px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: 0.2s;
+      }
+      .tab-active { background-color: #900000; color: #ffffff; }
+      .tab-inactive { background-color: #e9ecef; color: #495057; }
+      .tab-inactive:hover { background-color: #dee2e6; color: #212529; }
+
+        /* CSS cơ bản */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; padding: 20px; color: #333; }
+        .admin-container { max-width: 900px; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: auto; }
+        h2 { color: #900000; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #555; }
+        .form-group input, .form-group select, .form-group textarea { 
+            width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 15px; 
+        }
+        .form-group input:focus, .form-group textarea:focus { border-color: #900000; outline: none; }
+        
+        .ck-editor__editable_inline { min-height: 300px; }
+        
+        .btn-submit { background: #900000; color: white; padding: 12px 25px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; transition: background 0.3s;}
+        .btn-submit:hover { background: #700000; }
+        
+        .helper-text { font-size: 13px; color: #777; margin-top: 5px; }
+
+        /* Nút chuyển đổi ngôn ngữ */
+        .lang-switch { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px; }
+        .btn-lang { padding: 8px 20px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-lang.active { background: #900000; color: white; }
+        .btn-lang.inactive { background: #e9ecef; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        
+      <!-- HEADER TABS CỦA TRANG ADMIN -->
+      <div class="admin-tabs">
+        <a href="#" class="tab-btn tab-active">Đăng Bài Viết</a>
+        <a href="admin-add-casestudy.html" class="tab-btn tab-inactive">Đăng Dự Án</a>
+        <a href="admin-khach-hang.html" class="tab-btn tab-inactive">Khách Hàng Liên Hệ</a>
+      </div>
+
+        <h2>Đăng Bài Viết Mới (Song Ngữ)</h2>
+        
+        <form id="postForm">
+            <!-- CÁC TRƯỜNG DÙNG CHUNG -->
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #eee;">
+                <div class="form-group">
+                    <label for="thumbnailFile">Ảnh bìa bài viết (Upload từ máy tính)</label>
+                    <input type="file" id="thumbnailFile" accept="image/*">
+                    <input type="hidden" id="thumbnailUrl">
+                    <div id="imagePreview" style="margin-top: 15px;"></div>
+                </div>
+
+                <div class="form-group" style="display: flex; gap: 15px;">
+                    <div style="flex: 1;">
+                        <label for="categoryId">Danh mục bài viết</label>
+                        <select id="categoryId">
+                            <option value="1">Phân tích Thị trường</option>
+                            <option value="2">Pháp lý & Thuế</option>
+                            <option value="3">Quản trị Doanh nghiệp</option>
+                            <option value="4">Bản tin nội bộ AVEM</option>
+                        </select>
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="status">Trạng thái xuất bản</label>
+                        <select id="status">
+                            <option value="Published">Xuất bản ngay (Published)</option>
+                            <option value="Draft">Lưu bản nháp (Draft)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB CHUYỂN ĐỔI NGÔN NGỮ -->
+            <div class="lang-switch">
+                <button type="button" id="btn-vi" class="btn-lang active" onclick="switchLang('vi')">🇻🇳 Tiếng Việt</button>
+                <button type="button" id="btn-cn" class="btn-lang inactive" onclick="switchLang('cn')">🇨🇳 中文 (Tiếng Trung)</button>
+            </div>
+
+            <!-- ================= KHU VỰC TIẾNG VIỆT ================= -->
+            <div id="section-vi">
+                <div class="form-group">
+                    <label for="title">Tiêu đề bài viết (VI)</label>
+                    <input type="text" id="title" required placeholder="VD: Luật doanh nghiệp 2026 thay đổi">
+                </div>
+
+                <div class="form-group">
+                    <label for="slug">Đường dẫn chuẩn SEO (Slug)</label>
+                    <input type="text" id="slug" required placeholder="vd: luat-doanh-nghiep-2026-thay-doi">
+                    <div class="helper-text">*Hệ thống tự động tạo từ tiêu đề tiếng Việt.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="excerpt">Mô tả ngắn (VI)</label>
+                    <textarea id="excerpt" rows="3" required placeholder="Đoạn tóm tắt nội dung..."></textarea>
+                </div>
+
+                <div class="form-group">
+    <label for="editor">Nội dung chi tiết (VI)</label>
+    <!-- Gắn thêm ô chọn file Word ở đây -->
+    <div style="margin-bottom: 10px; background: #e9ecef; padding: 10px; border-radius: 4px;">
+        <span style="font-size: 0.9rem; font-weight: 600; margin-right: 10px;"><i class="fa-solid fa-file-word" style="color: #2b579a;"></i> Nhập từ file Word:</span>
+        <input type="file" id="uploadWordFile" accept=".docx" style="font-size: 0.85rem;">
+    </div>
+    
+    <textarea id="editor"></textarea>
+</div>
+            </div>
+
+            <!-- ================= KHU VỰC TIẾNG TRUNG ================= -->
+            <div id="section-cn" style="display: none;">
+                <div class="form-group">
+                    <label for="title_CN">Tiêu đề bài viết (CN)</label>
+                    <input type="text" id="title_CN" placeholder="VD: 2026年企业法变更">
+                </div>
+
+                <div class="form-group">
+                    <label for="excerpt_CN">Mô tả ngắn (CN)</label>
+                    <textarea id="excerpt_CN" rows="3" placeholder="内容摘要..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="editor_CN">Nội dung chi tiết (CN)</label>
+                    <!-- Gắn thêm ô chọn file Word cho Tiếng Trung ở đây -->
+    <div style="margin-bottom: 10px; background: #e9ecef; padding: 10px; border-radius: 4px;">
+        <span style="font-size: 0.9rem; font-weight: 600; margin-right: 10px;"><i class="fa-solid fa-file-word" style="color: #2b579a;"></i> Nhập từ file Word (Bản Trung):</span>
+        <input type="file" id="uploadWordFile_CN" accept=".docx" style="font-size: 0.85rem;">
+    </div>
+
+                    <textarea id="editor_CN"></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">Lưu Bài Viết Lên Hệ Thống</button>
+        </form>
+    </div>
+
+    <script>
+        // 1. LOGIC ĐỔI TAB NGÔN NGỮ
+        function switchLang(lang) {
+            if (lang === 'vi') {
+                document.getElementById('section-vi').style.display = 'block';
+                document.getElementById('section-cn').style.display = 'none';
+                document.getElementById('btn-vi').className = 'btn-lang active';
+                document.getElementById('btn-cn').className = 'btn-lang inactive';
+            } else {
+                document.getElementById('section-vi').style.display = 'none';
+                document.getElementById('section-cn').style.display = 'block';
+                document.getElementById('btn-vi').className = 'btn-lang inactive';
+                document.getElementById('btn-cn').className = 'btn-lang active';
+            }
+        }
+
+        // 2. KHỞI TẠO 2 BỘ SOẠN THẢO CKEDITOR (Cho VI và CN)
+        let myEditorVi, myEditorCn;
+        
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( editor => { myEditorVi = editor; } )
+            .catch( error => { console.error( error ); } );
+
+        ClassicEditor
+            .create( document.querySelector( '#editor_CN' ) )
+            .then( editor => { myEditorCn = editor; } )
+            .catch( error => { console.error( error ); } );
+
+            // --- LOGIC ĐỌC FILE WORD BƠM VÀO CKEDITOR ---
+        document.getElementById('uploadWordFile').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Hiển thị trạng thái đang đọc file
+            const originalText = myEditorVi.getData();
+            myEditorVi.setData('<p><em>Đang bóc tách dữ liệu từ file Word, vui lòng đợi...</em></p>');
+
+            const reader = new FileReader();
+            reader.onload = function(loadEvent) {
+                const arrayBuffer = loadEvent.target.result;
+
+                // Dùng Mammoth để dịch file Word sang HTML
+                mammoth.convertToHtml({arrayBuffer: arrayBuffer})
+                    .then(function(result) {
+                        const html = result.value; // Đoạn HTML đã được bóc tách sạch sẽ
+                        myEditorVi.setData(html);  // Bơm thẳng vào ô soạn thảo
+                        alert('Đã tải thành công nội dung từ file Word!');
+                    })
+                    .catch(function(err) {
+                        console.error(err);
+                        alert('Có lỗi xảy ra khi đọc file Word!');
+                        myEditorVi.setData(originalText); // Phục hồi lại nếu lỗi
+                    });
+            };
+            reader.readAsArrayBuffer(file);
+        });
+
+        // --- LOGIC ĐỌC FILE WORD BƠM VÀO CKEDITOR (BẢN TIẾNG TRUNG) ---
+        document.getElementById('uploadWordFile_CN').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Hiển thị trạng thái đang đọc file trong khung Tiếng Trung
+            const originalText = myEditorCn.getData();
+            myEditorCn.setData('<p><em>Đang bóc tách dữ liệu từ file Word, vui lòng đợi...</em></p>');
+
+            const reader = new FileReader();
+            reader.onload = function(loadEvent) {
+                const arrayBuffer = loadEvent.target.result;
+
+                // Dùng Mammoth để dịch file Word sang HTML
+                mammoth.convertToHtml({arrayBuffer: arrayBuffer})
+                    .then(function(result) {
+                        const html = result.value; 
+                        myEditorCn.setData(html);  // Bơm thẳng vào ô soạn thảo Tiếng Trung
+                        alert('Đã tải thành công nội dung bản Tiếng Trung từ file Word!');
+                    })
+                    .catch(function(err) {
+                        console.error(err);
+                        alert('Có lỗi xảy ra khi đọc file Word!');
+                        myEditorCn.setData(originalText); // Phục hồi lại nếu lỗi
+                    });
+            };
+            reader.readAsArrayBuffer(file);
+        });
+
+        // 3. TẠO SLUG TỰ ĐỘNG TỪ TIẾNG VIỆT
+        document.getElementById('title').addEventListener('input', function() {
+            let title = this.value;
+            let slug = title.toLowerCase();
+            slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+            slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+            slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+            slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+            slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+            slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+            slug = slug.replace(/đ/gi, 'd');
+            slug = slug.replace(/\s+/g, '-'); 
+            slug = slug.replace(/[^a-z0-9\-]/g, ''); 
+            
+            document.getElementById('slug').value = slug;
+        });
+
+        // 4. GỬI DỮ LIỆU ĐA NGÔN NGỮ LÊN C#
+        document.getElementById('postForm').addEventListener('submit', async function(e) {
+            e.preventDefault(); 
+            
+            const contentVi = myEditorVi.getData();
+            const contentCn = myEditorCn.getData();
+            
+            if(!contentVi.trim()) {
+                alert("Bạn chưa nhập nội dung bài viết tiếng Việt!");
+                return;
+            }
+
+            // Đóng gói dữ liệu kèm cả trường _CN
+            const articleData = {
+                title: document.getElementById('title').value,
+                slug: document.getElementById('slug').value,
+                categoryId: parseInt(document.getElementById('categoryId').value),
+                thumbnailUrl: document.getElementById('thumbnailUrl').value,
+                status: document.getElementById('status').value,
+                
+                // Dữ liệu Tiếng Việt
+                excerpt: document.getElementById('excerpt').value,
+                content: contentVi,
+                
+                // Dữ liệu Tiếng Trung
+                title_CN: document.getElementById('title_CN').value,
+                excerpt_CN: document.getElementById('excerpt_CN').value,
+                content_CN: contentCn
+            };
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.innerText = "Đang xử lý...";
+            submitBtn.disabled = true;
+
+            const myToken = localStorage.getItem('adminToken');
+            if (!myToken) {
+                alert("Bạn chưa đăng nhập hoặc phiên đăng nhập đã hết hạn!");
+                submitBtn.innerText = "Lưu Bài Viết Lên Hệ Thống";
+                submitBtn.disabled = false;
+                return; 
+            }
+
+            try {
+                const response = await fetch("https://localhost:7287/api/Articles", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${myToken}`
+                    },
+                    body: JSON.stringify(articleData) 
+                });
+
+                if (response.ok) {
+                    alert("🎉 Lên bài thành công rực rỡ!");
+                    document.getElementById('postForm').reset();
+                    myEditorVi.setData(''); 
+                    myEditorCn.setData('');
+                    document.getElementById('imagePreview').innerHTML = '';
+                    switchLang('vi'); // Trả về tab mặc định
+                } else {
+                    const errorMsg = await response.text();
+                    alert("Lỗi từ server: " + errorMsg);
+                }
+            } catch (error) {
+                console.error("Lỗi mạng: ", error);
+                alert("Không thể kết nối đến máy chủ C#. Đảm bảo Backend đang chạy!");
+            } finally {
+                submitBtn.innerText = "Lưu Bài Viết Lên Hệ Thống";
+                submitBtn.disabled = false;
+            }
+        });
+
+        // 5. UPLOAD ẢNH (Giữ nguyên như cũ)
+        document.getElementById('thumbnailFile').addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const myToken = localStorage.getItem('adminToken');
+            if (!myToken) {
+                alert("Vui lòng đăng nhập trước khi upload ảnh!");
+                return;
+            }
+
+            const previewDiv = document.getElementById('imagePreview');
+            previewDiv.innerHTML = '<span style="color:#777;">Đang tải ảnh lên máy chủ...</span>';
+
+            try {
+                const response = await fetch("https://localhost:7287/api/Upload/image", {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${myToken}` },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('thumbnailUrl').value = data.url;
+                    previewDiv.innerHTML = `<img loading="lazy" src="${data.url}" style="max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;">`;
+                } else {
+                    previewDiv.innerHTML = '<span style="color:red;">Lỗi upload ảnh!</span>';
+                }
+            } catch (error) {
+                previewDiv.innerHTML = '<span style="color:red;">Mất kết nối tới Server C#!</span>';
+            }
+        });
+    </script>
+</body>
+</html>

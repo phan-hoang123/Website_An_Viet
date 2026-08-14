@@ -1,0 +1,95 @@
+<!-- NỘI DUNG HEADER CHUNG -->
+<!-- NỘI DUNG HEADER CHUNG -->
+<header>
+  <div class="header-top">
+    
+    <!-- VỨT BỎ ẢNH, DÙNG LOGO BẰNG CHỮ ĐỂ TRONG SUỐT TUYỆT ĐỐI -->
+    <a class="logo" href="index.html" style="text-decoration: none;">
+      <div class="logo-text">
+        <h1 class="brand-name" style="font-size: 2.8rem; font-weight: 700; letter-spacing: 1px;">
+          <span style="color: var(--primary-color);">AVEM</span>
+        </h1>
+        <p class="brand-slogan" style="color: var(--primary-color); font-size: 0.9rem; font-weight: 700; letter-spacing: 2px; margin-top: 5px;">
+          EXCELLENCE IN MANAGEMENT
+        </p>
+      </div>
+    </a>
+
+    <div class="header-contact">
+      <div style="display: none; @media (min-width: 768px) {display: block}">
+        <a href="mailto:avemvietnam@gmail.com" style="color: inherit;"><i class="fa-solid fa-envelope"></i> avemvietnam@gmail.com</a>
+      </div>
+      <div><i class="fa-solid fa-phone-volume"></i> 034 788 8331</div>
+      <!-- Đã sửa phần VN thành Dropdown Ngôn Ngữ -->
+      <div style="border-left: 1px solid var(--border-color); padding-left: 20px; position: relative;">
+        
+        <!-- Nút bấm hiển thị -->
+        <div id="btn-lang" style="cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 700; color: var(--primary-color);">
+          <span id="current-lang-text">VN</span> <i class="fa-solid fa-chevron-down" style="font-size: 10px"></i>
+        </div>
+        
+        <!-- Menu xổ xuống (Mặc định ẩn) -->
+        <ul id="lang-dropdown" style="display: none; position: absolute; top: 140%; left: 10px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-radius: 4px; padding: 10px 0; min-width: 130px; list-style: none; z-index: 9999;">
+          <li><a href="#" class="lang-opt" data-lang="vi" style="display: block; padding: 8px 15px; color: var(--text-main); font-weight: 500; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-main)'">Tiếng Việt</a></li>
+          <li><a href="#" class="lang-opt" data-lang="zh-CN" style="display: block; padding: 8px 15px; color: var(--text-main); font-weight: 500; text-decoration: none; transition: 0.2s;" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-main)'">中文 </a></li>
+        </ul>
+
+        <!-- GẮN THÊM KÍNH LÚP NÀY VÀO TRƯỚC NÚT 3 GẠCH -->
+        <i id="mobile-search-toggle" class="fa-solid fa-magnifying-glass" style="display: none; cursor: pointer;"></i>
+
+        <!-- THÊM ĐOẠN NÀY VÀO: Nút Hamburger cho Mobile -->
+        <div id="mobile-menu-btn" style="display: none; font-size: 1.6rem; color: var(--primary-color); cursor: pointer; margin-left: 15px;">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- THANH TÌM KIẾM DÀNH RIÊNG CHO MOBILE (Mặc định ẩn) -->
+<div id="mobile-search-bar" style="display: none; padding: 12px 5%; background: var(--bg-light); border-top: 1px solid var(--border-color); box-shadow: inset 0 3px 5px rgba(0,0,0,0.02);">
+    <form action="search.html" method="GET" style="display: flex; gap: 10px; width: 100%; margin: 0;">
+        <input type="text" name="q" placeholder="Nhập từ khóa tìm kiếm..." required style="flex: 1; padding: 12px 15px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; font-family: 'Inter', sans-serif; font-size: 0.95rem;">
+        <button type="submit" style="background: var(--primary-color); color: var(--white); border: none; padding: 0 20px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s;">TÌM</button>
+    </form>
+</div>
+
+  <nav class="main-nav" style="display: flex; justify-content: center; align-items: center; gap: 30px;">
+    
+    <!-- KHỐI 1: MENU CHỮ (Rút nhẹ khoảng cách để chống ngợp) -->
+    <ul style="display: flex; gap: 30px; align-items: center; margin: 0; padding: 0;">
+      <li><a href="index.html" class="nav-link" data-i18n="menu_home">Trang Chủ</a></li>
+      <li>
+        <a href="lichsu.html" class="nav-link"><span data-i18n="menu_about">Về Chúng Tôi</span> <i class="fa-solid fa-angle-down" style="font-size: 12px; margin-left: 5px"></i></a>
+        <ul class="dropdown">
+          <li><a href="thuNgo.html" data-i18n="menu_letter">Thư ngỏ</a></li>
+          <li><a href="lichsu.html" data-i18n="menu_history">Lịch sử & Tầm nhìn</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="dichvu.html" class="nav-link"><span data-i18n="menu_solutions">Giải Pháp</span> <i class="fa-solid fa-angle-down" style="font-size: 12px; margin-left: 5px"></i></a>
+        <ul class="dropdown">
+          <li><a href="xuctien.html" data-i18n="menu_fdi">Xúc tiến đầu tư</a></li>
+          <li><a href="phaply.html" data-i18n="menu_legal">Pháp lý doanh nghiệp</a></li>
+          <li><a href="ketoan.html" data-i18n="menu_accounting">Kế toán</a></li>
+          <li><a href="kiemtoan.html" data-i18n="menu_audit">Kiểm toán</a></li>
+          <li><a href="covanquantri.html" data-i18n="menu_consulting">Cố vấn quản trị</a></li>
+        </ul>
+      </li>
+      <li><a href="duan.html" class="nav-link" data-i18n="menu_projects">Dự Án</a></li>
+      <li><a href="tintuc.html" class="nav-link" data-i18n="menu_news">Tin Tức</a></li>
+      <li><a href="contact.html" class="nav-link" data-i18n="menu_contact">Liên Hệ</a></li>
+    </ul>
+
+    <!-- KHỐI 2: THANH TÌM KIẾM (Đã gỡ position: absolute, đưa vào luồng Flexbox) -->
+    <div class="desktop-search-wrapper">
+        <form action="search.html" method="GET" style="display: flex; align-items: center; background: var(--bg-light); border-radius: 20px; padding: 2px 5px 2px 15px; border: 1px solid var(--border-color);">
+            <input type="text" name="q" data-i18n="search_placeholder" placeholder="Tìm kiếm..." required style="border: none; background: transparent; outline: none; font-size: 0.9rem; width: 180px; color: var(--text-main);">
+            <button type="submit" style="background: var(--primary-color); color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s;">
+                <i class="fa-solid fa-magnifying-glass" style="font-size: 0.8rem;"></i>
+            </button>
+        </form>
+    </div>
+
+  </nav>
+</header>

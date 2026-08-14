@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hệ Sinh Thái Giải Pháp - AVEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="global.css" />
+
+    <style>
+      /* === HERO BANNER TỐI GIẢN === */
+      .srv-hero { padding: 120px 5% 100px; background: linear-gradient(135deg, rgba(15, 17, 21, 0.9), rgba(144, 0, 0, 0.85)), url('https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80') center/cover; text-align: center; color: var(--white); }
+      .srv-hero-content { max-width: 900px; margin: 0 auto; }
+      .srv-hero-content span { display: inline-block; padding: 8px 25px; border: 1px solid var(--gold); color: var(--gold); border-radius: 50px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 25px; }
+      .srv-hero-content h1 { font-family: 'Sans-Serif', serif; font-size: 4rem; font-weight: 800; line-height: 1.2; margin-bottom: 25px; }
+      .srv-hero-content p { font-size: 1.2rem; color: rgba(255, 255, 255, 0.85); line-height: 1.8; }
+
+      /* === STICKY SCROLL SHOWCASE (BỐ CỤC ĐÓNG BĂNG) === */
+      .srv-showcase { padding: 100px 5%; background: var(--bg-light); position: relative; }
+      .showcase-container { max-width: 1300px; margin: 0 auto; display: flex; gap: 60px; align-items: flex-start; }
+      
+      /* Cột Trái: Đứng yên khi cuộn */
+      .sc-sidebar { flex: 1; position: sticky; top: 150px;  }
+      .sc-sidebar h2 { font-family: 'Sans-Serif', serif; font-size: 3.5rem; font-weight: 800; color: var(--text-main); line-height: 1.2; margin-bottom: 20px; }
+      .sc-sidebar h2 span { color: var(--primary-color); }
+      .sc-sidebar p { font-size: 1.15rem; color: var(--text-gray); line-height: 1.7; margin-bottom: 30px; }
+      .sc-features { display: flex; flex-direction: column; gap: 20px; }
+      .feat-row { display: flex; align-items: center; gap: 15px; font-weight: 600; color: var(--text-main); font-size: 1.05rem; }
+      .feat-row i { color: var(--gold); font-size: 1.5rem; }
+
+      /* Cột Phải: Danh sách cuộn trượt lên */
+      .sc-content { flex: 1.5; display: flex; flex-direction: column; gap: 50px; }
+      .srv-card { background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow); border: 1px solid var(--border-color); overflow: hidden; transition: all 0.4s ease; position: relative; cursor: pointer; }
+      .srv-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); border-color: var(--primary-color); }
+      .srv-card-img { height: 350px; position: relative; overflow: hidden; }
+      .srv-card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; }
+      .srv-card:hover .srv-card-img img { transform: scale(1.08); }
+      
+      /* Số thứ tự đục lỗ (Stroke number) */
+      .card-num { position: absolute; top: 20px; right: 30px; font-family: 'Sans-Serif', serif; font-size: 5rem; font-weight: 900; line-height: 1; color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,0.8); z-index: 2; }
+      .srv-card-body { padding: 40px; position: relative; }
+      .srv-icon { width: 70px; height: 70px; background: var(--white); color: var(--primary-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 10px 20px rgba(144,0,0,0.1); position: absolute; top: -35px; left: 40px; border: 4px solid var(--bg-light); transition: 0.4s; }
+      .srv-card:hover .srv-icon { background: var(--primary-color); color: var(--white); transform: rotateY(180deg); }
+      .srv-card-body h3 { font-family: 'Sans-Serif', serif; font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 15px; margin-top: 20px; transition: 0.3s; }
+      .srv-card:hover h3 { color: var(--primary-color); }
+      .srv-card-body p { font-size: 1.05rem; color: var(--text-gray); line-height: 1.6; margin-bottom: 25px; }
+      .srv-btn { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; color: var(--primary-color); text-transform: uppercase; letter-spacing: 1px; font-size: 0.95rem; }
+      .srv-card:hover .srv-btn { color: var(--gold-dark); gap: 15px; }
+
+      /* === QUICK STATS SECTION === */
+      .stats-section { padding: 80px 5%; background: var(--white); border-top: 1px solid var(--border-color); }
+      .stats-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+      .stat-item h3 { font-family: 'Sans-Serif', serif; font-size: 3.5rem; font-weight: 800; color: var(--primary-color); line-height: 1; margin-bottom: 10px; }
+      .stat-item p { font-size: 1rem; color: var(--text-gray); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+      /* === BIG CTA BANNER === */
+      .srv-cta { padding: 100px 5%; background: linear-gradient(135deg, var(--primary-color), #5e0000); text-align: center; color: var(--white); position: relative; overflow: hidden;}
+      .srv-cta::before { content: ''; position: absolute; top: -50%; left: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(207,168,110,0.2) 0%, transparent 70%); border-radius: 50%; }
+      .srv-cta::after { content: ''; position: absolute; bottom: -50%; right: -10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(207,168,110,0.2) 0%, transparent 70%); border-radius: 50%; }
+      .cta-wrapper { position: relative; z-index: 2; max-width: 800px; margin: 0 auto; }
+      .cta-wrapper h2 { font-family: 'Sans-Serif', serif; font-size: 3rem; font-weight: 700; margin-bottom: 20px; line-height: 1.3;}
+      .cta-wrapper p { font-size: 1.2rem; color: rgba(212, 199, 199, 0.8); margin-bottom: 40px; }
+      .btn-gold { background: var(--gold); color: var(--bg-dark); padding: 18px 45px; border-radius: 8px; font-weight: 800; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 1px; display: inline-block; transition: 0.3s; box-shadow: 0 10px 20px rgba(207, 168, 110, 0.3); border: none; cursor: pointer; }
+      .btn-gold:hover { transform: translateY(-5px); background: var(--white); color: var(--primary-color); } 
+
+      /* =======================================================
+         ĐẠI TU GIAO DIỆN MOBILE CHO TRANG HỆ SINH THÁI DỊCH VỤ
+         ======================================================= */
+      @media (max-width: 768px) {
+        
+        /* 1. HERO BANNER TRÊN CÙNG */
+        .srv-hero { padding: 100px 5% 60px; }
+        .srv-hero-content h1 { 
+            font-size: 2.2rem; /* Thu nhỏ chữ khổng lồ */
+            margin-bottom: 15px; 
+            line-height: 1.3; 
+        }
+        .srv-hero-content p { font-size: 1rem; line-height: 1.6; }
+
+        /* 2. SHOWCASE (Bẻ từ 2 cột ngang thành 1 cột dọc) */
+        .srv-showcase { padding: 60px 5%; }
+        .showcase-container { flex-direction: column; gap: 40px; }
+        
+        .sc-sidebar { 
+            position: static; /* Gỡ lệnh đóng băng (sticky) để vuốt mượt mà */
+            text-align: center; 
+        }
+        .sc-sidebar h2 { font-size: 2.2rem; margin-bottom: 15px; }
+        .sc-sidebar p { font-size: 1rem; text-align: justify; }
+        .sc-features { align-items: center; /* Căn giữa các gạch đầu dòng tích xanh */ }
+        
+        /* 3. CARD DỊCH VỤ (Các thẻ ảnh bên phải) */
+        .srv-card-img { height: 220px; } /* Cắt bớt chiều cao ảnh */
+        
+        /* Chỉnh lại con số khổng lồ đục lỗ góc phải */
+        .card-num { font-size: 3.5rem; top: 10px; right: 20px; } 
+        
+        .srv-card-body { padding: 30px 20px; }
+        
+        /* Thu nhỏ cái icon tròn tròn nổi trên viền ảnh */
+        .srv-icon { 
+            width: 55px; height: 55px; 
+            font-size: 1.4rem; 
+            top: -25px; left: 20px; 
+            border-width: 3px; 
+        }
+        
+        .srv-card-body h3 { font-size: 1.5rem; margin-top: 15px; }
+        .srv-card-body p { font-size: 0.95rem; text-align: justify; }
+
+        /* 4. QUICK STATS (Bẻ 4 cột thành 2 cột vuông vức) */
+        .stats-section { padding: 50px 5%; }
+        .stats-grid { 
+            grid-template-columns: repeat(2, 1fr); /* Ép về thành bảng 2x2 */
+            gap: 25px; 
+        }
+        .stat-item h3 { font-size: 2.5rem; }
+        .stat-item p { font-size: 0.85rem; }
+
+        /* 5. BIG CTA (Banner chốt sale cuối trang) */
+        .srv-cta { padding: 60px 5%; }
+        .cta-wrapper h2 { font-size: 1.8rem; margin-bottom: 15px; }
+        .cta-wrapper p { font-size: 1rem; margin-bottom: 30px; }
+        
+        /* Kéo giãn nút bấm 100% để dễ chạm */
+        .btn-gold { 
+            padding: 15px 20px; 
+            font-size: 0.95rem; 
+            width: 100%; 
+            text-align: center; 
+        }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="header-placeholder"></div>
+
+    <!-- ================= HERO BANNER ================= -->
+    <section class="srv-hero reveal">
+      <div class="srv-hero-content">
+        <span>Toàn Diện & Chuyên Sâu</span>
+        <h1 class="font-serif">Hệ Sinh Thái<br>Giải Pháp AVEM</h1>
+        <p>Kiến tạo nền tảng vững chắc để doanh nghiệp bứt phá mọi giới hạn. Chúng tôi cung cấp chuỗi dịch vụ liên kết chặt chẽ từ khi hình thành ý tưởng đến vận hành thực tế.</p>
+      </div>
+    </section>
+
+    <!-- ================= STICKY SCROLL SHOWCASE ================= -->
+    <section class="srv-showcase">
+      <div class="showcase-container">
+        
+        <!-- Cột Trái (Đứng yên) -->
+        <div class="sc-sidebar reveal">
+          <h2 class="font-serif">Danh mục<br><span>dịch vụ</span></h2>
+          <p>Tối ưu hóa nguồn lực, quản trị rủi ro và nâng tầm giá trị thương hiệu thông qua 5 trụ cột chuyên môn cốt lõi của AVEM.</p>
+          
+          <div class="sc-features">
+            <div class="feat-row"><i class="fa-solid fa-check-circle"></i> Tư vấn thiết kế riêng biệt (Tailor-made)</div>
+            <div class="feat-row"><i class="fa-solid fa-check-circle"></i> Đội ngũ chuyên gia CPA, Luật sư kỳ cựu</div>
+            <div class="feat-row"><i class="fa-solid fa-check-circle"></i> Bảo mật dữ liệu doanh nghiệp tuyệt đối</div>
+          </div>
+        </div>
+
+        <!-- Cột Phải (Cuộn danh sách) -->
+        <div class="sc-content">
+          
+          <!-- Card 1 -->
+          <div class="srv-card reveal" onclick="window.location.href='xuctien.html'">
+            <div class="srv-card-img">
+              <span class="card-num">01</span>
+              <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80" alt="Xúc tiến đầu tư">
+            </div>
+            <div class="srv-card-body">
+              <div class="srv-icon"><i class="fa-solid fa-chart-line"></i></div>
+              <h3 class="font-serif">Xúc Tiến Đầu Tư</h3>
+              <p>Đồng hành cùng nhà đầu tư trong việc tìm kiếm cơ hội, tối ưu chiến lược, lựa chọn địa điểm và triển khai dự án đầu tư FDI hiệu quả, an toàn tại thị trường Việt Nam.</p>
+              <span class="srv-btn">Xem chi tiết dịch vụ <i class="fa-solid fa-arrow-right-long"></i></span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="srv-card reveal" onclick="window.location.href='phaply.html'">
+            <div class="srv-card-img">
+              <span class="card-num">02</span>
+              <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80" alt="Pháp lý doanh nghiệp">
+            </div>
+            <div class="srv-card-body">
+              <div class="srv-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+              <h3 class="font-serif">Pháp Lý Doanh Nghiệp</h3>
+              <p>Thực hiện và giám sát toàn bộ thủ tục pháp lý từ thành lập, cấp phép, đến tái cấu trúc (M&A). Bảo vệ doanh nghiệp trước mọi rủi ro tuân thủ pháp luật.</p>
+              <span class="srv-btn">Xem chi tiết dịch vụ <i class="fa-solid fa-arrow-right-long"></i></span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="srv-card reveal" onclick="window.location.href='ketoan.html'">
+            <div class="srv-card-img">
+              <span class="card-num">03</span>
+              <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80" alt="Kế toán">
+            </div>
+            <div class="srv-card-body">
+              <div class="srv-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+              <h3 class="font-serif">Dịch Vụ Kế Toán</h3>
+              <p>Giải pháp kế toán toàn diện, chính xác: Thiết lập hệ thống nội bộ, quản lý lao động tiền lương, kế toán thuế và lập báo cáo tài chính chuẩn mực.</p>
+              <span class="srv-btn">Xem chi tiết dịch vụ <i class="fa-solid fa-arrow-right-long"></i></span>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="srv-card reveal" onclick="window.location.href='kiemtoan.html'">
+            <div class="srv-card-img">
+              <span class="card-num">04</span>
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80" alt="Kiểm toán">
+            </div>
+            <div class="srv-card-body">
+              <div class="srv-icon"><i class="fa-solid fa-check-double"></i></div>
+              <h3 class="font-serif">Kiểm Toán Độc Lập</h3>
+              <p>Kiểm toán BCTC, kiểm toán quyết toán, định giá và giao dịch liên kết. Đánh giá hệ thống kiểm soát nội bộ nhằm mang lại sự minh bạch tuyệt đối cho đối tác.</p>
+              <span class="srv-btn">Xem chi tiết dịch vụ <i class="fa-solid fa-arrow-right-long"></i></span>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="srv-card reveal" onclick="window.location.href='covanquantri.html'">
+            <div class="srv-card-img">
+              <span class="card-num">05</span>
+              <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80" alt="Cố vấn quản trị">
+            </div>
+            <div class="srv-card-body">
+              <div class="srv-icon"><i class="fa-solid fa-sitemap"></i></div>
+              <h3 class="font-serif">Cố Vấn Quản Trị</h3>
+              <p>Đồng hành cùng ban lãnh đạo thiết kế chiến lược, xây dựng quy trình hệ thống, tối ưu hiệu suất vận hành để bứt phá năng lực cạnh tranh cốt lõi.</p>
+              <span class="srv-btn">Xem chi tiết dịch vụ <i class="fa-solid fa-arrow-right-long"></i></span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= QUICK STATS ================= -->
+    <section class="stats-section reveal">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3>10+</h3>
+          <p>Năm Kinh Nghiệm</p>
+        </div>
+        <div class="stat-item">
+          <h3>1500+</h3>
+          <p>Dự Án Thành Công</p>
+        </div>
+        <div class="stat-item">
+          <h3>50+</h3>
+          <p>Chuyên Gia Cấp Cao</p>
+        </div>
+        <div class="stat-item">
+          <h3>100%</h3>
+          <p>Cam Kết Bảo Mật</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BIG CTA BANNER ================= -->
+    <section class="srv-cta reveal">
+      <div class="cta-wrapper">
+        <h2 class="font-serif">Cần Tư Vấn Gói Dịch Vụ Phù Hợp?</h2>
+        <p>Để lại thông tin, chuyên gia của chúng tôi sẽ liên hệ để phân tích bài toán thực tế của doanh nghiệp bạn trong vòng 24 giờ.</p>
+        <a href="contact.html" class="btn-gold">Đặt lịch chuyên gia</a>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="dictionary.js"></script>
+
+    <script src="main.js"></script>
+  </body>
+</html>
