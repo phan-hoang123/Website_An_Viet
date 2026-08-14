@@ -1,0 +1,89 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\WebAnViet\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1BE73B-F775-3C61-181B-973387F0F885}|AvemCMS.Api\\AvemCMS.Api.csproj|d:\\webanviet\\avemcms.api\\models\\article.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1BE73B-F775-3C61-181B-973387F0F885}|AvemCMS.Api\\AvemCMS.Api.csproj|solutionrelative:avemcms.api\\models\\article.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1BE73B-F775-3C61-181B-973387F0F885}|AvemCMS.Api\\AvemCMS.Api.csproj|d:\\webanviet\\avemcms.api\\models\\casestudy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1BE73B-F775-3C61-181B-973387F0F885}|AvemCMS.Api\\AvemCMS.Api.csproj|solutionrelative:avemcms.api\\models\\casestudy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1BE73B-F775-3C61-181B-973387F0F885}|AvemCMS.Api\\AvemCMS.Api.csproj|d:\\webanviet\\avemcms.api\\controllers\\searchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1BE73B-F775-3C61-181B-973387F0F885}|AvemCMS.Api\\AvemCMS.Api.csproj|solutionrelative:avemcms.api\\controllers\\searchcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA1BE73B-F775-3C61-181B-973387F0F885}|AvemCMS.Api\\AvemCMS.Api.csproj|d:\\webanviet\\avemcms.api\\controllers\\casestudiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA1BE73B-F775-3C61-181B-973387F0F885}|AvemCMS.Api\\AvemCMS.Api.csproj|solutionrelative:avemcms.api\\controllers\\casestudiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Article.cs",
+              "DocumentMoniker": "D:\\WebAnViet\\AvemCMS.Api\\Models\\Article.cs",
+              "RelativeDocumentMoniker": "AvemCMS.Api\\Models\\Article.cs",
+              "ToolTip": "D:\\WebAnViet\\AvemCMS.Api\\Models\\Article.cs",
+              "RelativeToolTip": "AvemCMS.Api\\Models\\Article.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAgwCUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T11:36:29.831Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CaseStudy.cs",
+              "DocumentMoniker": "D:\\WebAnViet\\AvemCMS.Api\\Models\\CaseStudy.cs",
+              "RelativeDocumentMoniker": "AvemCMS.Api\\Models\\CaseStudy.cs",
+              "ToolTip": "D:\\WebAnViet\\AvemCMS.Api\\Models\\CaseStudy.cs",
+              "RelativeToolTip": "AvemCMS.Api\\Models\\CaseStudy.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAIwDMAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T11:36:26.488Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SearchController.cs",
+              "DocumentMoniker": "D:\\WebAnViet\\AvemCMS.Api\\Controllers\\SearchController.cs",
+              "RelativeDocumentMoniker": "AvemCMS.Api\\Controllers\\SearchController.cs",
+              "ToolTip": "D:\\WebAnViet\\AvemCMS.Api\\Controllers\\SearchController.cs",
+              "RelativeToolTip": "AvemCMS.Api\\Controllers\\SearchController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwEwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T09:05:12.052Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CaseStudiesController.cs",
+              "DocumentMoniker": "D:\\WebAnViet\\AvemCMS.Api\\Controllers\\CaseStudiesController.cs",
+              "RelativeDocumentMoniker": "AvemCMS.Api\\Controllers\\CaseStudiesController.cs",
+              "ToolTip": "D:\\WebAnViet\\AvemCMS.Api\\Controllers\\CaseStudiesController.cs",
+              "RelativeToolTip": "AvemCMS.Api\\Controllers\\CaseStudiesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T09:01:42.516Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
